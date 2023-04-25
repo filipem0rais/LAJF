@@ -13,9 +13,8 @@
 -- ________________ 
 
 drop database if exists LAJF;
-
 create database LAJF;
-
+use LAJF;
 
 -- DBSpace Section
 -- _______________
@@ -35,7 +34,7 @@ create table Items (
      iteDescription varchar(255) not null,
      iteInitialValue decimal(15,2) not null,
      iteOnSale bool not null default 1,
-     iteDatePublication date not null default current_date,
+     iteDatePublication datetime not null default current_timestamp,
      idUser int not null,
      idCategory int not null,
      constraint ID_Items_ID primary key (idItem));
