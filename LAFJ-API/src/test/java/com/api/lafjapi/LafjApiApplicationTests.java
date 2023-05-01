@@ -1,10 +1,10 @@
-package com.lajf.api;
+package com.api.lafjapi;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class LajfApiApplicationTests {
+class LafjApiApplicationTests {
 
     @Test
     void contextLoads() {
