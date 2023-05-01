@@ -1,3 +1,8 @@
+drop database if exists bidhub;
+create database bidhub;
+
+use bidhub;
+
 create table categories
 (
     idCategory int auto_increment
