@@ -1,3 +1,4 @@
+/*
 //
 // Auteur : Filipe Dias Morais
 // Projet : LAJF-API
@@ -56,3 +57,4 @@ public class SaleController {
         return ResponseEntity.ok().build();
     }
 }
+*/

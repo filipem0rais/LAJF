@@ -1,3 +1,4 @@
+/*
 //
 // Auteur : Filipe Dias Morais
 // Projet : LAJF-API
@@ -55,4 +56,4 @@ public class CategoryController {
         categoryService.deleteById(id);
         return ResponseEntity.ok().build();
     }
-}
+}*/
