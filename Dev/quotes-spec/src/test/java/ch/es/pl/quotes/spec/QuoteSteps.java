@@ -1,6 +1,5 @@
 package ch.es.pl.quotes.spec;
 
-import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -28,7 +27,7 @@ public class QuoteSteps {
     @When("I POST it to the \\/quotes endpoint")
     public void i_POST_it_to_the_quotes_endpoint() throws Throwable {
         try {
-            ApiResponse response = api.addQuoteWithHttpInfo(quote);
+            ApiResponse<Void> response = api.addQuoteWithHttpInfo(quote);
             statusCode = response.getStatusCode();
         } catch (ApiException e) {
             statusCode = e.getCode();
@@ -39,4 +38,6 @@ public class QuoteSteps {
     public void i_receive_a_status_code(int arg1) throws Throwable {
         assertEquals(arg1, statusCode);
     }
+
+
 }
