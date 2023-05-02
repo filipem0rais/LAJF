@@ -7,6 +7,10 @@
 
 package org.lajf.controller;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import org.lajf.model.User;
 import org.lajf.model.dto.UserUpdateDTO;
 import org.lajf.repository.UserRepository;
@@ -27,6 +31,13 @@ public class UserController {
     @Autowired
     private UserRepository userRepository;
 
+    @Operation(summary = "Obtenir tous les utilisateurs",
+            responses = {
+                    @ApiResponse(responseCode = "200", description = "Succès",
+                            content = @Content(mediaType = "application/json",
+                                    schema = @Schema(implementation = UserUpdateDTO.class))),
+                    @ApiResponse(responseCode = "404", description = "Utilisateurs non trouvés")
+            })
     @GetMapping
     public ResponseEntity<List<UserUpdateDTO>> getAllUsers() {
         try {
@@ -45,6 +56,13 @@ public class UserController {
         }
     }
 
+@Operation(summary = "Obtenir un utilisateur par son id",
+            responses = {
+                    @ApiResponse(responseCode = "200", description = "Succès",
+                            content = @Content(mediaType = "application/json",
+                                    schema = @Schema(implementation = UserUpdateDTO.class))),
+                    @ApiResponse(responseCode = "404", description = "Utilisateur non trouvé")
+            })
     @GetMapping("/{id}")
     public ResponseEntity<UserUpdateDTO> getUserById(@PathVariable int id) {
         Optional<User> userData = userRepository.findById(id);
@@ -58,6 +76,13 @@ public class UserController {
         }
     }
 
+    @Operation(summary = "Créer un nouvel utilisateur",
+            responses = {
+                    @ApiResponse(responseCode = "201", description = "Utilisateur créé",
+                            content = @Content(mediaType = "application/json",
+                                    schema = @Schema(implementation = UserUpdateDTO.class))),
+                    @ApiResponse(responseCode = "409", description = "L'email existe déjà")
+            })
     @PostMapping
     public ResponseEntity<UserUpdateDTO> createUser(@RequestBody UserUpdateDTO userUpdate) {
         if (userRepository.existsByEmail(userUpdate.getEmail())) {
@@ -80,6 +105,13 @@ public class UserController {
         }
     }
 
+    @Operation(summary = "Mettre à jour un utilisateur",
+            responses = {
+                    @ApiResponse(responseCode = "200", description = "Utilisateur mis à jour",
+                            content = @Content(mediaType = "application/json",
+                                    schema = @Schema(implementation = UserUpdateDTO.class))),
+                    @ApiResponse(responseCode = "404", description = "Utilisateur non trouvé")
+            })
     @PutMapping("/{id}")
     public ResponseEntity<UserUpdateDTO> updateUser(@PathVariable int id, @RequestBody UserUpdateDTO userUpdate) {
         if (userRepository.existsById(id)) {
@@ -102,6 +134,13 @@ public class UserController {
         }
     }
 
+    @Operation(summary = "Supprimer un utilisateur",
+            responses = {
+                    @ApiResponse(responseCode = "200", description = "Utilisateur supprimé",
+                            content = @Content(mediaType = "application/json",
+                                    schema = @Schema(implementation = UserUpdateDTO.class))),
+                    @ApiResponse(responseCode = "404", description = "Utilisateur non trouvé")
+            })
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteUser(@PathVariable int id) {
         userRepository.deleteById(id);
