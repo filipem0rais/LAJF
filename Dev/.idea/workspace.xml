@@ -6,6 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="a2c5a68a-9320-4e9f-bd2a-ee2060c0d282" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/quotes-api/src/main/resources/data.sql" beforeDir="false" afterPath="$PROJECT_DIR$/quotes-api/src/main/resources/data.sql" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -48,7 +49,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
     "ignore.virus.scanning.warn.message": "true",
-    "last_opened_file_path": "C:/DATA/LAJF/Dev/quotes-spec/src/test/resources/features",
+    "last_opened_file_path": "C:/DATA/LAJF/Dev",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -73,7 +74,7 @@
       <recent name="ch.es.pl.quotes.api.repositories" />
     </key>
   </component>
-  <component name="RunManager" selected="Cucumber Java.Feature: user">
+  <component name="RunManager" selected="Spring Boot.Swagger2SpringBoot">
     <configuration name="Feature: quotes" type="CucumberJavaRunConfigurationType" factoryName="Cucumber java" temporary="true" nameIsGenerated="true">
       <option name="CUCUMBER_CORE_VERSION" value="5" />
       <option name="FILE_PATH" value="$PROJECT_DIR$/quotes-spec/src/test/resources/features/quotes.feature" />
@@ -184,7 +185,8 @@
       <updated>1683027223728</updated>
       <workItem from="1683027225579" duration="6704000" />
       <workItem from="1683034301584" duration="2928000" />
-      <workItem from="1683037419001" duration="325000" />
+      <workItem from="1683037419001" duration="429000" />
+      <workItem from="1683037860179" duration="107000" />
     </task>
     <servers />
   </component>
