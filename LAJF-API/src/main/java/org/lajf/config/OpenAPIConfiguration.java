@@ -7,7 +7,7 @@ import io.swagger.v3.oas.annotations.security.SecurityScheme;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-@OpenAPIDefinition(info = @Info(title = "Clients API", version = "1.0.1"))
+@OpenAPIDefinition(info = @Info(title = "Clients API", version = "1.0.1", description = "Documentation Clients API v1.0.1", contact = @io.swagger.v3.oas.annotations.info.Contact(name = "Filipe Dias Morais", email = "diasmorais.dev@gmail.com")))
 @SecurityScheme(
         name = "bearerAuth",
         type = SecuritySchemeType.HTTP,
