@@ -41,7 +41,9 @@ create table items
     iteDatePublication datetime   default CURRENT_TIMESTAMP not null,
     idUser             int                                  not null,
     idCategory         int                                  not null,
-    iteNom             varchar(100)                         not null,
+    iteName             varchar(100)                         not null,
+    iteState             varchar(100)                         not null,
+    itePicture             varchar(255)                         not null,
     constraint ID_Items_IND
         unique (idItem),
     constraint REF_Items_Categ_FK
