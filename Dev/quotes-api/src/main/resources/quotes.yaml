@@ -1,0 +1,132 @@
+openapi: '3.0.3'
+info:
+  description: Api Documentation
+  version: '1.0'
+  title: Api Documentation
+servers:
+  - url: 'http://localhost:9090/api'
+tags:
+  - name: Bidhub-API
+    description: API pour le projet Bidhub
+paths:
+  /users/{id}:
+    get:
+      tags:
+        - Bidhub-API
+      summary: Obtient un utilisateur
+      operationId: getUser
+      parameters:
+        - name: id
+          in: path
+          description: id de l'utilisateur à obtenir
+          required: true
+          schema:
+            type: integer
+            format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            'application/json':
+              schema:
+                $ref: '#/components/schemas/User'
+        '404':
+          description: Not Found
+      deprecated: false
+
+  /quotes:
+    get:
+      tags:
+        - Quotes-end-point
+      summary: Obtient une liste de toutes les quotes
+      operationId: getQuotes
+      responses:
+        '200':
+          description: OK
+          content:
+            'application/json':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Quote'
+        '404':
+          description: Not Found
+    post:
+      tags:
+        - Quotes-end-point
+      summary: Ajoute une nouvelle quote
+      operationId: addQuote
+      requestBody:
+        content:
+          'application/json':
+            schema:
+              $ref: '#/components/schemas/Quote'
+      responses:
+        '201':
+          description: quote crée
+          headers:
+            Location:
+              description: URL de la quote crée
+              schema:
+                type: string
+                format: uri
+  /quotes/{id}:
+    get:
+      tags:
+        - Quotes-end-point
+      summary: Obtient une quote
+      operationId: getQuote
+      parameters:
+        - name: id
+          in: path
+          description: numéro de la quote à obtenir
+          required: true
+          schema:
+            type: integer
+            format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            'application/json':
+              schema:
+                $ref: '#/components/schemas/Quote'
+        '404':
+          description: Not Found
+      deprecated: false
+components:
+  schemas:
+    User:
+      description: toutes les caractéristiques d'un utilisateur
+      type: object
+      properties:
+        name:
+          description: prénom de l'utilisateur
+          type: string
+        lastName:
+          description: nom de l'utilisateur
+          type: string
+        email:
+          description: email de l'utilisateur
+          type: string
+        credit:
+          description: crédit de l'utilisateur
+          type: number
+          format: double
+      title: User
+
+    Quote:
+      description: toutes les caractéristiques d'une quote
+      type: object
+      properties:
+        author:
+          description: nom de l'auteur
+          type: string
+        citation:
+          description: phrase de la citation
+          type: string
+        id:
+          description: numéro auto-incrémenté de la citation
+          type: integer
+          format: int32
+      title: Quote
