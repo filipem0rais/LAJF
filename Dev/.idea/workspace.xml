@@ -5,7 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a2c5a68a-9320-4e9f-bd2a-ee2060c0d282" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -56,6 +56,7 @@
     "project.structure.last.edited": "Project",
     "project.structure.proportion": "0.0",
     "project.structure.side.proportion": "0.0",
+    "spring.configuration.checksum": "7bf40b46262359d8a75f027c3195235a",
     "vue.rearranger.settings.migration": "true"
   },
   "keyToStringList": {
@@ -183,6 +184,7 @@
       <updated>1683027223728</updated>
       <workItem from="1683027225579" duration="6704000" />
       <workItem from="1683034301584" duration="2928000" />
+      <workItem from="1683037419001" duration="325000" />
     </task>
     <servers />
   </component>
