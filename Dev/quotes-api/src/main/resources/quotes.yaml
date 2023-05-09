@@ -34,6 +34,37 @@ paths:
           description: Not Found
       deprecated: false
 
+  /auth/login:
+    post:
+      tags:
+        - Bidhub-API
+      summary: Authentifie un utilisateur
+      operationId: authenticateUser
+      parameters:
+        - name: email
+          in: query
+          description: email de l'utilisateur
+          required: true
+          schema:
+            type: string
+        - name: password
+          in: query
+          description: mot de passe de l'utilisateur
+          required: true
+          schema:
+              type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Token'
+        '404':
+          description: Not Found
+      deprecated: false
+
+
 components:
   schemas:
     User:
@@ -44,6 +75,9 @@ components:
           description: numéro auto-incrémenté de l'utilisateur
           type: integer
           format: int32
+        password:
+          description: mot de passe de l'utilisateur
+          type: string
         name:
           description: prénom de l'utilisateur
           type: string
@@ -58,3 +92,22 @@ components:
           type: number
           format: double
       title: User
+    Login:
+      description: toutes les caractéristiques d'un utilisateur pour l'authentification
+      type: object
+      properties:
+        email:
+          description: email de l'utilisateur
+          type: string
+        password:
+          description: mot de passe de l'utilisateur
+          type: string
+      title: Login
+    Token:
+      description: token de l'utilisateur
+      type: object
+      properties:
+        token:
+          description: token de l'utilisateur
+          type: string
+      title: Token
