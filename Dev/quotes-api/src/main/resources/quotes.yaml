@@ -100,6 +100,10 @@ components:
       description: toutes les caractéristiques d'un utilisateur
       type: object
       properties:
+        id:
+          description: numéro auto-incrémenté de l'utilisateur
+          type: integer
+          format: int32
         name:
           description: prénom de l'utilisateur
           type: string

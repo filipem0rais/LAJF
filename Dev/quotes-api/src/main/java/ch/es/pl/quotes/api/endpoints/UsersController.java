@@ -32,6 +32,7 @@ public class UsersController implements UsersApi {
         if (opt.isPresent()) {
             UserEntity userEntity = opt.get();
             User user = new User();
+            user.setId(userEntity.getId());
             user.setName(userEntity.getName());
             user.setLastName(userEntity.getLastName());
             user.setEmail(userEntity.getEmail());

@@ -1,9 +1,13 @@
-Feature: Application user
+Feature: Récupérer un utilisateur
 
-  Scenario: Retrieve information of the user with ID 4
-    Given I have the user ID 4
-    When I send a GET request to the /users/4 endpoint
-    Then I receive a 200 status code
-    And I receive the information of the user with ID 4
+  Scenario: Récupérer un utilisateur avec un ID valide
+    Given que je dispose d'un ID d'utilisateur valide
+    When j'envoie une requete GET a /users/5
+    Then le code de statut de la réponse devrait être 200
+    And le corps de la réponse devrait contenir un utilisateur avec l'ID donné
 
-
+  Scenario: Tenter de récupérer un utilisateur avec un ID invalide
+    Given que je dispose d'un ID d'utilisateur invalide
+    When j'envoie une requete GET a /users/999
+    Then le code de statut de la réponse devrait être 404
+    And le corps de la réponse devrait contenir une erreur indiquant que l'utilisateur n'a pas été trouvé
