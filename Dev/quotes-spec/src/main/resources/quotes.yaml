@@ -52,7 +52,7 @@ paths:
           description: mot de passe de l'utilisateur
           required: true
           schema:
-            type: string
+              type: string
       responses:
         '200':
           description: OK
