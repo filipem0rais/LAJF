@@ -33,7 +33,6 @@ paths:
         '404':
           description: Not Found
       deprecated: false
-
   /auth/login:
     post:
       tags:
@@ -52,7 +51,7 @@ paths:
           description: mot de passe de l'utilisateur
           required: true
           schema:
-              type: string
+            type: string
       responses:
         '200':
           description: OK
@@ -63,6 +62,213 @@ paths:
         '404':
           description: Not Found
       deprecated: false
+
+  /bids/{id}:
+    get:
+      tags:
+        - Bidhub-API
+      summary: Obtient une offre
+      operationId: getBid
+      parameters:
+        - name: id
+          in: path
+          description: id de l'offre à obtenir
+          required: true
+          schema:
+            type: integer
+            format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            'application/json':
+              schema:
+                $ref: '#/components/schemas/Bid'
+        '404':
+          description: Not Found
+      deprecated: false
+
+    delete:
+        tags:
+            - Bidhub-API
+        summary: Supprime une offre
+        operationId: deleteBid
+        parameters:
+          - name: id
+            in: path
+            description: id de l'offre à supprimer
+            required: true
+            schema:
+                type: integer
+                format: int32
+        responses:
+            '200':
+              description: OK
+            '404':
+              description: Not Found
+        deprecated: false
+  /bids:
+    get:
+      tags:
+        - Bidhub-API
+      summary: Obtient toutes les offres
+      operationId: getBids
+      responses:
+        '200':
+          description: OK
+          content:
+            'application/json':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Bid'
+        '404':
+          description: Not Found
+      deprecated: false
+    post:
+      tags:
+        - Bidhub-API
+      summary: Crée une offre
+      operationId: createBid
+      requestBody:
+        content:
+          'application/json':
+            schema:
+              $ref: '#/components/schemas/Bid'
+      responses:
+        '201':
+          description: Created
+          content:
+            'application/json':
+              schema:
+                $ref: '#/components/schemas/Bid'
+        '404':
+          description: Not Found
+      deprecated: false
+    put:
+      tags:
+        - Bidhub-API
+      summary: Modifie une offre
+      operationId: updateBid
+      requestBody:
+        content:
+          'application/json':
+            schema:
+              $ref: '#/components/schemas/Bid'
+      responses:
+        '200':
+          description: OK
+          content:
+            'application/json':
+              schema:
+                $ref: '#/components/schemas/Bid'
+        '404':
+          description: Not Found
+      deprecated: false
+
+  /items/{id}:
+    get:
+      tags:
+        - Bidhub-API
+      summary: Obtient un article
+      operationId: getItem
+      parameters:
+        - name: id
+          in: path
+          description: id de l'article à obtenir
+          required: true
+          schema:
+            type: integer
+            format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            'application/json':
+              schema:
+                $ref: '#/components/schemas/Item'
+        '404':
+          description: Not Found
+      deprecated: false
+
+    delete:
+        tags:
+            - Bidhub-API
+        summary: Supprime un article
+        operationId: deleteItem
+        parameters:
+          - name: id
+            in: path
+            description: id de l'article à supprimer
+            required: true
+            schema:
+                type: integer
+                format: int32
+        responses:
+            '200':
+              description: OK
+            '404':
+              description: Not Found
+        deprecated: false
+  /items:
+    get:
+      tags:
+        - Bidhub-API
+      summary: Obtient tous les articles
+      operationId: getItems
+      responses:
+        '200':
+          description: OK
+          content:
+            'application/json':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Item'
+        '404':
+          description: Not Found
+      deprecated: false
+    post:
+      tags:
+        - Bidhub-API
+      summary: Crée un article
+      operationId: createItem
+      requestBody:
+        content:
+          'application/json':
+            schema:
+              $ref: '#/components/schemas/Item'
+      responses:
+        '201':
+          description: Created
+          content:
+            'application/json':
+              schema:
+                $ref: '#/components/schemas/Item'
+        '404':
+          description: Not Found
+      deprecated: false
+    put:
+      tags:
+        - Bidhub-API
+      summary: Modifie un article
+      operationId: updateItem
+      requestBody:
+        content:
+          'application/json':
+            schema:
+              $ref: '#/components/schemas/Item'
+      responses:
+        '200':
+          description: OK
+          content:
+            'application/json':
+              schema:
+                $ref: '#/components/schemas/Item'
+        '404':
+          description: Not Found
+      deprecated: false
+
 
 
 components:
@@ -111,3 +317,68 @@ components:
           description: token de l'utilisateur
           type: string
       title: Token
+    Bid:
+      description: toutes les caractéristiques d'une offre
+      type: object
+      properties:
+        idBid:
+          description: numéro auto-incrémenté de l'offre
+          type: integer
+          format: int32
+        bidAmount:
+          description: montant de l'offre
+          type: number
+          format: double
+        idUser:
+          description: numéro de l'utilisateur faisant l'offre
+          type: integer
+          format: int32
+        idItem:
+          description: numéro de l'article sur lequel l'offre est faite
+          type: integer
+          format: int32
+      title: Bid
+    Item:
+      description: toutes les caractéristiques d'un article
+      type: object
+      properties:
+        idItem:
+          description: numéro auto-incrémenté de l'article
+          type: integer
+          format: int32
+        iteDescription:
+          description: description de l'article
+          type: string
+        iteInitialValue:
+          description: valeur initiale de l'article
+          type: number
+          format: double
+        iteOnSale:
+          description: indique si l'article est en vente
+          type: boolean
+        iteDatePublication:
+          description: date de publication de l'article
+          type: string
+          format: date-time
+        idUser:
+          description: numéro de l'utilisateur qui a publié l'article
+          type: integer
+          format: int32
+        idCategory:
+          description: numéro de la catégorie de l'article
+          type: integer
+          format: int32
+        iteName:
+          description: nom de l'article
+          type: string
+        iteState:
+          description: état de l'article
+          type: string
+        itePicture:
+          description: image de l'article
+          type: string
+        itePickedUp:
+          description: indique si l'article a été récupéré
+          type: boolean
+      title: Item
+
