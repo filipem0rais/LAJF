@@ -6,14 +6,11 @@
   <component name="ChangeListManager">
     <list default="true" id="a2c5a68a-9320-4e9f-bd2a-ee2060c0d282" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/quotes-api/src/main/java/ch/es/pl/quotes/api/endpoints/QuotesEndPoint.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/quotes-api/src/main/java/ch/es/pl/quotes/api/endpoints/UsersController.java" beforeDir="false" afterPath="$PROJECT_DIR$/quotes-api/src/main/java/ch/es/pl/quotes/api/endpoints/UsersController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/quotes-api/src/main/java/ch/es/pl/quotes/api/exceptions/QuoteNotFoundException.java" beforeDir="false" afterPath="$PROJECT_DIR$/quotes-api/src/main/java/ch/es/pl/quotes/api/exceptions/UserNotFoundException.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/quotes-api/src/main/resources/quotes.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/quotes-api/src/main/resources/quotes.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/quotes-spec/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/quotes-spec/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/quotes-spec/src/main/resources/quotes.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/quotes-spec/src/main/resources/quotes.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/quotes-spec/src/test/java/ch/es/pl/quotes/spec/QuoteSteps.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/quotes-spec/src/test/java/ch/es/pl/quotes/spec/UserSteps.java" beforeDir="false" afterPath="$PROJECT_DIR$/quotes-spec/src/test/java/ch/es/pl/quotes/spec/UserSteps.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/quotes-spec/src/test/resources/features/quotes.feature" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/quotes-spec/src/test/resources/features/user.feature" beforeDir="false" afterPath="$PROJECT_DIR$/quotes-spec/src/test/resources/features/user.feature" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -81,10 +78,11 @@
       <recent name="C:\DATA\LAJF\Dev\quotes-spec\src\test\resources\features" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="ch.es.pl.quotes.api.exceptions" />
       <recent name="ch.es.pl.quotes.api.repositories" />
     </key>
   </component>
-  <component name="RunManager" selected="Cucumber Java.Feature: user">
+  <component name="RunManager" selected="Spring Boot.Swagger2SpringBoot">
     <configuration name="Feature: quotes" type="CucumberJavaRunConfigurationType" factoryName="Cucumber java" temporary="true" nameIsGenerated="true">
       <option name="CUCUMBER_CORE_VERSION" value="5" />
       <option name="FILE_PATH" value="$PROJECT_DIR$/quotes-spec/src/test/resources/features/quotes.feature" />
@@ -150,14 +148,14 @@
       <option name="customJreEnabled" value="false" />
       <option name="customTemplatesPath" value="" />
       <option name="enableDebugLogging" value="false" />
-      <option name="generateToPath" value="C:\DATA\LAJFY\Dev\gen" />
+      <option name="generateToPath" value="C:\DATA\LAJF\Dev\gen" />
       <option name="generationParameters">
         <list />
       </option>
       <option name="generatorPath" value="https://repo1.maven.org/maven2/org/openapitools/openapi-generator-cli/5.0.0/openapi-generator-cli-5.0.0.jar" />
       <option name="jdkPath" value="" />
       <option name="language" value="java" />
-      <option name="specificationPath" value="C:\DATA\LAJFY\Dev\quotes-api\src\main\resources\quotes.yaml" />
+      <option name="specificationPath" value="C:\DATA\LAJF\Dev\quotes-spec\src\main\resources\quotes.yaml" />
       <method v="2" />
     </configuration>
     <list>
@@ -184,7 +182,7 @@
       <workItem from="1683034301584" duration="2928000" />
       <workItem from="1683037419001" duration="429000" />
       <workItem from="1683037860179" duration="107000" />
-      <workItem from="1683612347715" duration="3461000" />
+      <workItem from="1683612347715" duration="3901000" />
     </task>
     <servers />
   </component>

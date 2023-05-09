@@ -7,12 +7,10 @@
 
 package ch.es.pl.quotes.api.endpoints;
 
-import ch.es.pl.quotes.api.entities.QuoteEntity;
 import ch.es.pl.quotes.api.entities.UserEntity;
-import ch.es.pl.quotes.api.exceptions.QuoteNotFoundException;
+import ch.es.pl.quotes.api.exceptions.UserNotFoundException;
 import ch.es.pl.quotes.api.repositories.UserRepository;
 import org.openapitools.api.UsersApi;
-import org.openapitools.model.Quote;
 import org.openapitools.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -41,7 +39,7 @@ public class UsersController implements UsersApi {
             return new ResponseEntity<User>(user, HttpStatus.OK);
         } else {
 //            return ResponseEntity.notFound().build();
-            throw new QuoteNotFoundException(id);
+            throw new UserNotFoundException(id);
         }
     }
 }
