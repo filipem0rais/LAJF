@@ -79,26 +79,4 @@ create index REF_Items_Categ_IND
 create index REF_Items_Users_IND
     on items (idUser);
 
-create table sale
-(
-    idSale      int auto_increment
-        primary key,
-    idItem      int                  not null,
-    salPickedUp tinyint(1) default 0 not null,
-    idUser      int                  not null,
-    constraint ID_Sale_IND
-        unique (idSale),
-    constraint SID_Sale_Items_ID
-        unique (idItem),
-    constraint SID_Sale_Items_IND
-        unique (idItem),
-    constraint REF_Sale_Users_FK
-        foreign key (idUser) references users (idUser),
-    constraint SID_Sale_Items_FK
-        foreign key (idItem) references items (idItem)
-);
-
-create index REF_Sale_Users_IND
-    on sale (idUser);
-
 

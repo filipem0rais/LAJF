@@ -35,15 +35,15 @@ public class AuthController implements AuthApi {
 
     @Override
     public ResponseEntity<Token> authenticateUser(String email, String password) {
-        Optional<UserEntity> opt = userRepository.findByEmailAndPassword(email, password);
+        Optional<UserEntity> opt = userRepository.findByUseEmailAndUsePassword(email, password);
         if (opt.isPresent()) {
             UserEntity userEntity = opt.get();
-            if (! password.equals(userEntity.getPassword())) {
+            if (! password.equals(userEntity.getUsePassword())) {
                 return ResponseEntity.badRequest().build();
             }
             String token = Jwts.builder()
-                    .setSubject(userEntity.getEmail())
-                    .claim("id", userEntity.getId())
+                    .setSubject(userEntity.getUseEmail())
+                    .claim("id", userEntity.getIdUser())
                     .setIssuedAt(new Date())
                     .signWith(SignatureAlgorithm.HS256, secretKey)
                     .compact();
