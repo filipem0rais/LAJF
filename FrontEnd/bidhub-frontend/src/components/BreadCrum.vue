@@ -6,16 +6,22 @@
           <nav aria-label="breadcrumb" class="mt-5 mb-0 text-left">
             <ol class="breadcrumb" style="background-color: transparent;">
               <li class="breadcrumb-item"><a href="#">Accueil</a></li>
-              <li class="breadcrumb-item active" aria-current="page">Identification</li>
+              <li class="breadcrumb-item active" aria-current="page">{{ pageTitle }}</li>
             </ol>
           </nav>
-          <h1 class="page-title" style="margin-top: 0;">Identification</h1>
+          <h1 class="page-title" style="margin-top: 0;">{{ pageTitle }}</h1>
           <hr class="title-underline" style="margin-top: 0;">
         </div>
       </div>
     </div>
   </div>
 </template>
+
+<script>
+export default {
+  props: ['pageTitle']
+}
+</script>
 
 <style scoped>
 .page-title {

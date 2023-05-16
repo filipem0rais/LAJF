@@ -1,6 +1,6 @@
 <template>
   <body>
-  <bread-crum/>
+  <bread-crum page-title="Identification"/>
   <div class="main-container">
     <div class="container">
       <div class="row">
@@ -8,16 +8,14 @@
           <div class="card">
             <div class="card-body">
               <h2 class="card-title">Se connecter</h2>
-              <form @submit="submitLoginForm">
+              <form @submit="submitLoginForm" @click="resetMessage">
                 <div class="mb-3">
                   <label for="email" class="form-label">Adresse e-mail</label>
-                  <input type="email" class="form-control" id="email" v-model="loginData.useEmail" required
-                         @click="resetSuccessMessage; resetErrorLoginMessage">
+                  <input type="email" class="form-control" id="email" v-model="loginData.useEmail" required>
                 </div>
                 <div class="mb-3">
-                  <label for="confirm-password" class="form-label">Confirmez le mot de passe</label>
-                  <input type="password" class="form-control" id="confirm-password" v-model="loginData.usePassword"
-                         required @click="resetSuccessMessage" @input="resetErrorLoginMessage">
+                  <label for="password" class="form-label">Mot de passe</label>
+                  <input type="password" class="form-control" id="password" v-model="loginData.usePassword" required>
                 </div>
                 <button type="submit" class="btn btn-primary">Se connecter</button>
               </form>
@@ -31,27 +29,26 @@
           <div class="card">
             <div class="card-body">
               <h2 class="card-title">S'inscrire</h2>
-              <form @submit="submitForm">
+              <form @submit="submitForm" @click="resetMessage">
                 <div class="mb-3">
                   <label for="firstname" class="form-label">Prénom</label>
-                  <input type="text" class="form-control" id="firstname" v-model="userData.useName" required>
+                  <input type="text" class="form-control" id="firstname" v-model="userData.useName" required pattern="[A-Za-z]{2,25}" title="Au moins 2 caractères alphabétiques">
                 </div>
                 <div class="mb-3">
                   <label for="lastname" class="form-label">Nom</label>
-                  <input type="text" class="form-control" id="lastname" v-model="userData.useLastName" required>
+                  <input type="text" class="form-control" id="lastname" v-model="userData.useLastName" required pattern="[A-Za-z]{2,25}"  title="Au moins 2 caractères alphabétiques">
                 </div>
                 <div class="mb-3">
                   <label for="email2" class="form-label">Adresse e-mail</label>
-                  <input type="email" class="form-control" id="email2" v-model="userData.useEmail" required @click="resetErrorMailMessage">
+                  <input type="email" class="form-control" id="email2" v-model="userData.useEmail" required>
                 </div>
                 <div class="mb-3">
                   <label for="password2" class="form-label">Mot de passe</label>
-                  <input type="password" class="form-control" id="password2" v-model="userData.usePassword" required>
+                  <input type="password" class="form-control" id="password2" v-model="userData.usePassword" required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*\W).{10,50}" title="Au moins 10 caractères, 1 chiffre, 1 majuscule/minuscule et 1 caractère spécial">
                 </div>
                 <div class="mb-3">
                   <label for="confirm-password" class="form-label">Confirmez le mot de passe</label>
                   <input type="password" class="form-control" id="confirm-password" v-model="confirmPassword">
-                  <span v-if="passwordMismatch" class="text-danger">Les mots de passe ne correspondent pas</span>
                 </div>
                 <button type="submit" class="btn btn-primary">S'inscrire</button>
               </form>
@@ -61,6 +58,9 @@
               <div v-if="showErrorMailMessage" class="alert alert-danger mt-3">
                 Adresse e-mail déjà utilisée.
               </div>
+              <div v-if="showErrorPasswordMessage" class="alert alert-danger mt-3">
+                Les mots de passe ne correspondent pas.
+              </div>
             </div>
           </div>
         </div>
@@ -69,7 +69,6 @@
   </div>
   </body>
 </template>
-
 <style scoped>
 .main-container {
   margin-bottom: 60px;
@@ -87,10 +86,8 @@
 
 .card-title {
   padding-bottom: 10px;
-
 }
 </style>
-
 <script>
 import { registerUser, loginUser } from '@/services/UserService'
 import BreadCrum from '@/components/BreadCrum.vue'
@@ -116,7 +113,8 @@ export default {
       passwordMismatch: false,
       showSuccessMessage: false,
       showErrorLoginMessage: false,
-      showErrorMailMessage: false
+      showErrorMailMessage: false,
+      showErrorPasswordMessage: false
     }
   },
   methods: {
@@ -127,6 +125,7 @@ export default {
         this.confirmPassword = ''
         this.userData.usePassword = ''
         this.passwordMismatch = true
+        this.showErrorPasswordMessage = true
         return
       }
 
@@ -161,14 +160,11 @@ export default {
           this.showErrorLoginMessage = true
         })
     },
-    resetSuccessMessage () {
+    resetMessage () {
       this.showSuccessMessage = false
-    },
-    resetErrorLoginMessage () {
       this.showErrorLoginMessage = false
-    },
-    resetErrorMailMessage () {
       this.showErrorMailMessage = false
+      this.showErrorPasswordMessage = false
     }
   }
 }
