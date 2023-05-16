@@ -10,9 +10,11 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.openapitools.client.model.RegisterUser;
-import org.springframework.http.*;
-import org.springframework.util.LinkedMultiValueMap;
-import org.springframework.util.MultiValueMap;
+import org.openapitools.model.LoginUser;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 
@@ -223,15 +225,10 @@ public class UserSteps {
         String url = BASE_URL + "/auth/login";
         RestTemplate restTemplate = new RestTemplate();
 
-        // Create a new HttpEntity
-        HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
 
-        MultiValueMap<String, String> map= new LinkedMultiValueMap<String, String>();
-        map.add("email", this.email);
-        map.add("password", this.password);
-
-        HttpEntity<MultiValueMap<String, String>> request = new HttpEntity<MultiValueMap<String, String>>(map, headers);
+        LoginUser request = new LoginUser();
+        request.setUseEmail(this.email);
+        request.setUsePassword(this.password);
 
         try {
             this.response = restTemplate.postForEntity(url, request, String.class);
