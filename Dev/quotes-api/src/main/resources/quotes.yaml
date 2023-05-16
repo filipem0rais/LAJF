@@ -66,12 +66,12 @@ paths:
             schema:
               $ref: '#/components/schemas/RegisterUser'
       responses:
-            '201':
-              description: Created
-            '404':
-              description: Not Found
-            '409':
-              description: Conflict - email already exists
+        '201':
+          description: Created
+        '404':
+          description: Not Found
+        '409':
+          description: Conflict - email already exists
 
       deprecated: false
   /bids/{id}:
@@ -298,7 +298,109 @@ paths:
           description: Not Found
       deprecated: false
 
+  /categories/{id}:
+    get:
+      tags:
+        - Bidhub-API
+      summary: Obtient une catégorie
+      operationId: getCategory
+      parameters:
+        - name: id
+          in: path
+          description: id de la catégorie à obtenir
+          required: true
+          schema:
+            type: integer
+            format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            'application/json':
+              schema:
+                $ref: '#/components/schemas/Category'
+        '404':
+          description: Not Found
+      deprecated: false
 
+    delete:
+      tags:
+        - Bidhub-API
+      summary: Supprime une catégorie
+      operationId: deleteCategory
+      parameters:
+        - name: id
+          in: path
+          description: id de la catégorie à supprimer
+          required: true
+          schema:
+            type: integer
+            format: int32
+      responses:
+        '200':
+          description: OK
+        '404':
+          description: Not Found
+      deprecated: false
+
+  /categories:
+    get:
+      tags:
+        - Bidhub-API
+      summary: Obtient toutes les catégories
+      operationId: getCategories
+      responses:
+        '200':
+          description: OK
+          content:
+            'application/json':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Category'
+        '404':
+          description: Not Found
+      deprecated: false
+    post:
+      tags:
+        - Bidhub-API
+      summary: Crée une catégorie
+      operationId: createCategory
+      requestBody:
+        content:
+          'application/json':
+            schema:
+              $ref: '#/components/schemas/Category'
+      responses:
+        '201':
+          description: Created
+          content:
+            'application/json':
+              schema:
+                $ref: '#/components/schemas/Category'
+        '404':
+          description: Not Found
+      deprecated: false
+    put:
+      tags:
+        - Bidhub-API
+      summary: Modifie une catégorie
+      operationId: updateCategory
+      requestBody:
+        content:
+          'application/json':
+            schema:
+              $ref: '#/components/schemas/Category'
+      responses:
+        '200':
+          description: OK
+          content:
+            'application/json':
+              schema:
+                $ref: '#/components/schemas/Category'
+        '404':
+          description: Not Found
+      deprecated: false
 
 components:
   schemas:
@@ -438,4 +540,17 @@ components:
           description: email de l'utilisateur
           type: string
       title: LoginUser
+
+    Category:
+      description: toutes les caractéristiques d'une catégorie
+      type: object
+      properties:
+        idCategory:
+          description: numéro auto-incrémenté de la catégorie
+          type: integer
+          format: int32
+        catName:
+          description: nom de la catégorie
+          type: string
+      title: Category
 
