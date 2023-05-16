@@ -62,7 +62,26 @@ paths:
         '404':
           description: Not Found
       deprecated: false
+  /auth/register:
+    post:
+      tags:
+        - Bidhub-API
+      summary: Enregistre un utilisateur
+      operationId: registerUser
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RegisterUser'
+      responses:
+            '201':
+              description: Created
+            '404':
+              description: Not Found
+            '409':
+              description: Conflict - email already exists
 
+      deprecated: false
   /bids/{id}:
     get:
       tags:
@@ -89,30 +108,30 @@ paths:
       deprecated: false
 
     delete:
-        tags:
-            - Bidhub-API
-        summary: Supprime une offre
-        operationId: deleteBid
-        parameters:
-          - name: id
-            in: path
-            description: id de l'offre à supprimer
-            required: true
-            schema:
-                type: integer
-                format: int32
-          - in: header
-            name: Authorization
-            schema:
-              type: string
-            required: true
-        responses:
-          '200':
-            description: OK
-          '403':
-            description: Forbidden
-          '404':
-            description: Not Found
+      tags:
+        - Bidhub-API
+      summary: Supprime une offre
+      operationId: deleteBid
+      parameters:
+        - name: id
+          in: path
+          description: id de l'offre à supprimer
+          required: true
+          schema:
+            type: integer
+            format: int32
+        - in: header
+          name: Authorization
+          schema:
+            type: string
+          required: true
+      responses:
+        '200':
+          description: OK
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
   /bids:
     get:
       tags:
@@ -210,24 +229,24 @@ paths:
       deprecated: false
 
     delete:
-        tags:
-            - Bidhub-API
-        summary: Supprime un article
-        operationId: deleteItem
-        parameters:
-          - name: id
-            in: path
-            description: id de l'article à supprimer
-            required: true
-            schema:
-                type: integer
-                format: int32
-        responses:
-            '200':
-              description: OK
-            '404':
-              description: Not Found
-        deprecated: false
+      tags:
+        - Bidhub-API
+      summary: Supprime un article
+      operationId: deleteItem
+      parameters:
+        - name: id
+          in: path
+          description: id de l'article à supprimer
+          required: true
+          schema:
+            type: integer
+            format: int32
+      responses:
+        '200':
+          description: OK
+        '404':
+          description: Not Found
+      deprecated: false
   /items:
     get:
       tags:
@@ -399,4 +418,21 @@ components:
           description: indique si l'article a été récupéré
           type: boolean
       title: Item
+    RegisterUser:
+      description: toutes les caractéristiques d'un utilisateur
+      type: object
+      properties:
+        usePassword:
+          description: mot de passe de l'utilisateur
+          type: string
+        useName:
+          description: prénom de l'utilisateur
+          type: string
+        useLastName:
+          description: nom de l'utilisateur
+          type: string
+        useEmail:
+          description: email de l'utilisateur
+          type: string
+      title: RegisterUser
 

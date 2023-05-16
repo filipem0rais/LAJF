@@ -9,9 +9,6 @@ package ch.es.pl.quotes.api.entities;
 
 import jakarta.persistence.*;
 
-import java.math.BigDecimal;
-import java.util.Objects;
-
 @Entity
 @Table(name = "users")
 public class UserEntity {
@@ -32,7 +29,7 @@ public class UserEntity {
     @Column(name = "useLastName", nullable = false)
     private String useLastName;
 
-    @Column(name = "useEmail", nullable = false)
+    @Column(name = "useEmail", nullable = false, unique = true)
     private String useEmail;
 
     @Column(name = "usePassword", nullable = false)
