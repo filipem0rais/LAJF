@@ -16,7 +16,7 @@ public class UserEntity {
             table = "idUsers",
             pkColumnName = "name",
             valueColumnName = "val",
-            initialValue = 3,
+            initialValue = 1000,
             allocationSize = 100)
     @Id // @GeneratedValue
     @GeneratedValue(strategy = GenerationType.TABLE, generator = "genUsers")

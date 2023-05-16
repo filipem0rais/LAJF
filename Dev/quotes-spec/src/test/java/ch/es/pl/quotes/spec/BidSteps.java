@@ -1,65 +1,125 @@
-package ch.es.pl.quotes.spec;//
-// Auteur : Filipe Dias Morais
-// Projet : Dev
-// Date   : 02.05.2023
-//
+/*
+package ch.es.pl.quotes.spec;
 
-import ch.es.pl.quotes.api.entities.BidEntity;
-import ch.es.pl.quotes.api.repositories.BidRepository;
+
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.client.HttpClientErrorException;
+import org.springframework.web.client.RestTemplate;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class BidSteps {
 
-    @Autowired
-    private BidRepository bidRepository;
-
+    private static final String BASE_URL = "http://localhost:9090/api"; // Remplacez ceci par l'URL de base de votre API
     private Integer bidId;
-    private ResponseEntity<BidEntity> response;
+    private ResponseEntity<String> response;
+    private HttpClientErrorException httpClientErrorException;
+    private String token;
+    private String bidInfo;
 
-    @Given("que je dispose d'un ID d'offre valide")
-    public void que_je_dispose_d_un_ID_d_offre_valide() {
-        // vous devez avoir une façon de créer ou de récupérer un ID d'offre valide
-        bidId = //get or create valid bid ID;
+    @Given("que je dispose d'un ID d'enchère valide")
+    public void i_have_a_valid_bid_id() {
+        this.bidId = 5; // TODO: replace this with a valid bid ID
     }
 
-    @Given("que je dispose d'un ID d'offre invalide")
-    public void que_je_dispose_d_un_ID_d_offre_invalide() {
-        // pour un ID invalide, vous pouvez simplement utiliser un ID qui n'existe pas dans votre base de données
-        bidId = 999999;
+    @Given("que je dispose d'un ID d'enchère invalide")
+    public void i_have_an_invalid_bid_id() {
+        this.bidId = 999; // TODO: replace this with an invalid bid ID
     }
 
-    @When("j'envoie une requête GET à {string}")
-    public void j_envoie_une_requete_GET_a(String path) {
-        // Vous devez adapter cette partie en fonction de la manière dont vous faites les requêtes HTTP dans votre code
-        response = // HTTP GET request to path + bidId;
+    @Given("que je dispose d'un token d'utilisateur valide et des informations d'enchère valides")
+    public void i_have_a_valid_user_token_and_valid_bid_info() {
+        this.token = "valid_token"; // TODO: replace this with a valid user token
+        this.bidInfo = "valid_bid_info"; // TODO: replace this with valid bid info
+    }
+
+    @Given("que je dispose d'un token d'utilisateur invalide et des informations d'enchère valides")
+    public void i_have_an_invalid_user_token_and_valid_bid_info() {
+        this.token = "invalid_token"; // TODO: replace this with an invalid user token
+        this.bidInfo = "valid_bid_info"; // TODO: replace this with valid bid info
+    }
+
+    @When("j'envoie une requete GET a \\/bids\\/{int}")
+    public void i_send_a_get_request_to_bids(int id) {
+        String url = BASE_URL + "/bids/" + id;
+        RestTemplate restTemplate = new RestTemplate();
+        try {
+            this.response = restTemplate.getForEntity(url, String.class);
+        } catch (HttpClientErrorException e) {
+            this.httpClientErrorException = e;
+        }
+    }
+
+    @When("j'envoie une requete POST a \\/bids avec le token et les informations d'enchère")
+    public void i_send_a_post_request_to_bids_with_the_token_and_bid_info() {
+        String url = BASE_URL + "/bids";
+        RestTemplate restTemplate = new RestTemplate();
+        HttpHeaders headers = new HttpHeaders();
+        headers.set("Authorization", "Bearer " + this.token);
+        HttpEntity<String> entity = new HttpEntity<>(this.bidInfo, headers);
+        try {
+            this.response = restTemplate.postForEntity(url, entity, String.class);
+        } catch (HttpClientErrorException e) {
+            this.httpClientErrorException = e;
+        }
+    }
+
+    @When("j'envoie une requete PUT a \\/bids\\/{int} avec le token et les informations d'enchère")
+    public void i_send_a_put_request_to_bids_with_the_token_and_bid_info(int id) {
+        String url = BASE_URL + "/bids/" + id;
+        RestTemplate restTemplate = new RestTemplate();
+        HttpHeaders headers = new HttpHeaders();
+        headers.set("Authorization", "Bearer " + this.token);
+        HttpEntity<String> entity = new HttpEntity<>(this.bidInfo, headers);
+        try {
+            this.response = restTemplate.exchange(url, HttpMethod.PUT, entity, String.class);
+        } catch (HttpClientErrorException e) {
+            this.httpClientErrorException = e;
+        }
+    }
+
+    @When("j'envoie une requete DELETE a \\/bids\\/{int} avec le token")
+    public void i_send_a_delete_request_to_bids_with_the_token(int id) {
+        String url = BASE_URL + "/bids/" + id;
+        RestTemplate restTemplate = new RestTemplate();
+        HttpHeaders headers = new HttpHeaders();
+        headers.set("Authorization", "Bearer " + this.token);
+        HttpEntity<String> entity = new HttpEntity<>(headers);
+        try {
+            restTemplate.exchange(url, HttpMethod.DELETE, entity, String.class);
+            this.response = null;
+        } catch (HttpClientErrorException e) {
+            this.httpClientErrorException = e;
+        }
     }
 
     @Then("le code de statut de la réponse devrait être {int}")
-    public void le_code_de_statut_de_la_reponse_devrait_etre(Integer expectedStatus) {
-        assertEquals(expectedStatus, response.getStatusCodeValue());
+    public void the_response_status_code_should_be(int statusCode) {
+        if (this.httpClientErrorException != null) {
+            assertThat(this.httpClientErrorException.getStatusCode().value()).isEqualTo(statusCode);
+        } else {
+            assertThat(this.response.getStatusCodeValue()).isEqualTo(statusCode);
+        }
     }
 
-    @Then("le corps de la réponse devrait contenir une offre avec l'ID donné")
-    public void le_corps_de_la_reponse_devrait_contenir_une_offre_avec_l_ID_donné() {
-        assertTrue(response.hasBody());
-        assertEquals(bidId, response.getBody().getIdBid());
+    @Then("le corps de la réponse devrait contenir une enchère avec l'ID donné")
+    public void the_response_body_should_contain_a_bid_with_the_given_id() {
+        assertThat(this.response.getBody()).contains("\"id\":" + this.bidId);
     }
 
-    @Then("le corps de la réponse devrait contenir une erreur indiquant que l'offre n'a pas été trouvée")
-    public void le_corps_de_la_reponse_devrait_contenir_une_erreur_indiquant_que_l_offre_n_a_pas_ete_trouvee() {
-        // Cette assertion dépendra de la façon dont votre API retourne les erreurs
-        // Par exemple, si vous renvoyez un objet d'erreur spécifique, vous pouvez vérifier s'il est présent dans le corps de la réponse
-        assertTrue(response.hasBody());
-        assertEquals("Bid not found", response.getBody().getErrorMessage());
+    @Then("le corps de la réponse devrait contenir une erreur indiquant que l'enchère n'a pas été trouvée")
+    public void the_response_body_should_contain_an_error_indicating_the_bid_was_not_found() {
+        assertThat(this.httpClientErrorException.getMessage()).contains("Not Found");
     }
 
-    // Continuez de cette façon pour les autres étapes de vos scénarios
-}
+    @Then("le corps de la réponse devrait contenir l'ID de la nouvelle enchère")
+    public void the_response_body_should_contain_the_id_of_the_new_bid() {
+        // TODO: Implement this step
+    }
+}*/

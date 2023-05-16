@@ -5,7 +5,7 @@ values (2, 'Oscar Wilde', 'Be yourself; everyone else is already taken.');
 insert into quotes
 values (3, 'Albert Einstein',
         'Two things are infinite: the universe and human stupidity; and I''m not sure about the universe.');
-/*
+
 insert into users (idUser, useName, useLastName, useEmail, usePassword, useCredit) values (4, 'Flinn', 'Feldhuhn', 'ffeldhuhn3@dagondesign.com', 'PM9hsMBPcvY', 2375);
 insert into users (idUser, useName, useLastName, useEmail, usePassword, useCredit) values (5, 'Rebe', 'Steanyng', 'rsteanyng4@alibaba.com', 'i8ggNtDP', 956);
 insert into users (idUser, useName, useLastName, useEmail, usePassword, useCredit) values (6, 'Clem', 'Rawnsley', 'crawnsley5@gizmodo.com', 'WnRqb8', 404);
@@ -105,5 +105,3 @@ insert into users (idUser, useName, useLastName, useEmail, usePassword, useCredi
 insert into users (idUser, useName, useLastName, useEmail, usePassword, useCredit) values (100, 'Teddy', 'Casacchia', 'tcasacchia2r@aol.com', 'TS5bVJx', 2485);
 
 
-
-*/
