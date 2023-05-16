@@ -9,8 +9,7 @@ package ch.es.pl.quotes.api.entities;
 
 import jakarta.persistence.*;
 
-import java.math.BigDecimal;
-import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 
 @Entity
 @Table(name = "items")
@@ -30,13 +29,13 @@ public class ItemEntity {
     private String iteDescription;
 
     @Column(name = "iteInitialValue", nullable = false)
-    private BigDecimal iteInitialValue;
+    private Double iteInitialValue;
 
     @Column(name = "iteOnSale", nullable = false)
     private Boolean iteOnSale;
 
     @Column(name = "iteDatePublication", nullable = false)
-    private LocalDateTime iteDatePublication;
+    private OffsetDateTime iteDatePublication;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "idUser", nullable = false)
@@ -77,11 +76,11 @@ public class ItemEntity {
         this.iteDescription = iteDescription;
     }
 
-    public BigDecimal getIteInitialValue() {
+    public Double getIteInitialValue() {
         return iteInitialValue;
     }
 
-    public void setIteInitialValue(BigDecimal iteInitialValue) {
+    public void setIteInitialValue(Double iteInitialValue) {
         this.iteInitialValue = iteInitialValue;
     }
 
@@ -93,11 +92,11 @@ public class ItemEntity {
         this.iteOnSale = iteOnSale;
     }
 
-    public LocalDateTime getIteDatePublication() {
+    public OffsetDateTime getIteDatePublication() {
         return iteDatePublication;
     }
 
-    public void setIteDatePublication(LocalDateTime iteDatePublication) {
+    public void setIteDatePublication(OffsetDateTime iteDatePublication) {
         this.iteDatePublication = iteDatePublication;
     }
 
