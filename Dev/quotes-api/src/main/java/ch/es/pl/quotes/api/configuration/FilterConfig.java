@@ -30,7 +30,7 @@ public class FilterConfig {
     public FilterRegistrationBean< AuthFilter > filterRegistrationBean() {
         FilterRegistrationBean<AuthFilter> registrationBean = new FilterRegistrationBean<>();
         registrationBean.setFilter(authFilter);
-        registrationBean.addUrlPatterns("/users/*","/items/*");
+        registrationBean.addUrlPatterns("/users/*");
         return registrationBean;
     }
 }

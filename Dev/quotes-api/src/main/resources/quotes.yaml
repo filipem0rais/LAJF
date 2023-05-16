@@ -233,6 +233,11 @@ paths:
           schema:
             type: integer
             format: int32
+        - in: header
+          name: Authorization
+          schema:
+            type: string
+          required: true
       responses:
         '200':
           description: OK
@@ -262,6 +267,12 @@ paths:
         - Bidhub-API
       summary: Crée un article
       operationId: createItem
+      parameters:
+        - in: header
+          name: Authorization
+          schema:
+            type: string
+          required: true
       requestBody:
         content:
           'application/json':
@@ -282,6 +293,12 @@ paths:
         - Bidhub-API
       summary: Modifie un article
       operationId: updateItem
+      parameters:
+        - in: header
+          name: Authorization
+          schema:
+            type: string
+          required: true
       requestBody:
         content:
           'application/json':
@@ -294,6 +311,32 @@ paths:
             'application/json':
               schema:
                 $ref: '#/components/schemas/Item'
+        '404':
+          description: Not Found
+      deprecated: false
+  /items/categories/{id}:
+    get:
+      tags:
+        - Bidhub-API
+      summary: Obtient tous les articles d'une catégorie y compris les sous-catégories
+      operationId: getItemsByCategory
+      parameters:
+        - name: id
+          in: path
+          description: id de la catégorie
+          required: true
+          schema:
+            type: integer
+            format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            'application/json':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Item'
         '404':
           description: Not Found
       deprecated: false
