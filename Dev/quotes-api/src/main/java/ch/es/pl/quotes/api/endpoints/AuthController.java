@@ -12,6 +12,7 @@ import ch.es.pl.quotes.api.repositories.UserRepository;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.openapitools.api.AuthApi;
+import org.openapitools.model.LoginUser;
 import org.openapitools.model.RegisterUser;
 import org.openapitools.model.Token;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,12 +37,12 @@ public class AuthController implements AuthApi {
 
 
     @Override
-    public ResponseEntity<Token> authenticateUser(String email, String password) {
-        Optional<UserEntity> opt = userRepository.findByUseEmail(email);
+    public ResponseEntity<Token> authenticateUser(LoginUser user) {
+        Optional<UserEntity> opt = userRepository.findByUseEmail(user.getUseEmail());
         if (opt.isPresent()) {
             UserEntity userEntity = opt.get();
             BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-            if (!passwordEncoder.matches(password, userEntity.getUsePassword())) {
+            if (!passwordEncoder.matches(user.getUsePassword(), userEntity.getUsePassword())) {
                 return ResponseEntity.badRequest().build();
             }
             String token = Jwts.builder()

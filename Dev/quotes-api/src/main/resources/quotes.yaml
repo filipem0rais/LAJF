@@ -39,19 +39,11 @@ paths:
         - Bidhub-API
       summary: Authentifie un utilisateur
       operationId: authenticateUser
-      parameters:
-        - name: email
-          in: query
-          description: email de l'utilisateur
-          required: true
-          schema:
-            type: string
-        - name: password
-          in: query
-          description: mot de passe de l'utilisateur
-          required: true
-          schema:
-            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LoginUser'
       responses:
         '200':
           description: OK
@@ -435,4 +427,15 @@ components:
           description: email de l'utilisateur
           type: string
       title: RegisterUser
+    LoginUser:
+      description: toutes les caractéristiques d'un utilisateur
+      type: object
+      properties:
+        usePassword:
+          description: mot de passe de l'utilisateur
+          type: string
+        useEmail:
+          description: email de l'utilisateur
+          type: string
+      title: LoginUser
 
