@@ -11,3 +11,4 @@ Feature: Récupérer un utilisateur
     When j'envoie une requete GET a /users/999
     Then le code de statut de la réponse devrait être 404
     And le corps de la réponse devrait contenir une erreur indiquant que l'utilisateur n'a pas été trouvé
+

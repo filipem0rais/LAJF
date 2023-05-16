@@ -101,12 +101,18 @@ paths:
             schema:
                 type: integer
                 format: int32
+          - in: header
+            name: Authorization
+            schema:
+              type: string
+            required: true
         responses:
-            '200':
-              description: OK
-            '404':
-              description: Not Found
-        deprecated: false
+          '200':
+            description: OK
+          '403':
+            description: Forbidden
+          '404':
+            description: Not Found
   /bids:
     get:
       tags:
@@ -130,6 +136,12 @@ paths:
         - Bidhub-API
       summary: Crée une offre
       operationId: createBid
+      parameters:
+        - in: header
+          name: Authorization
+          schema:
+            type: string
+          required: true
       requestBody:
         content:
           'application/json':
@@ -150,6 +162,12 @@ paths:
         - Bidhub-API
       summary: Modifie une offre
       operationId: updateBid
+      parameters:
+        - in: header
+          name: Authorization
+          schema:
+            type: string
+          required: true
       requestBody:
         content:
           'application/json':

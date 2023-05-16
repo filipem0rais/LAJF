@@ -26,7 +26,7 @@ public class BidEntity {
     @Column(name = "idBid", nullable = false)
     private int idBid;
     @Column(name = "bidAmount", nullable = false)
-    private BigDecimal bidAmount;
+    private Double bidAmount;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "idUser", nullable = false)
@@ -47,11 +47,11 @@ public class BidEntity {
         this.idBid = idBid;
     }
 
-    public BigDecimal getBidAmount() {
+    public Double getBidAmount() {
         return bidAmount;
     }
 
-    public void setBidAmount(BigDecimal bidAmount) {
+    public void setBidAmount(Double bidAmount) {
         this.bidAmount = bidAmount;
     }
 

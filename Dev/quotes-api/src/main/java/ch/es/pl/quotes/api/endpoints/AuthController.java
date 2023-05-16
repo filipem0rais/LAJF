@@ -54,4 +54,6 @@ public class AuthController implements AuthApi {
             return ResponseEntity.badRequest().build();
         }
     }
+
+
 }
