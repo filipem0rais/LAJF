@@ -8,17 +8,22 @@
           <div class="card">
             <div class="card-body">
               <h2 class="card-title">Se connecter</h2>
-              <form>
+              <form @submit="submitLoginForm">
                 <div class="mb-3">
                   <label for="email" class="form-label">Adresse e-mail</label>
-                  <input type="email" class="form-control" id="email" required>
+                  <input type="email" class="form-control" id="email" v-model="loginData.useEmail" required
+                         @click="resetSuccessMessage; resetErrorLoginMessage">
                 </div>
                 <div class="mb-3">
-                  <label for="password" class="form-label">Mot de passe</label>
-                  <input type="password" class="form-control" id="password" required>
+                  <label for="confirm-password" class="form-label">Confirmez le mot de passe</label>
+                  <input type="password" class="form-control" id="confirm-password" v-model="loginData.usePassword"
+                         required @click="resetSuccessMessage" @input="resetErrorLoginMessage">
                 </div>
                 <button type="submit" class="btn btn-primary">Se connecter</button>
               </form>
+              <div v-if="showErrorLoginMessage" class="alert alert-danger mt-3">
+                Adresse e-mail ou mot de passe incorrect.
+              </div>
             </div>
           </div>
         </div>
@@ -26,29 +31,36 @@
           <div class="card">
             <div class="card-body">
               <h2 class="card-title">S'inscrire</h2>
-              <form>
+              <form @submit="submitForm">
                 <div class="mb-3">
                   <label for="firstname" class="form-label">Prénom</label>
-                  <input type="text" class="form-control" id="firstname" required>
+                  <input type="text" class="form-control" id="firstname" v-model="userData.useName" required>
                 </div>
                 <div class="mb-3">
                   <label for="lastname" class="form-label">Nom</label>
-                  <input type="text" class="form-control" id="lastname" required>
+                  <input type="text" class="form-control" id="lastname" v-model="userData.useLastName" required>
                 </div>
                 <div class="mb-3">
                   <label for="email2" class="form-label">Adresse e-mail</label>
-                  <input type="email" class="form-control" id="email2" required>
+                  <input type="email" class="form-control" id="email2" v-model="userData.useEmail" required @click="resetErrorMailMessage">
                 </div>
                 <div class="mb-3">
                   <label for="password2" class="form-label">Mot de passe</label>
-                  <input type="password" class="form-control" id="password2" required>
+                  <input type="password" class="form-control" id="password2" v-model="userData.usePassword" required>
                 </div>
                 <div class="mb-3">
                   <label for="confirm-password" class="form-label">Confirmez le mot de passe</label>
-                  <input type="password" class="form-control" id="confirm-password" required>
+                  <input type="password" class="form-control" id="confirm-password" v-model="confirmPassword">
+                  <span v-if="passwordMismatch" class="text-danger">Les mots de passe ne correspondent pas</span>
                 </div>
                 <button type="submit" class="btn btn-primary">S'inscrire</button>
               </form>
+              <div v-if="showSuccessMessage" class="alert alert-success mt-3">
+                Vous êtes maintenant inscrit ! Connectez-vous pour accéder à votre compte.
+              </div>
+              <div v-if="showErrorMailMessage" class="alert alert-danger mt-3">
+                Adresse e-mail déjà utilisée.
+              </div>
             </div>
           </div>
         </div>
@@ -59,23 +71,105 @@
 </template>
 
 <style scoped>
+.main-container {
+  margin-bottom: 60px;
+}
+
 .btn {
   background-color: #ED7D2F;
   border-color: #ED7D2F;
 }
 
+.btn:hover {
+  background-color: #E85C0C;
+  border-color: #E85C0C;
+}
+
 .card-title {
   padding-bottom: 10px;
+
 }
 </style>
 
 <script>
+import { registerUser, loginUser } from '@/services/UserService'
 import BreadCrum from '@/components/BreadCrum.vue'
+import router from '@/router'
 
 export default {
-  name: 'IdentificationView',
   components: {
     BreadCrum
+  },
+  data () {
+    return {
+      userData: {
+        usePassword: '',
+        useName: '',
+        useLastName: '',
+        useEmail: ''
+      },
+      loginData: {
+        usePassword: '',
+        useEmail: ''
+      },
+      confirmPassword: '',
+      passwordMismatch: false,
+      showSuccessMessage: false,
+      showErrorLoginMessage: false,
+      showErrorMailMessage: false
+    }
+  },
+  methods: {
+    submitForm (event) {
+      event.preventDefault()
+
+      if (this.userData.usePassword !== this.confirmPassword) {
+        this.confirmPassword = ''
+        this.userData.usePassword = ''
+        this.passwordMismatch = true
+        return
+      }
+
+      registerUser(this.userData)
+        .then(() => {
+          this.userData = {
+            usePassword: '',
+            useName: '',
+            useLastName: '',
+            useEmail: ''
+          }
+          this.confirmPassword = ''
+          this.passwordMismatch = false
+          this.showSuccessMessage = true
+        })
+        .catch(() => {
+          this.showErrorMailMessage = true
+          this.userData.useEmail = ''
+        })
+    },
+    submitLoginForm (event) {
+      event.preventDefault()
+      loginUser(this.loginData)
+        .then(() => {
+          router.push('/connected')
+        })
+        .catch(() => {
+          this.loginData = {
+            usePassword: '',
+            useEmail: ''
+          }
+          this.showErrorLoginMessage = true
+        })
+    },
+    resetSuccessMessage () {
+      this.showSuccessMessage = false
+    },
+    resetErrorLoginMessage () {
+      this.showErrorLoginMessage = false
+    },
+    resetErrorMailMessage () {
+      this.showErrorMailMessage = false
+    }
   }
 }
 </script>

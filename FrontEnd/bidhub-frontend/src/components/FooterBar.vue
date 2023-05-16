@@ -1,5 +1,5 @@
 <template>
-  <footer>
+  <footer class="sticky-footer">
     <div class="container-fluid bg-light">
       <div class="row">
         <div class="col-md-6 text-left py-2">
@@ -14,13 +14,14 @@
 </template>
 
 <style scoped>
-footer {
+footer.sticky-footer {
   position: fixed;
   bottom: 0;
   left: 0;
   width: 100%;
   background-color: #f8f9fa;
   color: #9b9da4;
+  z-index: 1000;
 }
 
 .container-fluid {

@@ -32,6 +32,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
+@CrossOrigin(origins = "*")
 public class BidController implements BidsApi {
     @Autowired
     private BidRepository bidRepository;

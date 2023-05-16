@@ -15,7 +15,7 @@
               <router-link class="nav-link text-white" to="/">Accueil</router-link>
             </li>
             <li class="nav-item">
-              <router-link class="nav-link text-white" to="/about">Enchères</router-link>
+              <router-link class="nav-link text-white" to="/">Enchères</router-link>
             </li>
           </ul>
           <ul class="navbar-nav custom-nav">
