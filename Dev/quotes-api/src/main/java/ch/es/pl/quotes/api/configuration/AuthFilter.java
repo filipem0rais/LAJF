@@ -47,7 +47,6 @@ public class AuthFilter extends OncePerRequestFilter {
             chain.doFilter(request, response);
         } catch ( JwtException e) {
             response.sendError(HttpServletResponse.SC_UNAUTHORIZED,"Token introuvable ou incorrect");
-            return;
         }
 
     }

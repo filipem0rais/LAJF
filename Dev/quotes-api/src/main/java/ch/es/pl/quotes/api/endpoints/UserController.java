@@ -10,10 +10,7 @@ package ch.es.pl.quotes.api.endpoints;
 import ch.es.pl.quotes.api.entities.UserEntity;
 import ch.es.pl.quotes.api.exceptions.UserNotFoundException;
 import ch.es.pl.quotes.api.repositories.UserRepository;
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
 import org.openapitools.api.UsersApi;
-import org.openapitools.model.Token;
 import org.openapitools.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -22,6 +19,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RestController;
 
+<<<<<<< HEAD:Dev/quotes-api/src/main/java/ch/es/pl/quotes/api/endpoints/UsersController.java
 
 import java.util.Date;
 import java.util.Optional;
@@ -29,6 +27,12 @@ import java.util.Optional;
 @RestController
 @CrossOrigin(origins = "*")
 public class UsersController implements UsersApi {
+=======
+import java.util.Optional;
+
+@RestController
+public class UserController implements UsersApi {
+>>>>>>> API:Dev/quotes-api/src/main/java/ch/es/pl/quotes/api/endpoints/UserController.java
 
     @Autowired
     private UserRepository userRepository;
