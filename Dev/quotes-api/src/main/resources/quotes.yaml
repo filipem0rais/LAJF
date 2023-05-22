@@ -39,19 +39,11 @@ paths:
         - Bidhub-API
       summary: Authentifie un utilisateur
       operationId: authenticateUser
-      parameters:
-        - name: email
-          in: query
-          description: email de l'utilisateur
-          required: true
-          schema:
-            type: string
-        - name: password
-          in: query
-          description: mot de passe de l'utilisateur
-          required: true
-          schema:
-            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LoginUser'
       responses:
         '200':
           description: OK
@@ -62,7 +54,26 @@ paths:
         '404':
           description: Not Found
       deprecated: false
+  /auth/register:
+    post:
+      tags:
+        - Bidhub-API
+      summary: Enregistre un utilisateur
+      operationId: registerUser
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RegisterUser'
+      responses:
+        '201':
+          description: Created
+        '404':
+          description: Not Found
+        '409':
+          description: Conflict - email already exists
 
+      deprecated: false
   /bids/{id}:
     get:
       tags:
@@ -89,24 +100,30 @@ paths:
       deprecated: false
 
     delete:
-        tags:
-            - Bidhub-API
-        summary: Supprime une offre
-        operationId: deleteBid
-        parameters:
-          - name: id
-            in: path
-            description: id de l'offre à supprimer
-            required: true
-            schema:
-                type: integer
-                format: int32
-        responses:
-            '200':
-              description: OK
-            '404':
-              description: Not Found
-        deprecated: false
+      tags:
+        - Bidhub-API
+      summary: Supprime une offre
+      operationId: deleteBid
+      parameters:
+        - name: id
+          in: path
+          description: id de l'offre à supprimer
+          required: true
+          schema:
+            type: integer
+            format: int32
+        - in: header
+          name: Authorization
+          schema:
+            type: string
+          required: true
+      responses:
+        '200':
+          description: OK
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
   /bids:
     get:
       tags:
@@ -130,6 +147,12 @@ paths:
         - Bidhub-API
       summary: Crée une offre
       operationId: createBid
+      parameters:
+        - in: header
+          name: Authorization
+          schema:
+            type: string
+          required: true
       requestBody:
         content:
           'application/json':
@@ -150,6 +173,12 @@ paths:
         - Bidhub-API
       summary: Modifie une offre
       operationId: updateBid
+      parameters:
+        - in: header
+          name: Authorization
+          schema:
+            type: string
+          required: true
       requestBody:
         content:
           'application/json':
@@ -192,24 +221,29 @@ paths:
       deprecated: false
 
     delete:
-        tags:
-            - Bidhub-API
-        summary: Supprime un article
-        operationId: deleteItem
-        parameters:
-          - name: id
-            in: path
-            description: id de l'article à supprimer
-            required: true
-            schema:
-                type: integer
-                format: int32
-        responses:
-            '200':
-              description: OK
-            '404':
-              description: Not Found
-        deprecated: false
+      tags:
+        - Bidhub-API
+      summary: Supprime un article
+      operationId: deleteItem
+      parameters:
+        - name: id
+          in: path
+          description: id de l'article à supprimer
+          required: true
+          schema:
+            type: integer
+            format: int32
+        - in: header
+          name: Authorization
+          schema:
+            type: string
+          required: true
+      responses:
+        '200':
+          description: OK
+        '404':
+          description: Not Found
+      deprecated: false
   /items:
     get:
       tags:
@@ -233,6 +267,12 @@ paths:
         - Bidhub-API
       summary: Crée un article
       operationId: createItem
+      parameters:
+        - in: header
+          name: Authorization
+          schema:
+            type: string
+          required: true
       requestBody:
         content:
           'application/json':
@@ -253,6 +293,12 @@ paths:
         - Bidhub-API
       summary: Modifie un article
       operationId: updateItem
+      parameters:
+        - in: header
+          name: Authorization
+          schema:
+            type: string
+          required: true
       requestBody:
         content:
           'application/json':
@@ -268,8 +314,136 @@ paths:
         '404':
           description: Not Found
       deprecated: false
+  /items/categories/{id}:
+    get:
+      tags:
+        - Bidhub-API
+      summary: Obtient tous les articles d'une catégorie y compris les sous-catégories
+      operationId: getItemsByCategory
+      parameters:
+        - name: id
+          in: path
+          description: id de la catégorie
+          required: true
+          schema:
+            type: integer
+            format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            'application/json':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Item'
+        '404':
+          description: Not Found
+      deprecated: false
 
+  /categories/{id}:
+    get:
+      tags:
+        - Bidhub-API
+      summary: Obtient une catégorie
+      operationId: getCategory
+      parameters:
+        - name: id
+          in: path
+          description: id de la catégorie à obtenir
+          required: true
+          schema:
+            type: integer
+            format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            'application/json':
+              schema:
+                $ref: '#/components/schemas/Category'
+        '404':
+          description: Not Found
+      deprecated: false
 
+    delete:
+      tags:
+        - Bidhub-API
+      summary: Supprime une catégorie
+      operationId: deleteCategory
+      parameters:
+        - name: id
+          in: path
+          description: id de la catégorie à supprimer
+          required: true
+          schema:
+            type: integer
+            format: int32
+      responses:
+        '200':
+          description: OK
+        '404':
+          description: Not Found
+      deprecated: false
+
+  /categories:
+    get:
+      tags:
+        - Bidhub-API
+      summary: Obtient toutes les catégories
+      operationId: getCategories
+      responses:
+        '200':
+          description: OK
+          content:
+            'application/json':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Category'
+        '404':
+          description: Not Found
+      deprecated: false
+    post:
+      tags:
+        - Bidhub-API
+      summary: Crée une catégorie
+      operationId: createCategory
+      requestBody:
+        content:
+          'application/json':
+            schema:
+              $ref: '#/components/schemas/Category'
+      responses:
+        '201':
+          description: Created
+          content:
+            'application/json':
+              schema:
+                $ref: '#/components/schemas/Category'
+        '404':
+          description: Not Found
+      deprecated: false
+    put:
+      tags:
+        - Bidhub-API
+      summary: Modifie une catégorie
+      operationId: updateCategory
+      requestBody:
+        content:
+          'application/json':
+            schema:
+              $ref: '#/components/schemas/Category'
+      responses:
+        '200':
+          description: OK
+          content:
+            'application/json':
+              schema:
+                $ref: '#/components/schemas/Category'
+        '404':
+          description: Not Found
+      deprecated: false
 
 components:
   schemas:
@@ -277,23 +451,23 @@ components:
       description: toutes les caractéristiques d'un utilisateur
       type: object
       properties:
-        id:
+        idUser:
           description: numéro auto-incrémenté de l'utilisateur
           type: integer
           format: int32
-        password:
+        usePassword:
           description: mot de passe de l'utilisateur
           type: string
-        name:
+        useName:
           description: prénom de l'utilisateur
           type: string
-        lastName:
+        useLastName:
           description: nom de l'utilisateur
           type: string
-        email:
+        useEmail:
           description: email de l'utilisateur
           type: string
-        credit:
+        useCredit:
           description: crédit de l'utilisateur
           type: number
           format: double
@@ -381,4 +555,45 @@ components:
           description: indique si l'article a été récupéré
           type: boolean
       title: Item
+    RegisterUser:
+      description: toutes les caractéristiques d'un utilisateur
+      type: object
+      properties:
+        usePassword:
+          description: mot de passe de l'utilisateur
+          type: string
+        useName:
+          description: prénom de l'utilisateur
+          type: string
+        useLastName:
+          description: nom de l'utilisateur
+          type: string
+        useEmail:
+          description: email de l'utilisateur
+          type: string
+      title: RegisterUser
+    LoginUser:
+      description: toutes les caractéristiques d'un utilisateur
+      type: object
+      properties:
+        usePassword:
+          description: mot de passe de l'utilisateur
+          type: string
+        useEmail:
+          description: email de l'utilisateur
+          type: string
+      title: LoginUser
+
+    Category:
+      description: toutes les caractéristiques d'une catégorie
+      type: object
+      properties:
+        idCategory:
+          description: numéro auto-incrémenté de la catégorie
+          type: integer
+          format: int32
+        catName:
+          description: nom de la catégorie
+          type: string
+      title: Category
 

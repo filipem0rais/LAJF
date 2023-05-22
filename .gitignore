@@ -2,3 +2,7 @@
 *.ffs_db
 
 *.lun#
+
+Dev/.idea/
+
+FrontEnd/bidhub-frontend/node_modules/.cache/babel-loader/
