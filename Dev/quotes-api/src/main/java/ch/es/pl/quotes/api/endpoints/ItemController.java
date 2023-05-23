@@ -7,6 +7,7 @@
 
 package ch.es.pl.quotes.api.endpoints;
 
+import ch.es.pl.quotes.api.entities.BidEntity;
 import ch.es.pl.quotes.api.entities.CategoryEntity;
 import ch.es.pl.quotes.api.entities.ItemEntity;
 import ch.es.pl.quotes.api.entities.UserEntity;
@@ -25,12 +26,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @RestController
 public class ItemController implements ItemsApi {
@@ -143,7 +143,7 @@ public class ItemController implements ItemsApi {
     }
 
     @Override
-    public ResponseEntity<Void> deleteItem( Integer id,@RequestHeader("Authorization") String authHeader) {
+    public ResponseEntity<Void> deleteItem(Integer id, @RequestHeader("Authorization") String authHeader) {
         Optional<ItemEntity> opt = itemRepository.findById(id);
 
         Integer userId = getUserIdFromToken(authHeader);
@@ -222,8 +222,87 @@ public class ItemController implements ItemsApi {
         return items;
     }
 
-    /*
 
+    @Override
+    public ResponseEntity<List<Item>> getUnsoldItems(@RequestHeader("Authorization") String authHeader) {
+        Integer userId = getUserIdFromToken(authHeader);
+        Optional<UserEntity> optUser = userRepository.findById(userId);
+
+        if (optUser.isPresent()) {
+            List<ItemEntity> itemEntities = itemRepository.findUnsoldItemsByUser(optUser.get());
+
+            List<Item> items = new ArrayList<>();
+            for (ItemEntity itemEntity : itemEntities) {
+                Item item = new Item();
+                item.setIdItem(itemEntity.getIdItem());
+                item.setIteDescription(itemEntity.getIteDescription());
+                item.setIteInitialValue(itemEntity.getIteInitialValue());
+                item.setIteOnSale(itemEntity.getIteOnSale());
+                item.setIteDatePublication(itemEntity.getIteDatePublication());
+                item.setIdUser(itemEntity.getUser().getIdUser());
+                item.setIdCategory(itemEntity.getCategory().getIdCategory());
+                item.setIteName(itemEntity.getIteName());
+                item.setIteState(itemEntity.getIteState());
+                item.setItePicture(itemEntity.getItePicture());
+                item.setItePickedUp(itemEntity.getItePickedUp());
+                items.add(item);
+            }
+            return new ResponseEntity<List<Item>>(items, HttpStatus.OK);
+        } else {
+            throw new UserNotFoundException(userId);
+        }
+    }
+
+    @Override
+    public ResponseEntity<Void> endAuction(@PathVariable Integer itemId, @RequestHeader("Authorization") String authHeader) {
+        Integer userId = getUserIdFromToken(authHeader);
+        Optional<ItemEntity> optItem = itemRepository.findById(itemId);
+
+        if (optItem.isPresent()) {
+            ItemEntity item = optItem.get();
+
+            if (!item.getUser().getIdUser().equals(userId)) {
+                return new ResponseEntity<>(HttpStatus.FORBIDDEN);
+            }
+
+            item.setIteOnSale(false);
+            itemRepository.save(item);
+
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
+
+
+    public ResponseEntity<Void> validateTransaction(@PathVariable Integer itemId, @RequestHeader("Authorization") String authHeader) {
+        Integer userId = getUserIdFromToken(authHeader);
+        Optional<ItemEntity> optItem = itemRepository.findById(itemId);
+
+        if (optItem.isPresent()) {
+            ItemEntity item = optItem.get();
+
+            if (!item.getUser().getIdUser().equals(userId)) {
+                return new ResponseEntity<>(HttpStatus.FORBIDDEN);
+            }
+
+            if (item.getBids().isEmpty()) {
+                return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            }
+
+            BidEntity highestBid = Collections.max(item.getBids(), Comparator.comparing(BidEntity::getBidAmount));
+            item.setItePickedUp(true);
+            item.setUser(highestBid.getUser());
+            itemRepository.save(item);
+
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
+
+
+    /*
     @Override
     public ResponseEntity<Item> getItemByUser(Integer idUser) {
         Optional<ItemEntity> opt = itemRepository.findById(idUser);

@@ -9,6 +9,9 @@ package ch.es.pl.quotes.api.entities;
 
 import jakarta.persistence.*;
 
+import java.util.HashSet;
+import java.util.Set;
+
 @Entity
 @Table(name = "users")
 public class UserEntity {
@@ -38,6 +41,8 @@ public class UserEntity {
     @Column(name = "useCredit", nullable = false)
     private double useCredit;
 
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private Set<BidEntity> bids = new HashSet<>();
 
     // getters and setters
 
@@ -88,5 +93,13 @@ public class UserEntity {
 
     public void setUseCredit(double useCredit) {
         this.useCredit = useCredit;
+    }
+
+    public Set<BidEntity> getBids() {
+        return bids;
+    }
+
+    public void setBids(Set<BidEntity> bids) {
+        this.bids = bids;
     }
 }

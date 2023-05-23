@@ -10,6 +10,8 @@ package ch.es.pl.quotes.api.entities;
 import jakarta.persistence.*;
 
 import java.time.OffsetDateTime;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "items")
@@ -56,6 +58,9 @@ public class ItemEntity {
 
     @Column(name = "itePickedUp", nullable = false)
     private Boolean itePickedUp;
+
+    @OneToMany(mappedBy = "item", cascade = CascadeType.ALL)
+    private Set<BidEntity> bids = new HashSet<>();
 
     // getters and setters
 
@@ -146,6 +151,14 @@ public class ItemEntity {
 
     public void setItePickedUp(Boolean itePickedUp) {
         this.itePickedUp = itePickedUp;
+    }
+
+    public Set<BidEntity> getBids() {
+        return bids;
+    }
+
+    public void setBids(Set<BidEntity> bids) {
+        this.bids = bids;
     }
 }
 

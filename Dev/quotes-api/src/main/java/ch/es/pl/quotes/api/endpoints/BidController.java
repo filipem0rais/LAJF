@@ -19,8 +19,11 @@ import ch.es.pl.quotes.api.repositories.UserRepository;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jws;
 import io.jsonwebtoken.Jwts;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotNull;
 import org.openapitools.api.BidsApi;
 import org.openapitools.model.Bid;
+import org.openapitools.model.MakeBidRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
@@ -79,27 +82,7 @@ public class BidController implements BidsApi {
         return new ResponseEntity<List<Bid>>(bids, HttpStatus.OK);
     }
 
-    @Override
-    public ResponseEntity<Bid> createBid(@RequestHeader("Authorization") String authHeader, Bid bid) {
 
-        Integer userId = getUserIdFromToken(authHeader);
-
-        BidEntity bidEntity = new BidEntity();
-        bidEntity.setBidAmount(bid.getBidAmount());
-
-        UserEntity userEntity = userRepository.findById(userId)
-                .orElseThrow(() -> new UserNotFoundException(userId));
-        bidEntity.setUser(userEntity);
-
-        ItemEntity itemEntity = itemRepository.findById(bid.getIdItem())
-                .orElseThrow(() -> new ItemNotFoundException(bid.getIdItem()));
-        bidEntity.setItem(itemEntity);
-
-        bidEntity = bidRepository.save(bidEntity);
-
-        bid.setIdBid(bidEntity.getIdBid());
-        return new ResponseEntity<Bid>(bid, HttpStatus.CREATED);
-    }
 
 
 
@@ -151,5 +134,31 @@ public class BidController implements BidsApi {
                 .setSigningKey(secretKey)
                 .parseClaimsJws(token);
         return claims.getBody().get("id", Integer.class);
+    }
+
+    @Override
+    public ResponseEntity<Bid> makeBid(@NotNull @RequestHeader("Authorization") String authorization, @Valid @RequestBody MakeBidRequest makeBidRequest) {
+        Integer userId = getUserIdFromToken(authorization);
+
+        BidEntity bidEntity = new BidEntity();
+        bidEntity.setBidAmount(makeBidRequest.getBidAmount());
+
+        UserEntity userEntity = userRepository.findById(userId)
+                .orElseThrow(() -> new UserNotFoundException(userId));
+        bidEntity.setUser(userEntity);
+
+        ItemEntity itemEntity = itemRepository.findById(makeBidRequest.getItemId())
+                .orElseThrow(() -> new ItemNotFoundException(makeBidRequest.getItemId()));
+        bidEntity.setItem(itemEntity);
+
+        bidEntity = bidRepository.save(bidEntity);
+
+        Bid bid = new Bid();
+        bid.setIdBid(bidEntity.getIdBid());
+        bid.setBidAmount(bidEntity.getBidAmount());
+        bid.setIdUser(bidEntity.getUser().getIdUser());
+        bid.setIdItem(bidEntity.getItem().getIdItem());
+
+        return new ResponseEntity<>(bid, HttpStatus.CREATED);
     }
 }
