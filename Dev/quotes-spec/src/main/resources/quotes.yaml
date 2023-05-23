@@ -331,7 +331,7 @@ paths:
   /items/{itemId}/end-auction:
     put:
       tags:
-        - Items
+        - items
       summary: Met fin à une enchère
       description: Met fin à une enchère pour un article spécifique
       operationId: endAuction
@@ -360,7 +360,7 @@ paths:
   /items/{itemId}/validate-transaction:
     put:
       tags:
-        - Items
+        - items
       summary: Valide une transaction
       description: Valide la transaction pour un article spécifique
       operationId: validateTransaction
@@ -414,6 +414,33 @@ paths:
         '404':
           description: Not Found
       deprecated: false
+
+  /items/last/{count}:
+    get:
+      tags:
+        - Bidhub-API
+      summary: Obtient les x derniers articles mis en vente
+      operationId: getLastItemsOnSale
+      parameters:
+        - in: path
+          name: count
+          schema:
+            type: integer
+          required: true
+          description: Nombre d'articles à récupérer
+      responses:
+        '200':
+          description: OK
+          content:
+            'application/json':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Item'
+        '404':
+          description: Not Found
+      deprecated: false
+
 
   /categories/{id}:
     get:
@@ -678,6 +705,10 @@ components:
         itePickedUp:
           description: indique si l'article a été récupéré
           type: boolean
+        iteHighestBidAmount:
+          description: montant de l'offre la plus élevée
+          type: number
+          format: double
       title: Item
     RegisterUser:
       description: toutes les caractéristiques d'un utilisateur

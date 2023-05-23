@@ -102,7 +102,7 @@ public class ItemController implements ItemsApi {
             itemEntity.setIteDatePublication(item.getIteDatePublication());
 
             UserEntity userEntity = userRepository.findById(userId)
-                    .orElseThrow(() -> new UserNotFoundException(userId));
+                    .orElseThrow(() -> new UserNotFoundException("User not found", HttpStatus.NOT_FOUND));
             itemEntity.setUser(userEntity);
 
             CategoryEntity categoryEntity = categoryRepository.findById(item.getIdCategory())
@@ -128,7 +128,7 @@ public class ItemController implements ItemsApi {
         ItemEntity itemEntity = new ItemEntity();
 
         UserEntity userEntity = userRepository.findById(userId)
-                .orElseThrow(() -> new UserNotFoundException(userId));
+                .orElseThrow(() -> new UserNotFoundException("User not found", HttpStatus.NOT_FOUND));
         itemEntity.setUser(userEntity);
 
         CategoryEntity categoryEntity = categoryRepository.findById(item.getIdCategory())
@@ -276,7 +276,7 @@ public class ItemController implements ItemsApi {
             }
             return new ResponseEntity<List<Item>>(items, HttpStatus.OK);
         } else {
-            throw new UserNotFoundException(userId);
+            throw new UserNotFoundException("User not found", HttpStatus.NOT_FOUND);
         }
     }
 

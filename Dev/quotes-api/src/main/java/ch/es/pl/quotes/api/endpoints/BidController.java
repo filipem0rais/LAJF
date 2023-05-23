@@ -147,17 +147,23 @@ public class BidController implements BidsApi {
         // Obtenez la plus grande enchère actuelle pour l'item
         Double highestBidAmount = bidRepository.findHighestBidAmountByItem(itemEntity);
 
+        if (highestBidAmount == null) {
+            highestBidAmount = 0.;
+        }
+
         // Vérifiez si le bidAmount est égal ou supérieur à iteInitialValue de l'item
-        if (highestBidAmount != null && makeBidRequest.getBidAmount() < itemEntity.getIteInitialValue()) {
+        if (highestBidAmount >= makeBidRequest.getBidAmount() || makeBidRequest.getBidAmount() < itemEntity.getIteInitialValue()) {
             // Le bidAmount est inférieur à iteInitialValue, renvoyez une erreur
-            throw new IllegalArgumentException("Le montant de l'enchère doit être égal ou supérieur à iteInitialValue de l'item.");
+            //throw new IllegalArgumentException("Le montant de l'enchère doit être égal ou supérieur à iteInitialValue de l'item.");
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
 
         BidEntity bidEntity = new BidEntity();
         bidEntity.setBidAmount(makeBidRequest.getBidAmount());
 
         UserEntity userEntity = userRepository.findById(userId)
-                .orElseThrow(() -> new UserNotFoundException(userId));
+                .orElseThrow(() -> new UserNotFoundException("User not found", HttpStatus.NOT_FOUND));
+
         bidEntity.setUser(userEntity);
 
         bidEntity.setItem(itemEntity);

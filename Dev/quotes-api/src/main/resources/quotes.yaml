@@ -118,7 +118,7 @@ paths:
             type: string
           required: true
       responses:
-        '200':
+        '204':
           description: OK
         '403':
           description: Forbidden
@@ -137,17 +137,17 @@ paths:
             type: string
           required: true
       requestBody:
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  itemId:
-                    type: integer
-                    format: int32
-                  bidAmount:
-                    type: number
-                    format: double
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                itemId:
+                  type: integer
+                  format: int32
+                bidAmount:
+                  type: number
+                  format: double
       responses:
         '201':
           description: Created
@@ -252,7 +252,7 @@ paths:
             type: string
           required: true
       responses:
-        '200':
+        '204':
           description: OK
         '404':
           description: Not Found
@@ -331,7 +331,7 @@ paths:
   /items/{itemId}/end-auction:
     put:
       tags:
-        - Items
+        - Bidhub-API
       summary: Met fin à une enchère
       description: Met fin à une enchère pour un article spécifique
       operationId: endAuction
@@ -360,7 +360,7 @@ paths:
   /items/{itemId}/validate-transaction:
     put:
       tags:
-        - Items
+        - Bidhub-API
       summary: Valide une transaction
       description: Valide la transaction pour un article spécifique
       operationId: validateTransaction
@@ -481,7 +481,7 @@ paths:
             type: integer
             format: int32
       responses:
-        '200':
+        '204':
           description: OK
         '404':
           description: Not Found
@@ -567,6 +567,8 @@ paths:
 
   /items/unsoldItems:
     get:
+      tags:
+        - Bidhub-API
       summary: Retourne tous les items invendus d'un utilisateur spécifique
       operationId: getUnsoldItems
       parameters:
