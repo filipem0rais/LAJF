@@ -23,4 +23,11 @@ public interface ItemRepository extends JpaRepository<ItemEntity, Integer> {
     List<ItemEntity> findUnsoldItemsByUser(@Param("user") UserEntity user);
 
 
+    @Query("SELECT i FROM ItemEntity i WHERE i.iteOnSale = true ORDER BY i.iteDatePublication DESC")
+    List<ItemEntity> findLastItemsOnSale(@Param("limit") Integer limit);
+
+
+    List<ItemEntity> findByCategoryAndIteOnSale(CategoryEntity categoryEntity, boolean b);
+
+    List<ItemEntity> findByIteOnSale(boolean b);
 }

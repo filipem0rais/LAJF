@@ -14,6 +14,7 @@ import ch.es.pl.quotes.api.entities.UserEntity;
 import ch.es.pl.quotes.api.exceptions.CategoryNotFoundException;
 import ch.es.pl.quotes.api.exceptions.ItemNotFoundException;
 import ch.es.pl.quotes.api.exceptions.UserNotFoundException;
+import ch.es.pl.quotes.api.repositories.BidRepository;
 import ch.es.pl.quotes.api.repositories.CategoryRepository;
 import ch.es.pl.quotes.api.repositories.ItemRepository;
 import ch.es.pl.quotes.api.repositories.UserRepository;
@@ -44,6 +45,10 @@ public class ItemController implements ItemsApi {
     @Autowired
     private CategoryRepository categoryRepository;
 
+    @Autowired
+    private BidRepository bidRepository;
+
+
     @Value("${jwt.secret}")
     private String secretKey;
 
@@ -51,7 +56,13 @@ public class ItemController implements ItemsApi {
     public ResponseEntity<Item> getItem(Integer id) {
         Optional<ItemEntity> opt = itemRepository.findById(id);
         if (opt.isPresent()) {
+
             ItemEntity itemEntity = opt.get();
+
+            if (!itemEntity.getIteOnSale()){
+                throw new ItemNotFoundException(id);
+            }
+
             Item item = new Item();
             item.setIdItem(itemEntity.getIdItem());
             item.setIteDescription(itemEntity.getIteDescription());
@@ -64,6 +75,10 @@ public class ItemController implements ItemsApi {
             item.setIteState(itemEntity.getIteState());
             item.setItePicture(itemEntity.getItePicture());
             item.setItePickedUp(itemEntity.getItePickedUp());
+
+            // Get the highest bid amount for the item
+            Double highestBidAmount = bidRepository.findHighestBidAmountByItem(itemEntity);
+            item.setIteHighestBidAmount(highestBidAmount);
 
             return new ResponseEntity<Item>(item, HttpStatus.OK);
         } else {
@@ -163,7 +178,7 @@ public class ItemController implements ItemsApi {
 
     @Override
     public ResponseEntity<List<Item>> getItems() {
-        List<ItemEntity> itemEntities = itemRepository.findAll();
+        List<ItemEntity> itemEntities = itemRepository.findByIteOnSale(true);
         List<Item> items = new ArrayList<>();
         for (ItemEntity itemEntity : itemEntities) {
             Item item = new Item();
@@ -178,6 +193,11 @@ public class ItemController implements ItemsApi {
             item.setIteState(itemEntity.getIteState());
             item.setItePicture(itemEntity.getItePicture());
             item.setItePickedUp(itemEntity.getItePickedUp());
+
+            // Get the highest bid amount for the item
+            Double highestBidAmount = bidRepository.findHighestBidAmountByItem(itemEntity);
+            item.setIteHighestBidAmount(highestBidAmount);
+
             items.add(item);
         }
         return new ResponseEntity<List<Item>>(items, HttpStatus.OK);
@@ -204,6 +224,9 @@ public class ItemController implements ItemsApi {
                 item.setIteState(itemEntity.getIteState());
                 item.setItePicture(itemEntity.getItePicture());
                 item.setItePickedUp(itemEntity.getItePickedUp());
+                // Get the highest bid amount for the item
+                Double highestBidAmount = bidRepository.findHighestBidAmountByItem(itemEntity);
+                item.setIteHighestBidAmount(highestBidAmount);
                 itemsDto.add(item);
             }
             return new ResponseEntity<List<Item>>(itemsDto, HttpStatus.OK);
@@ -213,8 +236,9 @@ public class ItemController implements ItemsApi {
         }
     }
 
+
     private List<ItemEntity> getAllItemsForCategory(CategoryEntity categoryEntity) {
-        List<ItemEntity> items = itemRepository.findByCategory(categoryEntity);
+        List<ItemEntity> items = itemRepository.findByCategoryAndIteOnSale(categoryEntity, true);
         List<CategoryEntity> subcategories = categoryRepository.findByCatParent(categoryEntity);
         for (CategoryEntity subcategory : subcategories) {
             items.addAll(getAllItemsForCategory(subcategory));
@@ -245,6 +269,9 @@ public class ItemController implements ItemsApi {
                 item.setIteState(itemEntity.getIteState());
                 item.setItePicture(itemEntity.getItePicture());
                 item.setItePickedUp(itemEntity.getItePickedUp());
+                // Get the highest bid amount for the item
+                Double highestBidAmount = bidRepository.findHighestBidAmountByItem(itemEntity);
+                item.setIteHighestBidAmount(highestBidAmount);
                 items.add(item);
             }
             return new ResponseEntity<List<Item>>(items, HttpStatus.OK);
@@ -299,6 +326,35 @@ public class ItemController implements ItemsApi {
         }
 
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
+
+    @Override
+    public ResponseEntity<List<Item>> getLastItemsOnSale(@PathVariable Integer count) {
+        List<ItemEntity> itemEntities = itemRepository.findLastItemsOnSale(count);
+        List<Item> items = new ArrayList<>();
+
+        int i = 0;
+
+        for (ItemEntity itemEntity : itemEntities) {
+            if (i < count && itemEntity.getIteOnSale() ) {
+                Item item = new Item();
+                item.setIdItem(itemEntity.getIdItem());
+                item.setIteDescription(itemEntity.getIteDescription());
+                item.setIteInitialValue(itemEntity.getIteInitialValue());
+                item.setIteOnSale(itemEntity.getIteOnSale());
+                item.setIteDatePublication(itemEntity.getIteDatePublication());
+                item.setIdUser(itemEntity.getUser().getIdUser());
+                item.setIdCategory(itemEntity.getCategory().getIdCategory());
+                item.setIteName(itemEntity.getIteName());
+                item.setIteState(itemEntity.getIteState());
+                item.setItePicture(itemEntity.getItePicture());
+                item.setItePickedUp(itemEntity.getItePickedUp());
+                items.add(item);
+                i++;
+            }
+        }
+
+        return new ResponseEntity<List<Item>>(items, HttpStatus.OK);
     }
 
 

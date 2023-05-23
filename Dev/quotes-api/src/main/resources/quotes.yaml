@@ -415,6 +415,33 @@ paths:
           description: Not Found
       deprecated: false
 
+  /items/last/{count}:
+    get:
+      tags:
+        - Bidhub-API
+      summary: Obtient les x derniers articles mis en vente
+      operationId: getLastItemsOnSale
+      parameters:
+        - in: path
+          name: count
+          schema:
+            type: integer
+          required: true
+          description: Nombre d'articles à récupérer
+      responses:
+        '200':
+          description: OK
+          content:
+            'application/json':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Item'
+        '404':
+          description: Not Found
+      deprecated: false
+
+
   /categories/{id}:
     get:
       tags:
@@ -678,6 +705,10 @@ components:
         itePickedUp:
           description: indique si l'article a été récupéré
           type: boolean
+        iteHighestBidAmount:
+          description: montant de l'offre la plus élevée
+          type: number
+          format: double
       title: Item
     RegisterUser:
       description: toutes les caractéristiques d'un utilisateur

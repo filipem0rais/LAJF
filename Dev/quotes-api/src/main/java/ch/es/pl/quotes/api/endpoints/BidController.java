@@ -11,6 +11,7 @@ import ch.es.pl.quotes.api.entities.BidEntity;
 import ch.es.pl.quotes.api.entities.ItemEntity;
 import ch.es.pl.quotes.api.entities.UserEntity;
 import ch.es.pl.quotes.api.exceptions.BidNotFoundException;
+import ch.es.pl.quotes.api.exceptions.InvalidBidException;
 import ch.es.pl.quotes.api.exceptions.ItemNotFoundException;
 import ch.es.pl.quotes.api.exceptions.UserNotFoundException;
 import ch.es.pl.quotes.api.repositories.BidRepository;
@@ -140,6 +141,18 @@ public class BidController implements BidsApi {
     public ResponseEntity<Bid> makeBid(@NotNull @RequestHeader("Authorization") String authorization, @Valid @RequestBody MakeBidRequest makeBidRequest) {
         Integer userId = getUserIdFromToken(authorization);
 
+        ItemEntity itemEntity = itemRepository.findById(makeBidRequest.getItemId())
+                .orElseThrow(() -> new ItemNotFoundException(makeBidRequest.getItemId()));
+
+        // Obtenez la plus grande enchère actuelle pour l'item
+        Double highestBidAmount = bidRepository.findHighestBidAmountByItem(itemEntity);
+
+        // Vérifiez si le bidAmount est égal ou supérieur à iteInitialValue de l'item
+        if (highestBidAmount != null && makeBidRequest.getBidAmount() < itemEntity.getIteInitialValue()) {
+            // Le bidAmount est inférieur à iteInitialValue, renvoyez une erreur
+            throw new IllegalArgumentException("Le montant de l'enchère doit être égal ou supérieur à iteInitialValue de l'item.");
+        }
+
         BidEntity bidEntity = new BidEntity();
         bidEntity.setBidAmount(makeBidRequest.getBidAmount());
 
@@ -147,8 +160,6 @@ public class BidController implements BidsApi {
                 .orElseThrow(() -> new UserNotFoundException(userId));
         bidEntity.setUser(userEntity);
 
-        ItemEntity itemEntity = itemRepository.findById(makeBidRequest.getItemId())
-                .orElseThrow(() -> new ItemNotFoundException(makeBidRequest.getItemId()));
         bidEntity.setItem(itemEntity);
 
         bidEntity = bidRepository.save(bidEntity);

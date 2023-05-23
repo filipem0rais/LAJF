@@ -125,6 +125,45 @@ paths:
         '404':
           description: Not Found
   /bids:
+    post:
+      tags:
+        - Bidhub-API
+      summary: Fait une offre sur un article
+      operationId: makeBid
+      parameters:
+        - in: header
+          name: Authorization
+          schema:
+            type: string
+          required: true
+      requestBody:
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  itemId:
+                    type: integer
+                    format: int32
+                  bidAmount:
+                    type: number
+                    format: double
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Bid'
+        '400':
+          description: Bad Request - invalid input, object invalid
+        '401':
+          description: Unauthorized - user not logged in
+        '404':
+          description: Not Found
+        '409':
+          description: Conflict - bid lower than current highest bid
+      deprecated: false
     get:
       tags:
         - Bidhub-API
@@ -139,32 +178,6 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Bid'
-        '404':
-          description: Not Found
-      deprecated: false
-    post:
-      tags:
-        - Bidhub-API
-      summary: Crée une offre
-      operationId: createBid
-      parameters:
-        - in: header
-          name: Authorization
-          schema:
-            type: string
-          required: true
-      requestBody:
-        content:
-          'application/json':
-            schema:
-              $ref: '#/components/schemas/Bid'
-      responses:
-        '201':
-          description: Created
-          content:
-            'application/json':
-              schema:
-                $ref: '#/components/schemas/Bid'
         '404':
           description: Not Found
       deprecated: false
@@ -314,6 +327,67 @@ paths:
         '404':
           description: Not Found
       deprecated: false
+
+  /items/{itemId}/end-auction:
+    put:
+      tags:
+        - Items
+      summary: Met fin à une enchère
+      description: Met fin à une enchère pour un article spécifique
+      operationId: endAuction
+      parameters:
+        - in: path
+          name: itemId
+          description: ID de l'article
+          required: true
+          schema:
+            type: integer
+            format: int32
+        - in: header
+          name: Authorization
+          description: Token JWT de l'utilisateur
+          required: true
+          schema:
+            type: string
+      responses:
+        '204':
+          description: L'enchère a été terminée avec succès
+        '403':
+          description: L'utilisateur n'est pas le propriétaire de l'article
+        '404':
+          description: Article introuvable
+
+  /items/{itemId}/validate-transaction:
+    put:
+      tags:
+        - Items
+      summary: Valide une transaction
+      description: Valide la transaction pour un article spécifique
+      operationId: validateTransaction
+      parameters:
+        - in: path
+          name: itemId
+          description: ID de l'article
+          required: true
+          schema:
+            type: integer
+            format: int32
+        - in: header
+          name: Authorization
+          description: Token JWT de l'utilisateur
+          required: true
+          schema:
+            type: string
+      responses:
+        '204':
+          description: La transaction a été validée avec succès
+        '400':
+          description: Aucune offre n'a été faite sur cet article
+        '403':
+          description: L'utilisateur n'est pas le propriétaire de l'article
+        '404':
+          description: Article introuvable
+
   /items/categories/{id}:
     get:
       tags:
@@ -444,6 +518,56 @@ paths:
         '404':
           description: Not Found
       deprecated: false
+
+  /categories/root:
+    get:
+      tags:
+        - Bidhub-API
+      summary: Obtient l'arborescence de toutes les catégories à partir des catégories racines (sans parents)
+      operationId: getCategoryTree
+      responses:
+        '200':
+          description: OK
+          content:
+            'application/json':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Category'
+        '404':
+          description: Not Found
+      deprecated: false
+
+  /items/unsoldItems:
+    get:
+      summary: Retourne tous les items invendus d'un utilisateur spécifique
+      operationId: getUnsoldItems
+      parameters:
+        - name: Authorization
+          in: header
+          required: true
+          schema:
+            type: string
+          description: JWT Token de l'utilisateur
+      responses:
+        '200':
+          description: Opération réussie. Retourne une liste d'items invendus appartenant à l'utilisateur.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Item'
+        '400':
+          description: Requête invalide (par exemple, paramètres manquants, format de données incorrect, etc.)
+        '401':
+          description: Non autorisé. L'utilisateur doit être authentifié.
+        '404':
+          description: Aucun item invendu trouvé pour l'utilisateur.
+
+
+
+
 
 components:
   schemas:
@@ -595,5 +719,10 @@ components:
         catName:
           description: nom de la catégorie
           type: string
+        subCategories:
+          description: sous-catégories de la catégorie
+          type: array
+          items:
+            $ref: '#/components/schemas/Category'
       title: Category
 
