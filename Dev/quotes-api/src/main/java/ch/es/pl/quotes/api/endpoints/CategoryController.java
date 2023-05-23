@@ -85,5 +85,28 @@ public class CategoryController implements CategoriesApi {
         }
     }
 
+    public ResponseEntity<List<Category>> getCategoryTree() {
+        List<Category> categories = new ArrayList<>();
+        categoryRepository.findAll().forEach(categoryEntity -> {
+            if (categoryEntity.getCatParent() == null) { // We start with root categories (those without parent)
+                Category category = categoryToModel(categoryEntity);
+                categories.add(category);
+            }
+        });
+        return new ResponseEntity<>(categories, HttpStatus.OK);
+    }
+
+    private Category categoryToModel(CategoryEntity entity) {
+        Category category = new Category();
+        category.setIdCategory(entity.getIdCategory());
+        category.setCatName(entity.getCatName());
+        List<Category> subCategories = new ArrayList<>();
+        for (CategoryEntity subEntity : entity.getSubCategories()) {
+            subCategories.add(categoryToModel(subEntity)); // Recursively add subcategories
+        }
+        category.setSubCategories(subCategories);
+        return category;
+    }
+
 
 }

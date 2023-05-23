@@ -8,6 +8,12 @@
 package ch.es.pl.quotes.api.entities;
 
 import jakarta.persistence.*;
+import org.openapitools.model.Category;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "categories")
@@ -24,6 +30,10 @@ public class CategoryEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "catParent")
     private CategoryEntity catParent;
+
+    @OneToMany(mappedBy = "catParent", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<CategoryEntity> subCategories = new ArrayList<>();
+
 
     // getters and setters
 
@@ -50,4 +60,15 @@ public class CategoryEntity {
     public void setCatParent(CategoryEntity catParent) {
         this.catParent = catParent;
     }
+
+    public List<CategoryEntity> getSubCategories() {
+        return subCategories;
+    }
+
+    public void setSubCategories(List<CategoryEntity> subCategories) {
+        this.subCategories = subCategories;
+    }
+
+
+
 }
