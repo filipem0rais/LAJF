@@ -9,7 +9,7 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import org.openapitools.client.model.RegisterUser;
+import org.openapitools.model.RegisterUser;
 import org.openapitools.model.LoginUser;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
