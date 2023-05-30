@@ -108,5 +108,17 @@ public class CategoryController implements CategoriesApi {
         return category;
     }
 
+    public ResponseEntity<List<String>> getCategoryParents(Integer id) {
+        List<String> parentNames = new ArrayList<>();
+        Optional<CategoryEntity> categoryEntityOptional = categoryRepository.findById(id);
+
+        while (categoryEntityOptional.isPresent() && categoryEntityOptional.get().getCatParent() != null) {
+            CategoryEntity parentEntity = categoryEntityOptional.get().getCatParent();
+            parentNames.add(parentEntity.getCatName());
+            categoryEntityOptional = Optional.ofNullable(parentEntity);
+        }
+        return new ResponseEntity<>(parentNames, HttpStatus.OK);
+    }
+
 
 }

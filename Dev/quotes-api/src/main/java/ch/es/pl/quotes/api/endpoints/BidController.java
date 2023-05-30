@@ -84,9 +84,6 @@ public class BidController implements BidsApi {
     }
 
 
-
-
-
     @Override
     public ResponseEntity<Bid> updateBid(@RequestHeader("Authorization") String authHeader, Bid bid) {
         Integer userId = getUserIdFromToken(authHeader);
@@ -163,6 +160,34 @@ public class BidController implements BidsApi {
 
         UserEntity userEntity = userRepository.findById(userId)
                 .orElseThrow(() -> new UserNotFoundException("User not found", HttpStatus.NOT_FOUND));
+
+        /*// Vérifiez si l'enchère est supérieure au useCredit actuel de l'utilisateur
+        if (makeBidRequest.getBidAmount() > userEntity.getUseCredit()) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }*/
+
+        // Obtenez tous les items qui sont encore à vendre
+        List<ItemEntity> itemsOnSale = itemRepository.findByIteOnSale(true);
+
+        Double totalWinningBids = 0.;
+
+        // Pour chaque item, trouvez le bid le plus élevé
+        for (ItemEntity item : itemsOnSale) {
+            Optional<BidEntity> highestBidOpt = bidRepository.findHighestBidByItem(item);
+
+            // Si le bid le plus élevé appartient à l'utilisateur, ajoutez-le au total
+            if (highestBidOpt.isPresent()) {
+                BidEntity highestBid = highestBidOpt.get();
+                if (highestBid.getUser().getIdUser().equals(userId)) {
+                    totalWinningBids += highestBid.getBidAmount();
+                }
+            }
+        }
+
+        // Vérifiez si la somme des enchères gagnantes actuelles et la nouvelle enchère dépasse le useCredit de l'utilisateur
+        if (makeBidRequest.getBidAmount() + totalWinningBids > userEntity.getUseCredit()) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
 
         bidEntity.setUser(userEntity);
 
