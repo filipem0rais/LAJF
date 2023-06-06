@@ -9,20 +9,18 @@ tags:
   - name: Bidhub-API
     description: API pour le projet Bidhub
 paths:
-  /users/{id}:
+  /users:
     get:
       tags:
         - Bidhub-API
       summary: Obtient un utilisateur
       operationId: getUser
       parameters:
-        - name: id
-          in: path
-          description: id de l'utilisateur à obtenir
-          required: true
+        - in: header
+          name: Authorization
           schema:
-            type: integer
-            format: int32
+            type: string
+          required: true
       responses:
         '200':
           description: OK
