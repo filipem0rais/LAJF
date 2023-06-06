@@ -1,3 +1,4 @@
+/*
 //
 // Auteur : Filipe Dias Morais
 // Projet : Dev
@@ -26,11 +27,12 @@ public class FilterConfig {
     @Autowired
     private AuthFilter authFilter;
 
-    /*@Bean
+    @Bean
     public FilterRegistrationBean< AuthFilter > filterRegistrationBean() {
         FilterRegistrationBean<AuthFilter> registrationBean = new FilterRegistrationBean<>();
         registrationBean.setFilter(authFilter);
         registrationBean.addUrlPatterns("/users/*");
         return registrationBean;
-    }*/
-}
+    }
+
+}*/
