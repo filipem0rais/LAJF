@@ -6,11 +6,7 @@
 
 <style>
 #app {
-font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  text-align: center;
-  color: #2c3e50;
-  margin-right: auto;
-  margin-left: auto;
+font-family: Arial, sans-serif;
   margin-bottom: 60px;
 }
 

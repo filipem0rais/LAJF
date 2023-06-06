@@ -3,8 +3,7 @@
     <img class="check" alt="Check connexion" src="../assets/check.png">
     <h1>Bienvenue !</h1>
     <p class="subtext">Vous êtes connecté.</p>
-    <router-link to="to" class="btn btn-primary">Accéder aux enchères</router-link>
-    <footer-bar />
+    <router-link to="/encheres" class="btn btn-primary">Accéder aux enchères</router-link>
   </div>
 </template>
 

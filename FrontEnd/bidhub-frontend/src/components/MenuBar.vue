@@ -15,7 +15,10 @@
               <router-link class="nav-link text-white" to="/">Accueil</router-link>
             </li>
             <li class="nav-item">
-              <router-link class="nav-link text-white" to="/">Enchères</router-link>
+              <router-link class="nav-link text-white" to="/encheres">Enchères</router-link>
+            </li>
+            <li class="nav-item">
+              <router-link class="nav-link text-white" to="/vente">Vente</router-link>
             </li>
           </ul>
           <ul class="navbar-nav custom-nav">
@@ -55,3 +58,5 @@
   margin-left: auto;
 }
 </style>
+<script setup>
+</script>

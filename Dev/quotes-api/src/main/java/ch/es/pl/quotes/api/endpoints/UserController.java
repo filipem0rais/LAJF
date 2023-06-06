@@ -45,7 +45,7 @@ public class UserController implements UsersApi {
             return new ResponseEntity<User>(user, HttpStatus.OK);
         } else {
             // return ResponseEntity.notFound().build();
-            throw new UserNotFoundException(id);
+            throw new UserNotFoundException("User not found", HttpStatus.NOT_FOUND);
         }
     }
 

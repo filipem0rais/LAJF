@@ -202,103 +202,145 @@ insert into users (idUser, useName, useLastName, useEmail, usePassword, useCredi
 values (100, 'Teddy', 'Casacchia', 'tcasacchia2r@aol.com', 'TS5bVJx', 2485);
 
 insert into categories (idCategory, catName, catParent)
-values (1, 'Electronics', null);
+values (1, 'Art & Collections', null);
 insert into categories (idCategory, catName, catParent)
-values (2, 'Computers', 1);
+values (2, 'Automobiles', null);
 insert into categories (idCategory, catName, catParent)
-values (3, 'Cameras', 1);
+values (3, 'Bijoux & Montres', null);
 insert into categories (idCategory, catName, catParent)
-values (4, 'Laptops', 2);
+values (4, 'Maison & Jardin', null);
 insert into categories (idCategory, catName, catParent)
-values (5, 'Desktops', 2);
+values (5, 'Mode', null);
 insert into categories (idCategory, catName, catParent)
-values (6, 'Handhelds', 2);
+values (6, 'High-Tech', null);
 insert into categories (idCategory, catName, catParent)
-values (7, 'Digital', 3);
+values (7, 'Jouets & Jeux', null);
 insert into categories (idCategory, catName, catParent)
-values (8, 'Film', 3);
+values (8, 'Livres & BD', null);
 insert into categories (idCategory, catName, catParent)
-values (9, 'Accessories', 1);
+values (9, 'Timbres', 1);
 insert into categories (idCategory, catName, catParent)
-values (10, 'Monitors', 9);
+values (10, 'Monnaies', 1);
 insert into categories (idCategory, catName, catParent)
-values (11, 'Printers', 9);
+values (11, 'Cartes Postales', 1);
 insert into categories (idCategory, catName, catParent)
-values (12, 'Scanners', 9);
+values (12, 'Tableaux', 1);
 insert into categories (idCategory, catName, catParent)
-values (13, 'Tablets', 9);
+values (13, 'Contemporain', 12);
 insert into categories (idCategory, catName, catParent)
-values (14, 'Phones', 9);
+values (14, 'Ancien', 12);
 insert into categories (idCategory, catName, catParent)
-values (15, 'TVs', 9);
+values (15, 'Voitures', 2);
 insert into categories (idCategory, catName, catParent)
-values (16, 'Software', 1);
+values (16, 'Motos', 2);
 insert into categories (idCategory, catName, catParent)
-values (17, 'Games', 16);
+values (17, 'Scooters', 2);
 insert into categories (idCategory, catName, catParent)
-values (18, 'Operating Systems', 16);
+values (18, 'Voitures de collections', 15);
 insert into categories (idCategory, catName, catParent)
-values (19, 'Utilities', 16);
+values (19, 'Voitures de sport', 15);
 insert into categories (idCategory, catName, catParent)
-values (20, 'Books', null);
+values (20, 'Pièces détachées', 15);
 insert into categories (idCategory, catName, catParent)
-values (21, 'Children''s Books', 20);
+values (21, 'Motos de sport', 16);
 insert into categories (idCategory, catName, catParent)
-values (22, 'Kindle eBooks', 20);
+values (22, 'Motos de collections', 16);
 insert into categories (idCategory, catName, catParent)
-values (23, 'Magazines', 20);
+values (23, 'Pièces détachées', 16);
 insert into categories (idCategory, catName, catParent)
-values (24, 'Textbooks', 20);
+values (24, 'Montres', 3);
 insert into categories (idCategory, catName, catParent)
-values (25, 'Movies', null);
+values (25, 'Bijoux', 3);
 insert into categories (idCategory, catName, catParent)
-values (26, 'Action & Adventure', 25);
+values (26, 'Collier', 25);
 insert into categories (idCategory, catName, catParent)
-values (27, 'Anime', 25);
+values (27, 'Bague', 25);
 insert into categories (idCategory, catName, catParent)
-values (28, 'Comedy', 25);
+values (28, 'Bracelet', 25);
 insert into categories (idCategory, catName, catParent)
-values (29, 'Documentary', 25);
+values (29, 'Boucles d''oreilles', 25);
 insert into categories (idCategory, catName, catParent)
-values (30, 'Drama', 25);
+values (30, 'Mobilier intérieur', 4);
 insert into categories (idCategory, catName, catParent)
-values (31, 'Horror', 25);
+values (31, 'Mobilier extérieur', 4);
 insert into categories (idCategory, catName, catParent)
-values (32, 'Musicals', 25);
+values (32, 'Décoration', 4);
 insert into categories (idCategory, catName, catParent)
-values (33, 'Romance', 25);
+values (33, 'Luminaires', 4);
 insert into categories (idCategory, catName, catParent)
-values (34, 'Sci-Fi', 25);
+values (34, 'Vêtements', 5);
 insert into categories (idCategory, catName, catParent)
-values (35, 'Sports', 25);
+values (35, 'Chaussures', 5);
 insert into categories (idCategory, catName, catParent)
-values (36, 'TV Shows', 25);
+values (36, 'Accessoires', 5);
 insert into categories (idCategory, catName, catParent)
-values (37, 'Video Games', null);
+values (37, 'Pull', 34);
 insert into categories (idCategory, catName, catParent)
-values (38, 'PlayStation 4', 37);
+values (38, 'T-shirt', 34);
 insert into categories (idCategory, catName, catParent)
-values (39, 'PlayStation 3', 37);
+values (39, 'Pantalon', 34);
 insert into categories (idCategory, catName, catParent)
-values (40, 'Xbox One', 37);
+values (40, 'Chaussures de ville', 35);
 insert into categories (idCategory, catName, catParent)
-values (41, 'Xbox 360', 37);
+values (41, 'Chaussures de sport', 35);
 insert into categories (idCategory, catName, catParent)
-values (42, 'Wii U', 37);
+values (42, 'Sacs', 36);
 insert into categories (idCategory, catName, catParent)
-values (43, 'Wii', 37);
+values (43, 'Ceintures', 36);
 insert into categories (idCategory, catName, catParent)
-values (44, 'Nintendo 3DS', 37);
+values (44, 'Portefeuilles', 36);
 insert into categories (idCategory, catName, catParent)
-values (45, 'PlayStation Vita', 37);
+values (45, 'Téléphones', 6);
 insert into categories (idCategory, catName, catParent)
-values (46, 'PC', 37);
+values (46, 'Ordinateurs', 6);
 insert into categories (idCategory, catName, catParent)
-values (47, 'Vehicules', null);
+values (47, 'Télévisions', 6);
 insert into categories (idCategory, catName, catParent)
-values (48, 'Cars', 47);
+values (48, 'Portables', 46);
 insert into categories (idCategory, catName, catParent)
-values (49, 'Motorcycles', 47);
+values (49, 'Bureaux', 46);
+insert into categories (idCategory, catName, catParent)
+values (50, 'Composants', 46);
+insert into categories (idCategory, catName, catParent)
+values (51, 'Ecrans', 46);
+insert into categories (idCategory, catName, catParent)
+values (52, 'Jeux de société', 7);
+insert into categories (idCategory, catName, catParent)
+values (53, 'Jeux de cartes', 7);
+insert into categories (idCategory, catName, catParent)
+values (54, 'Jeux de vidéos', 7);
+insert into categories (idCategory, catName, catParent)
+values (55, 'Jouets', 7);
+insert into categories (idCategory, catName, catParent)
+values (56, 'MMORPG', 54);
+insert into categories (idCategory, catName, catParent)
+values (57, 'FPS', 54);
+insert into categories (idCategory, catName, catParent)
+values (58, 'RPG', 54);
+insert into categories (idCategory, catName, catParent)
+values (59, 'Jeux de plateforme', 54);
+insert into categories (idCategory, catName, catParent)
+values (60, 'Livres', 8);
+insert into categories (idCategory, catName, catParent)
+values (61, 'BD', 8);
+insert into categories (idCategory, catName, catParent)
+values (62, 'Mangas', 8);
+insert into categories (idCategory, catName, catParent)
+values (63, 'Romans policier', 60);
+insert into categories (idCategory, catName, catParent)
+values (64, 'Romans fantastique', 60);
+insert into categories (idCategory, catName, catParent)
+values (65, 'Romans historique', 60);
+insert into categories (idCategory, catName, catParent)
+values (66, 'Enfants', 61);
+insert into categories (idCategory, catName, catParent)
+values (67, 'Adolescents', 61);
+insert into categories (idCategory, catName, catParent)
+values (68, 'Actions', 62);
+insert into categories (idCategory, catName, catParent)
+values (69, 'Aventures', 62);
+insert into categories (idCategory, catName, catParent)
+values (70, 'Romances', 62);
 
 insert into items (idItem, iteDatePublication, iteDescription, iteInitialValue, iteName, iteOnSale, itePickedUp,
                    itePicture, iteState, idCategory, idUser)
