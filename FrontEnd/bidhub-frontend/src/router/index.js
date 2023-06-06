@@ -2,9 +2,9 @@ import { createRouter, createWebHashHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import IdentificationView from '../views/IdentificationView.vue'
 import ConnectedView from '../views/ConnectedView.vue'
-import EncheresView from '@/views/EncheresView.vue'
+import EncheresView from '@/views/BidsView.vue'
 import LotDetailsView from '@/views/LotDetailsView.vue'
-import VenteView from '@/views/VenteView.vue'
+import VenteView from '@/views/OfferView.vue'
 
 const routes = [
   {
@@ -43,6 +43,7 @@ const router = createRouter({
   history: createWebHashHistory(),
   routes
 })
+/*
 router.beforeEach((to, from, next) => {
   const token = localStorage.getItem('token')
   if (to.name === 'vente' && token === null) {
@@ -51,5 +52,6 @@ router.beforeEach((to, from, next) => {
     next()
   }
 })
+*/
 
 export default router

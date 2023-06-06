@@ -34,7 +34,6 @@
   background-color: #ED7D2F;
   border-color: #ED7D2F;
 }
-
 .btn:hover {
   background-color: #E85C0C;
   border-color: #E85C0C;

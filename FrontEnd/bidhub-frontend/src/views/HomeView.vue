@@ -29,7 +29,7 @@
 </template>
 
 <script>
-import CardLotAccueil from '@/components/CardLotAccueil.vue'
+import CardLotAccueil from '@/components/Card/LotHomeCard.vue'
 import LotService from '../services/LotService'
 
 export default {
@@ -70,13 +70,6 @@ export default {
   border-top: 2px solid black;
   width: 100%;
   margin: 20px auto;
-}
-
-.last-underline {
-  border: none;
-  border-top: 2px solid black;
-  width: 50%;
-  margin: 10px auto;
 }
 
 .text-container {
