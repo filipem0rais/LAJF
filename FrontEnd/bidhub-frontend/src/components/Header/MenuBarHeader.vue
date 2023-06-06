@@ -33,6 +33,14 @@
   </header>
 </template>
 
+<script>
+export default {
+  name: 'MenuBarHeader',
+  components: {
+  }
+}
+</script>
+
 <style scoped>
 .logo {
   height: 50px;
@@ -58,5 +66,3 @@
   margin-left: auto;
 }
 </style>
-<script setup>
-</script>
