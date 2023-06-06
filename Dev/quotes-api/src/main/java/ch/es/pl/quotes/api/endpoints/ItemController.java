@@ -80,6 +80,11 @@ public class ItemController implements ItemsApi {
             Double highestBidAmount = bidRepository.findHighestBidAmountByItem(itemEntity);
             item.setIteHighestBidAmount(highestBidAmount);
 
+            // Get count of bids for the item
+            Integer bidsCount = bidRepository.countBidsByItem(itemEntity);
+            item.setIteBidCount(bidsCount);
+
+
             return new ResponseEntity<Item>(item, HttpStatus.OK);
         } else {
             // return ResponseEntity.notFound().build();
@@ -198,6 +203,10 @@ public class ItemController implements ItemsApi {
             Double highestBidAmount = bidRepository.findHighestBidAmountByItem(itemEntity);
             item.setIteHighestBidAmount(highestBidAmount);
 
+            // Get count of bids for the item
+            Integer bidsCount = bidRepository.countBidsByItem(itemEntity);
+            item.setIteBidCount(bidsCount);
+
             items.add(item);
         }
         return new ResponseEntity<List<Item>>(items, HttpStatus.OK);
@@ -227,6 +236,11 @@ public class ItemController implements ItemsApi {
                 // Get the highest bid amount for the item
                 Double highestBidAmount = bidRepository.findHighestBidAmountByItem(itemEntity);
                 item.setIteHighestBidAmount(highestBidAmount);
+
+                // Get count of bids for the item
+                Integer bidsCount = bidRepository.countBidsByItem(itemEntity);
+                item.setIteBidCount(bidsCount);
+
                 itemsDto.add(item);
             }
             return new ResponseEntity<List<Item>>(itemsDto, HttpStatus.OK);
@@ -272,6 +286,9 @@ public class ItemController implements ItemsApi {
                 // Get the highest bid amount for the item
                 Double highestBidAmount = bidRepository.findHighestBidAmountByItem(itemEntity);
                 item.setIteHighestBidAmount(highestBidAmount);
+                // Get count of bids for the item
+                Integer bidsCount = bidRepository.countBidsByItem(itemEntity);
+                item.setIteBidCount(bidsCount);
                 items.add(item);
             }
             return new ResponseEntity<List<Item>>(items, HttpStatus.OK);

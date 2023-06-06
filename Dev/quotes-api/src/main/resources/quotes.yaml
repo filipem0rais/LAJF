@@ -9,20 +9,18 @@ tags:
   - name: Bidhub-API
     description: API pour le projet Bidhub
 paths:
-  /users/{id}:
+  /users:
     get:
       tags:
         - Bidhub-API
       summary: Obtient un utilisateur
       operationId: getUser
       parameters:
-        - name: id
-          in: path
-          description: id de l'utilisateur à obtenir
-          required: true
+        - in: header
+          name: Authorization
           schema:
-            type: integer
-            format: int32
+            type: string
+          required: true
       responses:
         '200':
           description: OK
@@ -546,6 +544,33 @@ paths:
           description: Not Found
       deprecated: false
 
+  /categories/{id}/parents:
+    get:
+      tags:
+        - Bidhub-API
+      summary: Obtient les parents d'une catégorie
+      operationId: getCategoryParents
+      parameters:
+        - name: id
+          in: path
+          description: id de la catégorie
+          required: true
+          schema:
+            type: integer
+            format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            'application/json':
+              schema:
+                type: array
+                items:
+                  type: string
+        '404':
+          description: Not Found
+      deprecated: false
+
   /categories/root:
     get:
       tags:
@@ -711,6 +736,10 @@ components:
           description: montant de l'offre la plus élevée
           type: number
           format: double
+        iteBidCount:
+          description: nombre d'offres sur l'article
+          type: integer
+          format: int32
       title: Item
     RegisterUser:
       description: toutes les caractéristiques d'un utilisateur
