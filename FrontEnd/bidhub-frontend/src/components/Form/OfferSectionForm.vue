@@ -15,6 +15,8 @@
 </template>
 
 <script>
+import { postBid } from '@/services/BidService'
+
 export default {
   name: 'OfferSection',
   props: ['lot'],
@@ -25,7 +27,13 @@ export default {
   },
   methods: {
     placeBid () {
-      // Logique de placement d'enchère
+      postBid(this.lot.iteId, this.newBid)
+        .then(() => {
+          this.$emit('bid-placed')
+        })
+        .catch(error => {
+          console.error(error)
+        })
     }
   }
 }

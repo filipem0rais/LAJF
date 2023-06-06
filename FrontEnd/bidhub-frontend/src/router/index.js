@@ -5,6 +5,7 @@ import ConnectedView from '../views/ConnectedView.vue'
 import EncheresView from '@/views/BidsView.vue'
 import LotDetailsView from '@/views/LotDetailsView.vue'
 import VenteView from '@/views/OfferView.vue'
+import LogoutView from '@/views/LogoutView.vue'
 
 const routes = [
   {
@@ -36,6 +37,11 @@ const routes = [
     path: '/vente',
     name: 'vente',
     component: VenteView
+  },
+  {
+    path: '/logout',
+    name: 'logout',
+    component: LogoutView
   }
 ]
 
@@ -43,7 +49,6 @@ const router = createRouter({
   history: createWebHashHistory(),
   routes
 })
-/*
 router.beforeEach((to, from, next) => {
   const token = localStorage.getItem('token')
   if (to.name === 'vente' && token === null) {
@@ -52,6 +57,5 @@ router.beforeEach((to, from, next) => {
     next()
   }
 })
-*/
 
 export default router

@@ -8,24 +8,10 @@
 </template>
 
 <script>
-
-import { getUserData } from '@/services/UserService'
 export default {
   name: 'ConnectedView',
-  components: {
-  },
-  mounted () {
-    getUserData()
-      .then(user => {
-        console.log(user)
-      })
-      .catch(error => {
-        console.log('CPT')
-        console.error(error)
-      })
-  }
+  components: {}
 }
-
 </script>
 
 <style scoped>

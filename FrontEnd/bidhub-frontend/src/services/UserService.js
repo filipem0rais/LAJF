@@ -11,11 +11,10 @@ export function registerUser (userData) {
       throw error
     })
 }
-
 export function loginUser (loginData) {
   return axios.post(BASE_URL + '/login', loginData)
     .then(response => {
-      console.log('connect')
+      localStorage.setItem('token', response.data.token)
       return response.data
     })
     .catch(error => {
@@ -31,11 +30,13 @@ export function getUserData () {
     }
   })
     .then(response => {
-      console.log('ok')
-      console.log(response.data)
+      return response.data
     })
     .catch(error => {
-      console.log('CPT2')
       console.error(error)
     })
+}
+export function logoutUser () {
+  localStorage.removeItem('token')
+  localStorage.removeItem('userId')
 }

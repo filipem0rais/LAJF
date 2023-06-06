@@ -22,9 +22,16 @@
             </li>
           </ul>
           <ul class="navbar-nav custom-nav">
-            <li class="nav-item">
+            <li class="nav-item" v-if="!user">
               <router-link class="nav-link text-white" to="/identification">Identification</router-link>
             </li>
+            <li class="nav-item" v-else>
+              <router-link class="nav-link text-white" to="/logout" @click="logout">
+                Crédits : {{ user.useCredit }}
+                <img src="@/assets/leave.png" alt="Déconnexion" class="logout-icon">
+              </router-link>
+            </li>
+
           </ul>
         </div>
       </div>
@@ -34,9 +41,28 @@
 </template>
 
 <script>
+import { getUserData, logoutUser } from '@/services/UserService'
+
 export default {
   name: 'MenuBarHeader',
-  components: {
+  components: {},
+  data () {
+    return {
+      user: null
+    }
+  },
+  async mounted () {
+    try {
+      this.user = await getUserData()
+    } catch (error) {
+      console.error(error)
+    }
+  },
+  methods: {
+    logout () {
+      logoutUser()
+      this.user = null
+    }
   }
 }
 </script>
@@ -64,5 +90,9 @@ export default {
 
 .custom-nav {
   margin-left: auto;
+}
+.logout-icon{
+  width: 30px;
+  height: 30px;
 }
 </style>
