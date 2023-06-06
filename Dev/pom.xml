@@ -25,4 +25,21 @@
         <module>quotes-api</module>
         <module>quotes-spec</module>
     </modules>
+    <dependencies>
+        <dependency>
+            <groupId>pl.morgwai.base</groupId>
+            <artifactId>servlet-scopes</artifactId>
+            <version>9.3-javax</version>
+        </dependency>
+        <dependency>
+            <groupId>com.github.911992</groupId>
+            <artifactId>WebSocket_HandshakeRequest_to_Servlet31_HttpServletRequest_Wrapper</artifactId>
+            <version>0.1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.github.911992</groupId>
+            <artifactId>WebSocket_HandshakeRequest_to_Servlet31_HttpServletRequest_Wrapper</artifactId>
+            <version>0.1.0</version>
+        </dependency>
+    </dependencies>
 </project>

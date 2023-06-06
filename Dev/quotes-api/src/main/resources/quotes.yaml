@@ -15,12 +15,6 @@ paths:
         - Bidhub-API
       summary: Obtient un utilisateur
       operationId: getUser
-      parameters:
-        - in: header
-          name: Authorization
-          schema:
-            type: string
-          required: true
       responses:
         '200':
           description: OK

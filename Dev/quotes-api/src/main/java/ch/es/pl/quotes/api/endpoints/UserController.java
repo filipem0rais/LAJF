@@ -22,6 +22,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RestController;
 
+import jakarta.servlet.FilterChain;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+
+
 import java.util.Optional;
 
 @RestController
@@ -30,13 +36,21 @@ public class UserController implements UsersApi {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    HttpServletRequest request;
+
     @Value("${jwt.secret}")
     private String secretKey;
 
 
     @Override
-    public ResponseEntity<User> getUser(@RequestHeader("Authorization") String authHeader) {
-        Optional<UserEntity> opt = userRepository.findById(getUserIdFromToken(authHeader));
+    public ResponseEntity<User> getUser() {
+
+        String token = request.getHeader("Authorization");
+
+        token = token.replace("Bearer ", "");
+
+        Optional<UserEntity> opt = userRepository.findById(getUserIdFromToken(token));
         if (opt.isPresent()) {
             UserEntity userEntity = opt.get();
             User user = new User();
