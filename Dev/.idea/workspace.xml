@@ -6,6 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="a2c5a68a-9320-4e9f-bd2a-ee2060c0d282" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+<<<<<<< Updated upstream
       <change beforePath="$PROJECT_DIR$/quotes-api/src/main/java/ch/es/pl/quotes/api/configuration/AuthFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/quotes-api/src/main/java/ch/es/pl/quotes/api/configuration/AuthFilter.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/quotes-api/src/main/java/ch/es/pl/quotes/api/configuration/FilterConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/quotes-api/src/main/java/ch/es/pl/quotes/api/configuration/FilterConfig.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../FrontEnd/bidhub-frontend/src/components/Form/LoginForm.vue" beforeDir="false" />
@@ -14,6 +15,9 @@
       <change beforePath="$PROJECT_DIR$/../FrontEnd/bidhub-frontend/src/services/UserService.js" beforeDir="false" afterPath="$PROJECT_DIR$/../FrontEnd/bidhub-frontend/src/services/UserService.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../FrontEnd/bidhub-frontend/src/views/ConnectedView.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../FrontEnd/bidhub-frontend/src/views/ConnectedView.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../FrontEnd/bidhub-frontend/src/views/IdentificationView.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../FrontEnd/bidhub-frontend/src/views/IdentificationView.vue" afterDir="false" />
+=======
+      <change beforePath="$PROJECT_DIR$/../FrontEnd/bidhub-frontend/src/services/BidService.js" beforeDir="false" />
+>>>>>>> Stashed changes
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -53,7 +57,6 @@
     "RequestMappingsPanelOrder1": "1",
     "RequestMappingsPanelWidth0": "75",
     "RequestMappingsPanelWidth1": "75",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
     "ignore.virus.scanning.warn.message": "true",
@@ -65,28 +68,8 @@
     "project.structure.last.edited": "Project",
     "project.structure.proportion": "0.0",
     "project.structure.side.proportion": "0.0",
-    "spring.configuration.checksum": "7bf40b46262359d8a75f027c3195235a",
+    "spring.configuration.checksum": "0f6036c0bd0ddc564146f84e523d24a2",
     "vue.rearranger.settings.migration": "true"
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
-    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
-    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
-    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
-    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/DATA/LAJF/Dev&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
-    &quot;spring.configuration.checksum&quot;: &quot;0f6036c0bd0ddc564146f84e523d24a2&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
   "keyToStringList": {
     "DatabaseDriversLRU": [
@@ -195,12 +178,6 @@
       <option name="specificationPath" value="C:\DATA\LAJFY\Dev\quotes-api\src\main\resources\quotes.yaml" />
       <method v="2" />
     </configuration>
-    <list>
-      <item itemvalue="Cucumber Java.Feature: quotes" />
-      <item itemvalue="Cucumber Java.Feature: user" />
-      <item itemvalue="Cucumber Java.Scenario: Get user with id 4" />
-      <item itemvalue="Spring Boot.Swagger2SpringBoot" />
-    </list>
     <recent_temporary>
       <list>
         <item itemvalue="Cucumber Java.Feature: user" />
@@ -222,7 +199,7 @@
       <workItem from="1683037419001" duration="429000" />
       <workItem from="1683037860179" duration="107000" />
       <workItem from="1686042709405" duration="1175000" />
-      <workItem from="1686046607423" duration="3707000" />
+      <workItem from="1686046607423" duration="4187000" />
     </task>
     <servers />
   </component>
