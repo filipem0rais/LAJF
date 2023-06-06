@@ -6,6 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="a2c5a68a-9320-4e9f-bd2a-ee2060c0d282" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/quotes-api/src/main/java/ch/es/pl/quotes/api/configuration/AuthFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/quotes-api/src/main/java/ch/es/pl/quotes/api/configuration/AuthFilter.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/quotes-api/src/main/java/ch/es/pl/quotes/api/configuration/FilterConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/quotes-api/src/main/java/ch/es/pl/quotes/api/configuration/FilterConfig.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../FrontEnd/bidhub-frontend/src/components/Form/LoginForm.vue" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../FrontEnd/bidhub-frontend/src/components/Form/RegistrationForm.vue" beforeDir="false" />

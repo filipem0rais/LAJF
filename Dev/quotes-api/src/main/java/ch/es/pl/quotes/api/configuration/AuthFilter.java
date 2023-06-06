@@ -1,3 +1,4 @@
+/*
 //
 // Auteur : Filipe Dias Morais
 // Projet : Dev
@@ -52,3 +53,4 @@ public class AuthFilter extends OncePerRequestFilter {
     }
 
 }
+*/
