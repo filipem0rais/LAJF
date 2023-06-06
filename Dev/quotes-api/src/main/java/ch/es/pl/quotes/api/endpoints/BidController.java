@@ -30,6 +30,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import jakarta.servlet.http.HttpServletRequest;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,6 +46,9 @@ public class BidController implements BidsApi {
 
     @Autowired
     private ItemRepository itemRepository;
+
+    @Autowired
+    HttpServletRequest request;
 
     @Value("${jwt.secret}")
     private String secretKey;
@@ -85,8 +89,13 @@ public class BidController implements BidsApi {
 
 
     @Override
-    public ResponseEntity<Bid> updateBid(@RequestHeader("Authorization") String authHeader, Bid bid) {
-        Integer userId = getUserIdFromToken(authHeader);
+    public ResponseEntity<Bid> updateBid(Bid bid) {
+
+        String token = request.getHeader("Authorization");
+
+        token = token.replace("Bearer ", "");
+
+        Integer userId = getUserIdFromToken(token);
         Integer id = bid.getIdBid();
 
         BidEntity existingBidEntity = bidRepository.findById(id)
@@ -110,8 +119,13 @@ public class BidController implements BidsApi {
 
 
     @Override
-    public ResponseEntity<Void> deleteBid(Integer id, @RequestHeader("Authorization") String authHeader) {
-        Integer userId = getUserIdFromToken(authHeader);
+    public ResponseEntity<Void> deleteBid(Integer id) {
+
+        String token = request.getHeader("Authorization");
+
+        token = token.replace("Bearer ", "");
+
+        Integer userId = getUserIdFromToken(token);
 
         BidEntity existingBidEntity = bidRepository.findById(id)
                 .orElseThrow(() -> new BidNotFoundException(id));
@@ -135,8 +149,13 @@ public class BidController implements BidsApi {
     }
 
     @Override
-    public ResponseEntity<Bid> makeBid(@NotNull @RequestHeader("Authorization") String authorization, @Valid @RequestBody MakeBidRequest makeBidRequest) {
-        Integer userId = getUserIdFromToken(authorization);
+    public ResponseEntity<Bid> makeBid( @Valid @RequestBody MakeBidRequest makeBidRequest) {
+
+        String token = request.getHeader("Authorization");
+
+        token = token.replace("Bearer ", "");
+
+        Integer userId = getUserIdFromToken(token);
 
         ItemEntity itemEntity = itemRepository.findById(makeBidRequest.getItemId())
                 .orElseThrow(() -> new ItemNotFoundException(makeBidRequest.getItemId()));
