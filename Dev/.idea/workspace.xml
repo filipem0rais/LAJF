@@ -5,8 +5,32 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a2c5a68a-9320-4e9f-bd2a-ee2060c0d282" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/../FrontEnd/bidhub-frontend/src/components/Display/LotDetailsDisplay.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../FrontEnd/bidhub-frontend/src/components/Form/LoginForm.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../FrontEnd/bidhub-frontend/src/components/Form/LotSubmissionForm.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../FrontEnd/bidhub-frontend/src/components/Form/OfferSectionForm.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../FrontEnd/bidhub-frontend/src/components/Form/RegistrationForm.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../FrontEnd/bidhub-frontend/src/services/BidService.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../FrontEnd/bidhub-frontend/src/views/OfferView.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/quotes-api/src/main/resources/data.sql" beforeDir="false" afterPath="$PROJECT_DIR$/quotes-api/src/main/resources/data.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FrontEnd/bidhub-frontend/src/App.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../FrontEnd/bidhub-frontend/src/App.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FrontEnd/bidhub-frontend/src/components/BreadCrum.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../FrontEnd/bidhub-frontend/src/components/Header/BreadCrumHeader.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FrontEnd/bidhub-frontend/src/components/CardLotAccueil.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../FrontEnd/bidhub-frontend/src/components/Card/LotHomeCard.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FrontEnd/bidhub-frontend/src/components/CardLotEnchere.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../FrontEnd/bidhub-frontend/src/components/Card/LotBidCard.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FrontEnd/bidhub-frontend/src/components/CategorySelect.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../FrontEnd/bidhub-frontend/src/components/Display/CategorySelectDisplay.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FrontEnd/bidhub-frontend/src/components/FilterContainer.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../FrontEnd/bidhub-frontend/src/components/Display/FilterContainerDisplay.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FrontEnd/bidhub-frontend/src/components/FooterBar.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../FrontEnd/bidhub-frontend/src/components/Footer/FooterBarFooter.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FrontEnd/bidhub-frontend/src/components/MenuBar.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../FrontEnd/bidhub-frontend/src/components/Header/MenuBarHeader.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FrontEnd/bidhub-frontend/src/components/PaginationLot.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../FrontEnd/bidhub-frontend/src/components/Display/PagingLotDisplay.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FrontEnd/bidhub-frontend/src/components/SubCategory.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../FrontEnd/bidhub-frontend/src/components/Display/SubCategoryDisplay.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FrontEnd/bidhub-frontend/src/router/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/../FrontEnd/bidhub-frontend/src/router/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FrontEnd/bidhub-frontend/src/services/CategorieService.js" beforeDir="false" afterPath="$PROJECT_DIR$/../FrontEnd/bidhub-frontend/src/services/CategoryService.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FrontEnd/bidhub-frontend/src/views/ConnectedView.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../FrontEnd/bidhub-frontend/src/views/ConnectedView.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FrontEnd/bidhub-frontend/src/views/EncheresView.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../FrontEnd/bidhub-frontend/src/views/BidsView.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FrontEnd/bidhub-frontend/src/views/HomeView.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../FrontEnd/bidhub-frontend/src/views/HomeView.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FrontEnd/bidhub-frontend/src/views/IdentificationView.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../FrontEnd/bidhub-frontend/src/views/IdentificationView.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FrontEnd/bidhub-frontend/src/views/LotDetailsView.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../FrontEnd/bidhub-frontend/src/views/LotDetailsView.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FrontEnd/bidhub-frontend/src/views/VenteView.vue" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -39,33 +63,34 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "DefaultHtmlFileTemplate": "HTML File",
-    "RequestMappingsPanelOrder0": "0",
-    "RequestMappingsPanelOrder1": "1",
-    "RequestMappingsPanelWidth0": "75",
-    "RequestMappingsPanelWidth1": "75",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "ignore.virus.scanning.warn.message": "true",
-    "last_opened_file_path": "C:/DATA/LAJF/Dev",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "project.structure.last.edited": "Project",
-    "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.0",
-    "spring.configuration.checksum": "7bf40b46262359d8a75f027c3195235a",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
+    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
+    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
+    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
+    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/DATA/LAJF/Dev/quotes-spec/src/test/resources/features&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
+    &quot;spring.configuration.checksum&quot;: &quot;0f6036c0bd0ddc564146f84e523d24a2&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
-  "keyToStringList": {
-    "DatabaseDriversLRU": [
-      "h2"
+  &quot;keyToStringList&quot;: {
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;h2&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\DATA\LAJF\Dev\quotes-spec\src\test\resources\features" />
@@ -169,9 +194,9 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Cucumber Java.Feature: quotes" />
         <item itemvalue="Cucumber Java.Feature: user" />
         <item itemvalue="Cucumber Java.Scenario: Get user with id 4" />
-        <item itemvalue="Cucumber Java.Feature: quotes" />
       </list>
     </recent_temporary>
   </component>
@@ -185,12 +210,22 @@
       <updated>1683027223728</updated>
       <workItem from="1683027225579" duration="6704000" />
       <workItem from="1683034301584" duration="2928000" />
-      <workItem from="1683037419001" duration="429000" />
-      <workItem from="1683037860179" duration="107000" />
+      <workItem from="1683037419001" duration="325000" />
+      <workItem from="1686038791827" duration="1009000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <breakpoint enabled="true" type="java-exception">
+          <properties class="java.lang.IllegalArgumentException" package="java.lang" />
+          <option name="timeStamp" value="1" />
+        </breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

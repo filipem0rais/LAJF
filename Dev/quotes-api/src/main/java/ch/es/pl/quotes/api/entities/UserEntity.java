@@ -9,7 +9,8 @@ package ch.es.pl.quotes.api.entities;
 
 import jakarta.persistence.*;
 
-import java.util.Objects;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "users")
@@ -18,73 +19,87 @@ public class UserEntity {
             table = "idUsers",
             pkColumnName = "name",
             valueColumnName = "val",
-            initialValue = 3,
+            initialValue = 1000,
             allocationSize = 100)
     @Id // @GeneratedValue
     @GeneratedValue(strategy = GenerationType.TABLE, generator = "genUsers")
-    private int id;
-    private String name;
-    private String lastName;
-    private String email;
-    private String password;
-    private double credit;
+    @Column(name = "idUser", nullable = false)
+    private Integer idUser;
 
-    public UserEntity() {}
+    @Column(name = "useName", nullable = false)
+    private String useName;
 
-    public UserEntity(int id, String name, String lastName, String email, String password, double credit) {
-        this.id = id;
-        this.name = name;
-        this.lastName = lastName;
-        this.email = email;
-        this.password = password;
-        this.credit = credit;
+    @Column(name = "useLastName", nullable = false)
+    private String useLastName;
+
+    @Column(name = "useEmail", nullable = false, unique = true)
+    private String useEmail;
+
+    @Column(name = "usePassword", nullable = false)
+    private String usePassword;
+
+    @Column(name = "useCredit", nullable = false)
+    private double useCredit;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private Set<BidEntity> bids = new HashSet<>();
+
+    // getters and setters
+
+
+    public Integer getIdUser() {
+        return idUser;
     }
 
-    public int getId() {
-        return id;
+    public void setIdUser(Integer idUser) {
+        this.idUser = idUser;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public String getUseName() {
+        return useName;
     }
 
-    public String getName() {
-        return name;
+    public void setUseName(String useName) {
+        this.useName = useName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public String getUseLastName() {
+        return useLastName;
     }
 
-    public String getLastName() {
-        return lastName;
+    public void setUseLastName(String useLastName) {
+        this.useLastName = useLastName;
     }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public String getUseEmail() {
+        return useEmail;
     }
 
-    public String getEmail() {
-        return email;
+    public void setUseEmail(String useEmail) {
+        this.useEmail = useEmail;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public String getUsePassword() {
+        return usePassword;
     }
 
-    public String getPassword() {
-        return password;
+    public void setUsePassword(String usePassword) {
+        this.usePassword = usePassword;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public double getUseCredit() {
+        return useCredit;
     }
 
-    public double getCredit() {
-        return credit;
+    public void setUseCredit(double useCredit) {
+        this.useCredit = useCredit;
     }
 
-    public void setCredit(double credit) {
-        this.credit = credit;
+    public Set<BidEntity> getBids() {
+        return bids;
+    }
+
+    public void setBids(Set<BidEntity> bids) {
+        this.bids = bids;
     }
 }
