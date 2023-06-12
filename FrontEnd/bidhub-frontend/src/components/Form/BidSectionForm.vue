@@ -6,7 +6,7 @@
     <p>Valeur initiale: <strong>{{ lot.iteInitialValue }} CHF</strong></p>
     <p>Nombre d'enchère(s): </p>
     <div class="input-group mb-3">
-      <input type="text" class="form-control" v-model="newBid" placeholder="Nouvelle enchère">
+      <input type="text" class="form-control" v-model="bidAmount" placeholder="Nouvelle enchère">
       <div class="input-group-append">
         <button class="btn btn-primary" type="button" @click="placeBid">Placer une enchère</button>
       </div>
@@ -22,12 +22,17 @@ export default {
   props: ['lot'],
   data () {
     return {
-      newBid: ''
+      itemId: '',
+      bidAmount: ''
     }
   },
   methods: {
     placeBid () {
-      postBid(this.lot.iteId, this.newBid)
+      const bid = {
+        itemId: this.lot.idItem,
+        bidAmount: this.bidAmount
+      }
+      postBid(bid)
         .then(() => {
           this.$emit('bid-placed')
         })

@@ -1,4 +1,4 @@
-/*
+
 import axios from 'axios'
 
 const BASE_URL = 'http://localhost:9090/api/bids'
@@ -10,11 +10,10 @@ export function postBid (bid) {
       Authorization: token
     }
   })
-    .then(response => {
-      return response.data
+    .then(() => {
+      console.log('cest placé')
     })
     .catch(error => {
       console.error(error)
     })
 }
-*/

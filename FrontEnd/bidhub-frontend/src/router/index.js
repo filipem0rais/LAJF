@@ -4,7 +4,7 @@ import IdentificationView from '../views/IdentificationView.vue'
 import ConnectedView from '../views/ConnectedView.vue'
 import EncheresView from '@/views/BidsView.vue'
 import LotDetailsView from '@/views/LotDetailsView.vue'
-import VenteView from '@/views/OfferView.vue'
+import VenteView from '@/views/SubmissionView.vue'
 import LogoutView from '@/views/LogoutView.vue'
 
 const routes = [

@@ -19,7 +19,7 @@
 import LotService from '../services/LotService'
 import BreadCrum from '@/components/Header/BreadCrumHeader.vue'
 import LotDetailsInfo from '@/components/Display/LotDetailsDisplay.vue'
-import OfferSection from '@/components/Form/OfferSectionForm.vue'
+import OfferSection from '@/components/Form/BidSectionForm.vue'
 
 export default {
   name: 'LotDetails',

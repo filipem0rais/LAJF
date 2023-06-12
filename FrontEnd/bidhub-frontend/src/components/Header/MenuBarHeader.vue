@@ -55,7 +55,6 @@ export default {
     try {
       this.user = await getUserData()
     } catch (error) {
-      console.error(error)
     }
   },
   methods: {

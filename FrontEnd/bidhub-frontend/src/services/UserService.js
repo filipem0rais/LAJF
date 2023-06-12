@@ -22,6 +22,7 @@ export function loginUser (loginData) {
     })
 }
 export function getUserData () {
+  if (!localStorage.getItem('token')) return Promise.resolve(null)
   const token = localStorage.getItem('token')
 
   return axios.get('http://localhost:9090/api/users', {
@@ -30,6 +31,7 @@ export function getUserData () {
     }
   })
     .then(response => {
+      localStorage.setItem('userId', response.data.idUser)
       return response.data
     })
     .catch(error => {

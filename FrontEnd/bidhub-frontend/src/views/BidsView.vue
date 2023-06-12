@@ -85,7 +85,6 @@ export default {
       CategorieService.getCategories()
         .then(categories => {
           this.categories = categories
-          console.log(this.categories)
         })
         .catch(error => {
           console.error(error)
