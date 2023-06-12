@@ -1,5 +1,5 @@
 <template>
-  <bread-crum :page-title="`Lot Numéro : ${lot.idItem}`"></bread-crum>
+  <bread-crum :page-title="`Lot Numéro : ${lot.idItem} `"></bread-crum>
   <div class="container">
     <div class="row">
       <div class="col">
