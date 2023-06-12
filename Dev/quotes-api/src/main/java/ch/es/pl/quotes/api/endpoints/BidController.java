@@ -138,6 +138,13 @@ public class BidController implements BidsApi {
     public ResponseEntity<Bid> makeBid(@NotNull @RequestHeader("Authorization") String authorization, @Valid @RequestBody MakeBidRequest makeBidRequest) {
         Integer userId = getUserIdFromToken(authorization);
 
+        String token = request.getHeader("Authorization");
+
+        token = token.replace("Bearer ", "");
+
+
+        Integer userId = getUserIdFromToken(token);
+
         ItemEntity itemEntity = itemRepository.findById(makeBidRequest.getItemId())
                 .orElseThrow(() -> new ItemNotFoundException(makeBidRequest.getItemId()));
 
@@ -152,7 +159,8 @@ public class BidController implements BidsApi {
         if (highestBidAmount >= makeBidRequest.getBidAmount() || makeBidRequest.getBidAmount() < itemEntity.getIteInitialValue()) {
             // Le bidAmount est inférieur à iteInitialValue, renvoyez une erreur
             //throw new IllegalArgumentException("Le montant de l'enchère doit être égal ou supérieur à iteInitialValue de l'item.");
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            //return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(HttpStatus.CONFLICT);
         }
 
         BidEntity bidEntity = new BidEntity();
@@ -186,7 +194,7 @@ public class BidController implements BidsApi {
 
         // Vérifiez si la somme des enchères gagnantes actuelles et la nouvelle enchère dépasse le useCredit de l'utilisateur
         if (makeBidRequest.getBidAmount() + totalWinningBids > userEntity.getUseCredit()) {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(HttpStatus.PRECONDITION_FAILED);
         }
 
         bidEntity.setUser(userEntity);

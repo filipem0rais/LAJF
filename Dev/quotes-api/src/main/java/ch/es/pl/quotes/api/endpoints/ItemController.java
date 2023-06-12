@@ -128,8 +128,14 @@ public class ItemController implements ItemsApi {
 
 
     @Override
-    public ResponseEntity<Item> createItem(@RequestHeader("Authorization") String authHeader, Item item) {
-        Integer userId = getUserIdFromToken(authHeader);
+    public ResponseEntity<Item> createItem(Item item) {
+
+
+
+        String token = request.getHeader("Authorization");
+
+        token = token.replace("Bearer ", "");
+        Integer userId = getUserIdFromToken(token);
         ItemEntity itemEntity = new ItemEntity();
 
         UserEntity userEntity = userRepository.findById(userId)
@@ -144,7 +150,7 @@ public class ItemController implements ItemsApi {
         itemEntity.setIteInitialValue(item.getIteInitialValue());
         itemEntity.setIteOnSale(item.getIteOnSale());
         itemEntity.setIteDatePublication(item.getIteDatePublication());
-        itemEntity.getCategory().setIdCategory(item.getIdCategory());
+        itemEntity.setCategory(categoryEntity);
         itemEntity.setIteName(item.getIteName());
         itemEntity.setIteState(item.getIteState());
         itemEntity.setItePicture(item.getItePicture());
