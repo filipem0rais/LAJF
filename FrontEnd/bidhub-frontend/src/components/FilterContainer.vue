@@ -36,8 +36,8 @@
 </template>
 
 <script>
-import SubCategory from '@/components/Display/SubCategoryDisplay.vue'
-import CategorieService from '../../services/CategoryService'
+import SubCategory from '@/components/SubCategory.vue'
+import CategorieService from '../services/CategorieService'
 
 export default {
   components: {

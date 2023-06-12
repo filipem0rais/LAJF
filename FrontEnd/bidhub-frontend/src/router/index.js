@@ -2,10 +2,9 @@ import { createRouter, createWebHashHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import IdentificationView from '../views/IdentificationView.vue'
 import ConnectedView from '../views/ConnectedView.vue'
-import EncheresView from '@/views/BidsView.vue'
+import EncheresView from '@/views/EncheresView.vue'
 import LotDetailsView from '@/views/LotDetailsView.vue'
-import VenteView from '@/views/SubmissionView.vue'
-import LogoutView from '@/views/LogoutView.vue'
+import VenteView from '@/views/VenteView.vue'
 
 const routes = [
   {
@@ -37,11 +36,6 @@ const routes = [
     path: '/vente',
     name: 'vente',
     component: VenteView
-  },
-  {
-    path: '/logout',
-    name: 'logout',
-    component: LogoutView
   }
 ]
 

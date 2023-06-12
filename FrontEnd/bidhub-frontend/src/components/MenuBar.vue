@@ -3,7 +3,7 @@
     <div class="navbar navbar-expand-lg bg-dark fixed-top">
       <div class="container">
         <a class="navbar-brand" href="#">
-          <img src="../../assets/logo.png" alt="Logo" class="logo logo-white-bg">
+          <img src="../assets/logo.png" alt="Logo" class="logo logo-white-bg">
         </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -22,16 +22,9 @@
             </li>
           </ul>
           <ul class="navbar-nav custom-nav">
-            <li class="nav-item" v-if="!user">
+            <li class="nav-item">
               <router-link class="nav-link text-white" to="/identification">Identification</router-link>
             </li>
-            <li class="nav-item" v-else>
-              <router-link class="nav-link text-white" to="/logout" @click="logout">
-                Crédits : {{ user.useCredit }}
-                <img src="@/assets/leave.png" alt="Déconnexion" class="logout-icon">
-              </router-link>
-            </li>
-
           </ul>
         </div>
       </div>
@@ -39,32 +32,6 @@
     <br>
   </header>
 </template>
-
-<script>
-import { getUserData, logoutUser } from '@/services/UserService'
-
-export default {
-  name: 'MenuBarHeader',
-  components: {},
-  data () {
-    return {
-      user: null
-    }
-  },
-  async mounted () {
-    try {
-      this.user = await getUserData()
-    } catch (error) {
-    }
-  },
-  methods: {
-    logout () {
-      logoutUser()
-      this.user = null
-    }
-  }
-}
-</script>
 
 <style scoped>
 .logo {
@@ -90,8 +57,6 @@ export default {
 .custom-nav {
   margin-left: auto;
 }
-.logout-icon{
-  width: 30px;
-  height: 30px;
-}
 </style>
+<script setup>
+</script>

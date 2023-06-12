@@ -1,4 +1,3 @@
-/*
 //
 // Auteur : Filipe Dias Morais
 // Projet : Dev
@@ -34,5 +33,4 @@ public class FilterConfig {
         registrationBean.addUrlPatterns("/users/*");
         return registrationBean;
     }
-
-}*/
+}

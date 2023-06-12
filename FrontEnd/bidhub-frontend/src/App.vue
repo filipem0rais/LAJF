@@ -12,6 +12,6 @@ font-family: Arial, sans-serif;
 
 </style>
 <script setup>
-import MenuBar from '@/components/Header/MenuBarHeader.vue'
-import FooterBar from '@/components/Footer/FooterBarFooter.vue'
+import MenuBar from '@/components/MenuBar.vue'
+import FooterBar from '@/components/FooterBar.vue'
 </script>

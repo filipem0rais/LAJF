@@ -32,11 +32,13 @@
               <form @submit="submitForm" @click="resetMessage">
                 <div class="mb-3">
                   <label for="firstname" class="form-label">Prénom</label>
-                  <input type="text" class="form-control" id="firstname" v-model="userData.useName" required pattern="[A-Za-z]{2,25}" title="Au moins 2 caractères alphabétiques">
+                  <input type="text" class="form-control" id="firstname" v-model="userData.useName" required
+                         pattern="[A-Za-z]{2,25}" title="Au moins 2 caractères alphabétiques">
                 </div>
                 <div class="mb-3">
                   <label for="lastname" class="form-label">Nom</label>
-                  <input type="text" class="form-control" id="lastname" v-model="userData.useLastName" required pattern="[A-Za-z]{2,25}"  title="Au moins 2 caractères alphabétiques">
+                  <input type="text" class="form-control" id="lastname" v-model="userData.useLastName" required
+                         pattern="[A-Za-z]{2,25}" title="Au moins 2 caractères alphabétiques">
                 </div>
                 <div class="mb-3">
                   <label for="email2" class="form-label">Adresse e-mail</label>
@@ -44,7 +46,9 @@
                 </div>
                 <div class="mb-3">
                   <label for="password2" class="form-label">Mot de passe</label>
-                  <input type="password" class="form-control" id="password2" v-model="userData.usePassword" required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*\W).{10,50}" title="Au moins 10 caractères, 1 chiffre, 1 majuscule/minuscule et 1 caractère spécial">
+                  <input type="password" class="form-control" id="password2" v-model="userData.usePassword" required
+                         pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*\W).{10,50}"
+                         title="Au moins 10 caractères, 1 chiffre, 1 majuscule/minuscule et 1 caractère spécial">
                 </div>
                 <div class="mb-3">
                   <label for="confirm-password" class="form-label">Confirmez le mot de passe</label>
@@ -90,7 +94,7 @@
 </style>
 <script>
 import { registerUser, loginUser } from '@/services/UserService'
-import BreadCrum from '@/components/Header/BreadCrumHeader.vue'
+import BreadCrum from '@/components/BreadCrum.vue'
 import router from '@/router'
 
 export default {
@@ -142,7 +146,6 @@ export default {
           this.showSuccessMessage = true
         })
         .catch(() => {
-          console.log('error')
           this.showErrorMailMessage = true
           this.userData.useEmail = ''
         })

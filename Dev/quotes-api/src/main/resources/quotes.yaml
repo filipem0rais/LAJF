@@ -104,6 +104,11 @@ paths:
           schema:
             type: integer
             format: int32
+        - in: header
+          name: Authorization
+          schema:
+            type: string
+          required: true
       responses:
         '204':
           description: OK
@@ -117,6 +122,12 @@ paths:
         - Bidhub-API
       summary: Fait une offre sur un article
       operationId: makeBid
+      parameters:
+        - in: header
+          name: Authorization
+          schema:
+            type: string
+          required: true
       requestBody:
         content:
           application/json:
@@ -167,6 +178,12 @@ paths:
         - Bidhub-API
       summary: Modifie une offre
       operationId: updateBid
+      parameters:
+        - in: header
+          name: Authorization
+          schema:
+            type: string
+          required: true
       requestBody:
         content:
           'application/json':
@@ -221,6 +238,11 @@ paths:
           schema:
             type: integer
             format: int32
+        - in: header
+          name: Authorization
+          schema:
+            type: string
+          required: true
       responses:
         '204':
           description: OK
@@ -250,6 +272,12 @@ paths:
         - Bidhub-API
       summary: Crée un article
       operationId: createItem
+      parameters:
+        - in: header
+          name: Authorization
+          schema:
+            type: string
+          required: true
       requestBody:
         content:
           'application/json':
@@ -270,6 +298,12 @@ paths:
         - Bidhub-API
       summary: Modifie un article
       operationId: updateItem
+      parameters:
+        - in: header
+          name: Authorization
+          schema:
+            type: string
+          required: true
       requestBody:
         content:
           'application/json':
@@ -301,6 +335,12 @@ paths:
           schema:
             type: integer
             format: int32
+        - in: header
+          name: Authorization
+          description: Token JWT de l'utilisateur
+          required: true
+          schema:
+            type: string
       responses:
         '204':
           description: L'enchère a été terminée avec succès
@@ -324,6 +364,12 @@ paths:
           schema:
             type: integer
             format: int32
+        - in: header
+          name: Authorization
+          description: Token JWT de l'utilisateur
+          required: true
+          schema:
+            type: string
       responses:
         '204':
           description: La transaction a été validée avec succès
@@ -544,6 +590,13 @@ paths:
         - Bidhub-API
       summary: Retourne tous les items invendus d'un utilisateur spécifique
       operationId: getUnsoldItems
+      parameters:
+        - name: Authorization
+          in: header
+          required: true
+          schema:
+            type: string
+          description: JWT Token de l'utilisateur
       responses:
         '200':
           description: Opération réussie. Retourne une liste d'items invendus appartenant à l'utilisateur.

@@ -30,8 +30,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RestController;
-import jakarta.servlet.http.HttpServletRequest;
-
 
 import java.util.*;
 
@@ -49,9 +47,6 @@ public class ItemController implements ItemsApi {
 
     @Autowired
     private BidRepository bidRepository;
-
-    @Autowired
-    HttpServletRequest request;
 
 
     @Value("${jwt.secret}")
@@ -98,15 +93,10 @@ public class ItemController implements ItemsApi {
     }
 
     @Override
-    public ResponseEntity<Item> updateItem(Item item) {
-
-        String token = request.getHeader("Authorization");
-
-        token = token.replace("Bearer ", "");
-
+    public ResponseEntity<Item> updateItem(@RequestHeader("Authorization") String authHeader, Item item) {
         Optional<ItemEntity> opt = itemRepository.findById(item.getIdItem());
 
-        Integer userId = getUserIdFromToken(token);
+        Integer userId = getUserIdFromToken(authHeader);
         Optional<UserEntity> optUser = userRepository.findById(userId);
 
         if (opt.isPresent()) {
@@ -138,11 +128,8 @@ public class ItemController implements ItemsApi {
 
 
     @Override
-    public ResponseEntity<Item> createItem(Item item) {
-        String token = request.getHeader("Authorization");
-
-        token = token.replace("Bearer ", "");
-        Integer userId = getUserIdFromToken(token);
+    public ResponseEntity<Item> createItem(@RequestHeader("Authorization") String authHeader, Item item) {
+        Integer userId = getUserIdFromToken(authHeader);
         ItemEntity itemEntity = new ItemEntity();
 
         UserEntity userEntity = userRepository.findById(userId)
@@ -176,13 +163,10 @@ public class ItemController implements ItemsApi {
     }
 
     @Override
-    public ResponseEntity<Void> deleteItem(Integer id) {
-        String token = request.getHeader("Authorization");
-
-        token = token.replace("Bearer ", "");
+    public ResponseEntity<Void> deleteItem(Integer id, @RequestHeader("Authorization") String authHeader) {
         Optional<ItemEntity> opt = itemRepository.findById(id);
 
-        Integer userId = getUserIdFromToken(token);
+        Integer userId = getUserIdFromToken(authHeader);
 
         if (opt.isPresent()) {
             ItemEntity itemEntity = opt.get();
@@ -278,11 +262,8 @@ public class ItemController implements ItemsApi {
 
 
     @Override
-    public ResponseEntity<List<Item>> getUnsoldItems() {
-        String token = request.getHeader("Authorization");
-
-        token = token.replace("Bearer ", "");
-        Integer userId = getUserIdFromToken(token);
+    public ResponseEntity<List<Item>> getUnsoldItems(@RequestHeader("Authorization") String authHeader) {
+        Integer userId = getUserIdFromToken(authHeader);
         Optional<UserEntity> optUser = userRepository.findById(userId);
 
         if (optUser.isPresent()) {
@@ -317,11 +298,8 @@ public class ItemController implements ItemsApi {
     }
 
     @Override
-    public ResponseEntity<Void> endAuction(@PathVariable Integer itemId) {
-        String token = request.getHeader("Authorization");
-
-        token = token.replace("Bearer ", "");
-        Integer userId = getUserIdFromToken(token);
+    public ResponseEntity<Void> endAuction(@PathVariable Integer itemId, @RequestHeader("Authorization") String authHeader) {
+        Integer userId = getUserIdFromToken(authHeader);
         Optional<ItemEntity> optItem = itemRepository.findById(itemId);
 
         if (optItem.isPresent()) {
@@ -341,11 +319,8 @@ public class ItemController implements ItemsApi {
     }
 
 
-    public ResponseEntity<Void> validateTransaction(@PathVariable Integer itemId) {
-        String token = request.getHeader("Authorization");
-
-        token = token.replace("Bearer ", "");
-        Integer userId = getUserIdFromToken(token);
+    public ResponseEntity<Void> validateTransaction(@PathVariable Integer itemId, @RequestHeader("Authorization") String authHeader) {
+        Integer userId = getUserIdFromToken(authHeader);
         Optional<ItemEntity> optItem = itemRepository.findById(itemId);
 
         if (optItem.isPresent()) {
@@ -398,5 +373,135 @@ public class ItemController implements ItemsApi {
 
         return new ResponseEntity<List<Item>>(items, HttpStatus.OK);
     }
+
+
+    /*
+    @Override
+    public ResponseEntity<Item> getItemByUser(Integer idUser) {
+        Optional<ItemEntity> opt = itemRepository.findById(idUser);
+        if (opt.isPresent()) {
+            ItemEntity itemEntity = opt.get();
+            Item item = new Item();
+            item.setIdItem(itemEntity.getIdItem());
+            item.setIteDescription(itemEntity.getIteDescription());
+            item.setIteInitialValue(itemEntity.getIteInitialValue());
+            item.setIteOnSale(itemEntity.getIteOnSale());
+            item.setIteDatePublication(itemEntity.getIteDatePublication());
+            item.setIdUser(itemEntity.getUser().getIdUser());
+            item.setIdCategory(itemEntity.getCategory().getIdCategory());
+            item.setIteName(itemEntity.getIteName());
+            item.setIteState(itemEntity.getIteState());
+            item.setItePicture(itemEntity.getItePicture());
+            item.setItePickedUp(itemEntity.getItePickedUp());
+
+            return new ResponseEntity<Item>(item, HttpStatus.OK);
+        } else {
+            // return ResponseEntity.notFound().build();
+            throw new ItemNotFoundException(idUser);
+        }
+    }
+
+    @Override
+    public ResponseEntity<Item> getItemByState(String state) {
+        Optional<ItemEntity> opt = itemRepository.findById(state);
+        if (opt.isPresent()) {
+            ItemEntity itemEntity = opt.get();
+            Item item = new Item();
+            item.setIdItem(itemEntity.getIdItem());
+            item.setIteDescription(itemEntity.getIteDescription());
+            item.setIteInitialValue(itemEntity.getIteInitialValue());
+            item.setIteOnSale(itemEntity.getIteOnSale());
+            item.setIteDatePublication(itemEntity.getIteDatePublication());
+            item.setIdUser(itemEntity.getUser().getIdUser());
+            item.setIdCategory(itemEntity.getCategory().getIdCategory());
+            item.setIteName(itemEntity.getIteName());
+            item.setIteState(itemEntity.getIteState());
+            item.setItePicture(itemEntity.getItePicture());
+            item.setItePickedUp(itemEntity.getItePickedUp());
+
+            return new ResponseEntity<Item>(item, HttpStatus.OK);
+        } else {
+            // return ResponseEntity.notFound().build();
+            throw new ItemNotFoundException(state);
+        }
+    }
+
+    @Override
+    public ResponseEntity<Item> getItemByPickedUp(String pickedUp) {
+        Optional<ItemEntity> opt = itemRepository.findById(pickedUp);
+        if (opt.isPresent()) {
+            ItemEntity itemEntity = opt.get();
+            Item item = new Item();
+            item.setIdItem(itemEntity.getIdItem());
+            item.setIteDescription(itemEntity.getIteDescription());
+            item.setIteInitialValue(itemEntity.getIteInitialValue());
+            item.setIteOnSale(itemEntity.getIteOnSale());
+            item.setIteDatePublication(itemEntity.getIteDatePublication());
+            item.setIdUser(itemEntity.getUser().getIdUser());
+            item.setIdCategory(itemEntity.getCategory().getIdCategory());
+            item.setIteName(itemEntity.getIteName());
+            item.setIteState(itemEntity.getIteState());
+            item.setItePicture(itemEntity.getItePicture());
+            item.setItePickedUp(itemEntity.getItePickedUp());
+
+            return new ResponseEntity<Item>(item, HttpStatus.OK);
+        } else {
+            // return ResponseEntity.notFound().build();
+            throw new ItemNotFoundException(pickedUp);
+        }
+
+    }
+
+    @Override
+    public ResponseEntity<Item> getItemByOnSale(String onSale) {
+        Optional<ItemEntity> opt = itemRepository.findById(onSale);
+        if (opt.isPresent()) {
+            ItemEntity itemEntity = opt.get();
+            Item item = new Item();
+            item.setIdItem(itemEntity.getIdItem());
+            item.setIteDescription(itemEntity.getIteDescription());
+            item.setIteInitialValue(itemEntity.getIteInitialValue());
+            item.setIteOnSale(itemEntity.getIteOnSale());
+            item.setIteDatePublication(itemEntity.getIteDatePublication());
+            item.setIdUser(itemEntity.getUser().getIdUser());
+            item.setIdCategory(itemEntity.getCategory().getIdCategory());
+            item.setIteName(itemEntity.getIteName());
+            item.setIteState(itemEntity.getIteState());
+            item.setItePicture(itemEntity.getItePicture());
+            item.setItePickedUp(itemEntity.getItePickedUp());
+
+            return new ResponseEntity<Item>(item, HttpStatus.OK);
+        } else {
+            // return ResponseEntity.notFound().build();
+            throw new ItemNotFoundException(onSale);
+        }
+    }
+
+    @Override
+    public ResponseEntity<Item> getItemByDatePublication(String datePublication) {
+        Optional<ItemEntity> opt = itemRepository.findById(datePublication);
+        if (opt.isPresent()) {
+            ItemEntity itemEntity = opt.get();
+            Item item = new Item();
+            item.setIdItem(itemEntity.getIdItem());
+            item.setIteDescription(itemEntity.getIteDescription());
+            item.setIteInitialValue(itemEntity.getIteInitialValue());
+            item.setIteOnSale(itemEntity.getIteOnSale());
+            item.setIteDatePublication(itemEntity.getIteDatePublication());
+            item.setIdUser(itemEntity.getUser().getIdUser());
+            item.setIdCategory(itemEntity.getCategory().getIdCategory());
+            item.setIteName(itemEntity.getIteName());
+            item.setIteState(itemEntity.getIteState());
+            item.setItePicture(itemEntity.getItePicture());
+            item.setItePickedUp(itemEntity.getItePickedUp());
+
+            return new ResponseEntity<Item>(item, HttpStatus.OK);
+        } else {
+            // return ResponseEntity.notFound().build();
+            throw new ItemNotFoundException(datePublication);
+        }
+    }
+    */
+
 
 }

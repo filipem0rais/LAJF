@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import CategorieService from '../../services/CategoryService'
+import CategorieService from '../services/CategorieService'
 
 export default {
   name: 'SubCategory',

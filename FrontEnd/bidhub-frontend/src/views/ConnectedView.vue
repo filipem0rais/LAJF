@@ -7,13 +7,6 @@
   </div>
 </template>
 
-<script>
-export default {
-  name: 'ConnectedView',
-  components: {}
-}
-</script>
-
 <style scoped>
 .connected-view {
   text-align: center;
@@ -41,9 +34,19 @@ export default {
   background-color: #ED7D2F;
   border-color: #ED7D2F;
 }
+
 .btn:hover {
   background-color: #E85C0C;
   border-color: #E85C0C;
 }
 
 </style>
+
+<script>
+
+export default {
+  name: 'ConnectedView',
+  components: {
+  }
+}
+</script>

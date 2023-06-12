@@ -7,7 +7,7 @@
       </option>
     </select>
     <label v-if="selectedCategory && selectedCategory.subCategories.length > 0">Sous-catégorie</label>
-    <category-select-display v-if="selectedCategory && selectedCategory.subCategories.length > 0"
+    <CategorySelect v-if="selectedCategory && selectedCategory.subCategories.length > 0"
                     :categories="selectedCategory.subCategories" @category-changed="onSubCategoryChanged"/>
   </div>
 </template>
@@ -24,7 +24,6 @@ export default {
     onChange (event) {
       const selectedId = Number(event.target.value)
       this.selectedCategory = this.categories.find(cat => cat.idCategory === selectedId)
-      console.log(this.selectedCategory)
       this.$emit('category-changed', this.selectedCategory)
     },
     onSubCategoryChanged (subCategory) {

@@ -34,12 +34,12 @@
 </template>
 
 <script>
-import BreadCrum from '@/components/Header/BreadCrumHeader.vue'
-import CardLotEnchere from '@/components/Card/LotBidCard.vue'
+import BreadCrum from '@/components/BreadCrum.vue'
+import CardLotEnchere from '@/components/CardLotEnchere.vue'
 import LotService from '../services/LotService'
-import CategorieService from '../services/CategoryService'
-import FilterContainer from '@/components/Display/FilterContainerDisplay.vue'
-import PaginationLot from '@/components/Display/PagingLotDisplay.vue'
+import CategorieService from '../services/CategorieService'
+import FilterContainer from '@/components/FilterContainer.vue'
+import PaginationLot from '@/components/PaginationLot.vue'
 
 export default {
   components: {
@@ -85,6 +85,7 @@ export default {
       CategorieService.getCategories()
         .then(categories => {
           this.categories = categories
+          console.log(this.categories)
         })
         .catch(error => {
           console.error(error)
