@@ -10,6 +10,7 @@
       <change afterPath="$PROJECT_DIR$/../FrontEnd/bidhub-frontend/src/services/BidService.js" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/../FrontEnd/bidhub-frontend/src/views/LogoutView.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+<<<<<<< HEAD
       <change beforePath="$PROJECT_DIR$/quotes-api/src/main/resources/data.sql" beforeDir="false" afterPath="$PROJECT_DIR$/quotes-api/src/main/resources/data.sql" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Docs/Planning/JournalEtPlanification.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/../Docs/Planning/JournalEtPlanification.xlsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../FrontEnd/bidhub-frontend/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/../FrontEnd/bidhub-frontend/package-lock.json" afterDir="false" />
@@ -19,6 +20,12 @@
       <change beforePath="$PROJECT_DIR$/../FrontEnd/bidhub-frontend/src/router/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/../FrontEnd/bidhub-frontend/src/router/index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../FrontEnd/bidhub-frontend/src/services/UserService.js" beforeDir="false" afterPath="$PROJECT_DIR$/../FrontEnd/bidhub-frontend/src/services/UserService.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../FrontEnd/bidhub-frontend/src/views/ConnectedView.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../FrontEnd/bidhub-frontend/src/views/ConnectedView.vue" afterDir="false" />
+=======
+      <change beforePath="$PROJECT_DIR$/quotes-api/src/main/java/ch/es/pl/quotes/api/endpoints/BidController.java" beforeDir="false" afterPath="$PROJECT_DIR$/quotes-api/src/main/java/ch/es/pl/quotes/api/endpoints/BidController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/quotes-api/src/main/java/ch/es/pl/quotes/api/endpoints/ItemController.java" beforeDir="false" afterPath="$PROJECT_DIR$/quotes-api/src/main/java/ch/es/pl/quotes/api/endpoints/ItemController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/quotes-api/src/main/java/ch/es/pl/quotes/api/entities/ItemEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/quotes-api/src/main/java/ch/es/pl/quotes/api/entities/ItemEntity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/quotes-api/src/main/resources/quotes.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/quotes-api/src/main/resources/quotes.yaml" afterDir="false" />
+>>>>>>> API
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -58,6 +65,10 @@
     &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
     &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
     &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
+<<<<<<< HEAD
+=======
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+>>>>>>> API
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
     &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
@@ -169,14 +180,14 @@
       <option name="customJreEnabled" value="false" />
       <option name="customTemplatesPath" value="" />
       <option name="enableDebugLogging" value="false" />
-      <option name="generateToPath" value="C:\DATA\LAJFY\Dev\gen" />
+      <option name="generateToPath" value="C:\DATA\LAJF\Dev\gen" />
       <option name="generationParameters">
         <list />
       </option>
       <option name="generatorPath" value="https://repo1.maven.org/maven2/org/openapitools/openapi-generator-cli/5.0.0/openapi-generator-cli-5.0.0.jar" />
       <option name="jdkPath" value="" />
       <option name="language" value="java" />
-      <option name="specificationPath" value="C:\DATA\LAJFY\Dev\quotes-api\src\main\resources\quotes.yaml" />
+      <option name="specificationPath" value="C:\DATA\LAJF\Dev\quotes-api\src\main\resources\quotes.yaml" />
       <method v="2" />
     </configuration>
     <list>
@@ -203,10 +214,19 @@
       <updated>1683027223728</updated>
       <workItem from="1683027225579" duration="6704000" />
       <workItem from="1683034301584" duration="2928000" />
+<<<<<<< HEAD
       <workItem from="1683037419001" duration="429000" />
       <workItem from="1683037860179" duration="107000" />
       <workItem from="1686042709405" duration="1175000" />
       <workItem from="1686046607423" duration="4187000" />
+=======
+      <workItem from="1683037419001" duration="325000" />
+      <workItem from="1686038791827" duration="1009000" />
+      <workItem from="1686552377489" duration="88000" />
+      <workItem from="1686552475257" duration="634000" />
+      <workItem from="1686553530697" duration="2713000" />
+      <workItem from="1686558060023" duration="444000" />
+>>>>>>> API
     </task>
     <servers />
   </component>
@@ -220,6 +240,14 @@
           <url>file://$PROJECT_DIR$/quotes-api/src/main/java/ch/es/pl/quotes/api/endpoints/AuthController.java</url>
           <line>41</line>
           <option name="timeStamp" value="1" />
+<<<<<<< HEAD
+=======
+        </breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/quotes-api/src/main/java/ch/es/pl/quotes/api/endpoints/BidController.java</url>
+          <line>153</line>
+          <option name="timeStamp" value="5" />
+>>>>>>> API
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

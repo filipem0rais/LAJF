@@ -139,6 +139,9 @@ public class ItemController implements ItemsApi {
 
     @Override
     public ResponseEntity<Item> createItem(Item item) {
+
+
+
         String token = request.getHeader("Authorization");
 
         token = token.replace("Bearer ", "");
@@ -157,7 +160,7 @@ public class ItemController implements ItemsApi {
         itemEntity.setIteInitialValue(item.getIteInitialValue());
         itemEntity.setIteOnSale(item.getIteOnSale());
         itemEntity.setIteDatePublication(item.getIteDatePublication());
-        itemEntity.getCategory().setIdCategory(item.getIdCategory());
+        itemEntity.setCategory(categoryEntity);
         itemEntity.setIteName(item.getIteName());
         itemEntity.setIteState(item.getIteState());
         itemEntity.setItePicture(item.getItePicture());
