@@ -144,6 +144,8 @@ paths:
           description: Not Found
         '409':
           description: Conflict - bid lower than current highest bid
+        '412':
+          description: Precondition Failed - bid higher than user's balance
       deprecated: false
     get:
       tags:

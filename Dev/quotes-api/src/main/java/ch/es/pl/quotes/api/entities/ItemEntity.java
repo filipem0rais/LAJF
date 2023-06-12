@@ -53,7 +53,7 @@ public class ItemEntity {
     @Column(name = "iteState", nullable = false)
     private String iteState;
 
-    @Column(name = "itePicture", nullable = false)
+    @Column(name = "itePicture", nullable = false, length = 1000)
     private String itePicture;
 
     @Column(name = "itePickedUp", nullable = false)
