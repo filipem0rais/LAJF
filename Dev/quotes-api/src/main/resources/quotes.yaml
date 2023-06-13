@@ -561,8 +561,95 @@ paths:
           description: Non autorisé. L'utilisateur doit être authentifié.
         '404':
           description: Aucun item invendu trouvé pour l'utilisateur.
+      deprecated: false
 
+  /items/getBiddedItems:
+    get:
+      tags:
+        - Bidhub-API
+      summary: Retourne tous les items sur lesquels l'utilisateur a enchéri
+      operationId: getBiddedItems
+      responses:
+        '200':
+          description: Opération réussie. Retourne une liste d'items sur lesquels l'utilisateur a enchéri.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Item'
+        '400':
+          description: Requête invalide (par exemple, paramètres manquants, format de données incorrect, etc.)
+        '401':
+          description: Non autorisé. L'utilisateur doit être authentifié.
+        '404':
+          description: Aucun item trouvé pour l'utilisateur.
 
+  /items/getWonItemsNotPickedUp:
+    get:
+      tags:
+        - Bidhub-API
+      summary: Retourne tous les items gagnés par l'utilisateur et non ramassés
+      operationId: getWonItemsNotPickedUp
+      responses:
+        '200':
+          description: Opération réussie. Retourne une liste d'items gagnés par l'utilisateur et non ramassés.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Item'
+        '400':
+          description: Requête invalide (par exemple, paramètres manquants, format de données incorrect, etc.)
+        '401':
+          description: Non autorisé. L'utilisateur doit être authentifié.
+        '404':
+          description: Aucun item trouvé pour l'utilisateur.
+
+  /items/getSoldItemsNotPickedUp:
+    get:
+      tags:
+        - Bidhub-API
+      summary: Retourne tous les items vendus par l'utilisateur et non ramassés
+      operationId: getSoldItemsNotPickedUp
+      responses:
+        '200':
+          description: Opération réussie. Retourne une liste d'items vendus par l'utilisateur et non ramassés.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Item'
+        '400':
+          description: Requête invalide (par exemple, paramètres manquants, format de données incorrect, etc.)
+        '401':
+          description: Non autorisé. L'utilisateur doit être authentifié.
+        '404':
+          description: Aucun item trouvé pour l'utilisateur.
+
+  /items/getSoldItemsPickedUp:
+    get:
+      tags:
+        - Bidhub-API
+      summary: Retourne tous les items vendus par l'utilisateur
+      operationId: getSoldItemsPickedUp
+      responses:
+        '200':
+          description: Opération réussie. Retourne une liste d'items vendus par l'utilisateur.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Item'
+        '400':
+          description: Requête invalide (par exemple, paramètres manquants, format de données incorrect, etc.)
+        '401':
+          description: Non autorisé. L'utilisateur doit être authentifié.
+        '404':
+          description: Aucun item trouvé pour l'utilisateur.
 
 
 

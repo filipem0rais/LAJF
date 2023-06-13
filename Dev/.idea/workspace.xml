@@ -17,6 +17,9 @@
       <change beforePath="$PROJECT_DIR$/../FrontEnd/bidhub-frontend/src/services/BidService.js" beforeDir="false" afterPath="$PROJECT_DIR$/../FrontEnd/bidhub-frontend/src/services/BidService.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../FrontEnd/bidhub-frontend/src/services/SubmissionService.js" beforeDir="false" afterPath="$PROJECT_DIR$/../FrontEnd/bidhub-frontend/src/services/SubmissionService.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../FrontEnd/bidhub-frontend/src/views/BidsView.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../FrontEnd/bidhub-frontend/src/views/BidsView.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/quotes-api/src/main/java/ch/es/pl/quotes/api/endpoints/ItemController.java" beforeDir="false" afterPath="$PROJECT_DIR$/quotes-api/src/main/java/ch/es/pl/quotes/api/endpoints/ItemController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/quotes-api/src/main/java/ch/es/pl/quotes/api/repositories/ItemRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/quotes-api/src/main/java/ch/es/pl/quotes/api/repositories/ItemRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/quotes-api/src/main/resources/quotes.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/quotes-api/src/main/resources/quotes.yaml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -207,9 +210,13 @@
       <workItem from="1686552377489" duration="88000" />
       <workItem from="1686552475257" duration="634000" />
       <workItem from="1686553530697" duration="2713000" />
+      <workItem from="1686558060023" duration="1347000" />
+      <workItem from="1686640875940" duration="1310000" />
       <workItem from="1686558060023" duration="444000" />
       <workItem from="1686558982792" duration="180000" />
       <workItem from="1686559174661" duration="1728000" />
+      <workItem from="1686559174661" duration="360000" />
+      <workItem from="1686644293538" duration="1112000" />
     </task>
     <servers />
   </component>
