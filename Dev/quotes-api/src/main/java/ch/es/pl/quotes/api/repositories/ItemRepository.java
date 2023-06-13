@@ -30,4 +30,16 @@ public interface ItemRepository extends JpaRepository<ItemEntity, Integer> {
     List<ItemEntity> findByCategoryAndIteOnSale(CategoryEntity categoryEntity, boolean b);
 
     List<ItemEntity> findByIteOnSale(boolean b);
+
+    @Query("SELECT i FROM ItemEntity i JOIN i.bids b WHERE b.user = :user AND i.iteOnSale = true")
+    List<ItemEntity> findItemsOnSaleWithUserBid(UserEntity user);
+
+    @Query("SELECT i FROM ItemEntity i JOIN i.bids b WHERE b.user = :user AND i.iteOnSale = false AND i.itePickedUp = false AND b.bidAmount = (SELECT MAX(b2.bidAmount) FROM BidEntity b2 WHERE b2.item = i)")
+    List<ItemEntity> findWonItemsNotPickedUp(UserEntity user);
+
+    List<ItemEntity> findByUserAndIteOnSaleAndItePickedUp(UserEntity user, Boolean iteOnSale, Boolean itePickedUp);
+
+
+
+
 }
