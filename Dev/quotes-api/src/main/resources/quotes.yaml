@@ -209,7 +209,6 @@ paths:
         '404':
           description: Not Found
       deprecated: false
-
     delete:
       tags:
         - Bidhub-API
@@ -226,6 +225,24 @@ paths:
       responses:
         '204':
           description: OK
+        '404':
+          description: Not Found
+      deprecated: false
+  /items/user:
+    get:
+      tags:
+        - Bidhub-API
+      summary: Obtient tous les articles d'un utilisateur
+      operationId: getItemsUser
+      responses:
+        '200':
+          description: OK
+          content:
+            'application/json':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Item'
         '404':
           description: Not Found
       deprecated: false
