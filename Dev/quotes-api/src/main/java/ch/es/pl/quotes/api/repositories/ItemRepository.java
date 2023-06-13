@@ -40,6 +40,5 @@ public interface ItemRepository extends JpaRepository<ItemEntity, Integer> {
     List<ItemEntity> findByUserAndIteOnSaleAndItePickedUp(UserEntity user, Boolean iteOnSale, Boolean itePickedUp);
 
 
-
-
+    List<ItemEntity> findByUserAndIteOnSale(UserEntity user, boolean b);
 }

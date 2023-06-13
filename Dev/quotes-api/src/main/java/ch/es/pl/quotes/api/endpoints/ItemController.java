@@ -202,33 +202,43 @@ public class ItemController implements ItemsApi {
 
     @Override
     public ResponseEntity<List<Item>> getItems() {
-        List<ItemEntity> itemEntities = itemRepository.findByIteOnSale(true);
-        List<Item> items = new ArrayList<>();
-        for (ItemEntity itemEntity : itemEntities) {
-            Item item = new Item();
-            item.setIdItem(itemEntity.getIdItem());
-            item.setIteDescription(itemEntity.getIteDescription());
-            item.setIteInitialValue(itemEntity.getIteInitialValue());
-            item.setIteOnSale(itemEntity.getIteOnSale());
-            item.setIteDatePublication(itemEntity.getIteDatePublication());
-            item.setIdUser(itemEntity.getUser().getIdUser());
-            item.setIdCategory(itemEntity.getCategory().getIdCategory());
-            item.setIteName(itemEntity.getIteName());
-            item.setIteState(itemEntity.getIteState());
-            item.setItePicture(itemEntity.getItePicture());
-            item.setItePickedUp(itemEntity.getItePickedUp());
+        String token = request.getHeader("Authorization");
+        token = token.replace("Bearer ", "");
+        Integer userId = getUserIdFromToken(token);
+        Optional<UserEntity> optUser = userRepository.findById(userId);
 
-            // Get the highest bid amount for the item
-            Double highestBidAmount = bidRepository.findHighestBidAmountByItem(itemEntity);
-            item.setIteHighestBidAmount(highestBidAmount);
+        if (optUser.isPresent()) {
+            UserEntity user = optUser.get();
+            List<ItemEntity> itemEntities = itemRepository.findByUserAndIteOnSale(user, true);
+            List<Item> items = new ArrayList<>();
+            for (ItemEntity itemEntity : itemEntities) {
+                Item item = new Item();
+                item.setIdItem(itemEntity.getIdItem());
+                item.setIteDescription(itemEntity.getIteDescription());
+                item.setIteInitialValue(itemEntity.getIteInitialValue());
+                item.setIteOnSale(itemEntity.getIteOnSale());
+                item.setIteDatePublication(itemEntity.getIteDatePublication());
+                item.setIdUser(itemEntity.getUser().getIdUser());
+                item.setIdCategory(itemEntity.getCategory().getIdCategory());
+                item.setIteName(itemEntity.getIteName());
+                item.setIteState(itemEntity.getIteState());
+                item.setItePicture(itemEntity.getItePicture());
+                item.setItePickedUp(itemEntity.getItePickedUp());
 
-            // Get count of bids for the item
-            Integer bidsCount = bidRepository.countBidsByItem(itemEntity);
-            item.setIteBidCount(bidsCount);
+                // Get the highest bid amount for the item
+                Double highestBidAmount = bidRepository.findHighestBidAmountByItem(itemEntity);
+                item.setIteHighestBidAmount(highestBidAmount);
 
-            items.add(item);
+                // Get count of bids for the item
+                Integer bidsCount = bidRepository.countBidsByItem(itemEntity);
+                item.setIteBidCount(bidsCount);
+
+                items.add(item);
+            }
+            return new ResponseEntity<List<Item>>(items, HttpStatus.OK);
+        } else {
+            throw new UserNotFoundException("User not found", HttpStatus.NOT_FOUND);
         }
-        return new ResponseEntity<List<Item>>(items, HttpStatus.OK);
     }
 
     @Override
