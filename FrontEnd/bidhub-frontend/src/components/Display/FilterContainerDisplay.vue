@@ -14,24 +14,6 @@
         </li>
       </ul>
     </div>
-    <!-- Prochaine itération
-    <div class="slider">
-      <h4>Prix</h4>
-      <hr class="filter-hr">
-      <input type="number" class="form-control" id="min-price" placeholder="Prix min">
-      <input type="number" class="form-control" id="max-price" placeholder="Prix max">
-      <br>
-    </div>
-    <div class="dropdown">
-      <h4>État</h4>
-      <hr class="filter-hr">
-      <select class="form-select">
-        <option value="">Tout</option>
-        <option value="Neuf">Neuf</option>
-        <option value="Occasion">Occasion</option>
-      </select>
-    </div>
-    !-->
   </div>
 </template>
 

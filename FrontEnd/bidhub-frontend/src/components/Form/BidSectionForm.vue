@@ -1,7 +1,7 @@
 <template>
   <div class="offer-section">
     <h2 class="text-center"><strong>Placer une offre</strong></h2>
-    <p v-if="lot.iteHighestBidAmount">Enchère courante: <strong>{{ lot.iteHighestBidAmount }} CHF </strong></p>
+    <p v-if="lot.iteHighestBidAmount">Enchère courante: <strong>{{ lot.iteHighestBidAmount }} CHF</strong></p>
     <p v-else>Aucune enchère en cours</p>
     <p>Valeur initiale: <strong>{{ lot.iteInitialValue }} CHF</strong></p>
     <p>Nombre d'enchère(s): </p>
@@ -11,6 +11,9 @@
         <button class="btn btn-primary" type="button" @click="placeBid">Placer une enchère</button>
       </div>
     </div>
+    <div v-if="errorMessage" class="alert alert-danger">{{ errorMessage }}</div>
+    <div v-if="successMessage" class="alert alert-success">{{ successMessage }}</div>
+
   </div>
 </template>
 
@@ -23,7 +26,9 @@ export default {
   data () {
     return {
       itemId: '',
-      bidAmount: ''
+      bidAmount: '',
+      errorMessage: '',
+      successMessage: ''
     }
   },
   methods: {
@@ -34,10 +39,12 @@ export default {
       }
       postBid(bid)
         .then(() => {
+          this.errorMessage = ''
+          this.successMessage = 'Votre enchère a été placée avec succès.'
           this.$emit('bid-placed')
         })
         .catch(error => {
-          console.error(error)
+          this.errorMessage = error.message || 'Une erreur s\'est produite lors de la soumission de l\'enchère.'
         })
     }
   }

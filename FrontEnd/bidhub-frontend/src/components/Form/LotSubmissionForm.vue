@@ -2,15 +2,15 @@
   <form @submit="submitForm" >
     <div class="form-group">
       <label for="nomLot">Nom du lot</label>
-      <input type="text" class="form-control" id="nomLot" v-model="iteName" placeholder="Entrez le nom du lot" required>
+      <input type="text" class="form-control" id="nomLot" v-model="iteName" placeholder="Entrez le nom du lot" required minlength="2">
     </div>
     <div class="form-group">
       <label for="description">Description</label>
-      <textarea class="form-control" id="description" v-model="iteDescription" rows="3" required></textarea>
+      <textarea class="form-control" id="description" v-model="iteDescription" rows="3" maxlength="255"></textarea>
     </div>
     <div class="form-group">
       <label for="valeurInitiale">Valeur initiale</label>
-      <input type="text" class="form-control" id="valeurInitiale" v-model="iteInitialValue" placeholder="Entrez la valeur initiale" required>
+      <input type="text" class="form-control" id="valeurInitiale" v-model="iteInitialValue" placeholder="Entrez la valeur initiale" required pattern="[0-9]+" title="La valeur initiale doit contenir uniquement des chiffres">
     </div>
     <div class="form-group">
       <label for="etatLot">État du lot</label>
@@ -21,13 +21,16 @@
     </div>
     <div class="form-group">
       <label for="categorie">Catégorie</label>
-      <category-select-display :categories="categories" @category-changed="onCategoryChanged"></category-select-display>
+      <category-select-display :categories="categories" @category-changed="onCategoryChanged" required></category-select-display>
     </div>
     <div class="form-group">
       <label for="image">Image</label>
       <input type="text" class="form-control" id="imageLot" v-model="itePicture" placeholder="Entrez le lien d'une image">
     </div>
     <button type="submit" class="btn btn-primary btn-block btn-lg">Valider</button>
+    <div v-if="successMessage" class="alert alert-success mt-3">
+      {{ successMessage }}
+    </div>
   </form>
 </template>
 
@@ -54,7 +57,8 @@ export default {
       itePicture: '',
       iteHighestBidAmount: '',
       itePickedUp: '',
-      iteBidCount: ''
+      iteBidCount: '',
+      successMessage: ''
     }
   },
   methods: {
@@ -63,6 +67,9 @@ export default {
       this.idCategory = category.idCategory
     },
     submitForm () {
+      if (this.itePicture === '') {
+        this.itePicture = 'https://dummyimage.com/300x300/ccc/000.jpg'
+      }
       const data = {
         idItem: 5000,
         iteDescription: this.iteDescription,
@@ -78,10 +85,9 @@ export default {
         itePickedUp: false,
         iteBidCount: 0
       }
-      console.log(data)
       postLot(data)
         .then(() => {
-          console.log('ok')
+          this.successMessage = 'Votre lot a été ajouté avec succès'
         })
         .catch(error => {
           console.log(error)

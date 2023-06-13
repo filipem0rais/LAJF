@@ -8,13 +8,11 @@
       <div class="col-md-9">
         <div class="d-flex justify-content-between align-items-center mb-3">
           <p>Affichage de {{ paginateLots().length }} sur {{ this.lots.length }}</p>
-          <!-- Prochaine itération
-          <select class="form-select custom-select">
+          <select class="form-select custom-select" v-model="sortOption" @change="sortLots">
             <option value="default" selected>Trier par défaut</option>
             <option value="priceAsc">Prix croissant</option>
             <option value="priceDesc">Prix décroissant</option>
           </select>
-          -->
         </div>
         <div class="card-container">
           <div class="card" v-for="lot in paginateLots()" :key="lot.idItem">
@@ -52,11 +50,9 @@ export default {
     return {
       lots: [],
       categories: [],
-      sliderValues: [0, 100],
-      minValue: 0,
-      maxValue: 100,
       currentPage: 1,
-      ITEMSPERPAGE: 10
+      ITEMSPERPAGE: 10,
+      sortOption: 'default'
     }
   },
   mounted () {
@@ -97,6 +93,18 @@ export default {
     },
     updatePage (newPage) {
       this.currentPage = newPage
+    },
+    sortLots () {
+      switch (this.sortOption) {
+        case 'priceAsc':
+          this.lots.sort((a, b) => a.iteHighestBidAmount - b.iteHighestBidAmount)
+          break
+        case 'priceDesc':
+          this.lots.sort((a, b) => b.iteHighestBidAmount - a.iteHighestBidAmount)
+          break
+        default:
+          break
+      }
     }
   }
 }

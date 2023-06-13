@@ -6,6 +6,7 @@ import EncheresView from '@/views/BidsView.vue'
 import LotDetailsView from '@/views/LotDetailsView.vue'
 import VenteView from '@/views/SubmissionView.vue'
 import LogoutView from '@/views/LogoutView.vue'
+import MesLots from '@/views/MesLots.vue'
 
 const routes = [
   {
@@ -42,6 +43,11 @@ const routes = [
     path: '/logout',
     name: 'logout',
     component: LogoutView
+  },
+  {
+    path: '/meslots',
+    name: 'meslots',
+    component: MesLots
   }
 ]
 

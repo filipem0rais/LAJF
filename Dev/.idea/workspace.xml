@@ -5,7 +5,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a2c5a68a-9320-4e9f-bd2a-ee2060c0d282" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/../FrontEnd/bidhub-frontend/src/components/Card/LotUserCard.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../FrontEnd/bidhub-frontend/src/services/LotUserService.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../FrontEnd/bidhub-frontend/src/views/MesLots.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FrontEnd/bidhub-frontend/src/components/Display/FilterContainerDisplay.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../FrontEnd/bidhub-frontend/src/components/Display/FilterContainerDisplay.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FrontEnd/bidhub-frontend/src/components/Form/BidSectionForm.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../FrontEnd/bidhub-frontend/src/components/Form/BidSectionForm.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FrontEnd/bidhub-frontend/src/components/Form/LotSubmissionForm.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../FrontEnd/bidhub-frontend/src/components/Form/LotSubmissionForm.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FrontEnd/bidhub-frontend/src/components/Header/MenuBarHeader.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../FrontEnd/bidhub-frontend/src/components/Header/MenuBarHeader.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FrontEnd/bidhub-frontend/src/router/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/../FrontEnd/bidhub-frontend/src/router/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FrontEnd/bidhub-frontend/src/services/BidService.js" beforeDir="false" afterPath="$PROJECT_DIR$/../FrontEnd/bidhub-frontend/src/services/BidService.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FrontEnd/bidhub-frontend/src/services/SubmissionService.js" beforeDir="false" afterPath="$PROJECT_DIR$/../FrontEnd/bidhub-frontend/src/services/SubmissionService.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FrontEnd/bidhub-frontend/src/views/BidsView.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../FrontEnd/bidhub-frontend/src/views/BidsView.vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -198,7 +209,7 @@
       <workItem from="1686553530697" duration="2713000" />
       <workItem from="1686558060023" duration="444000" />
       <workItem from="1686558982792" duration="180000" />
-      <workItem from="1686559174661" duration="360000" />
+      <workItem from="1686559174661" duration="1728000" />
     </task>
     <servers />
   </component>
@@ -214,7 +225,7 @@
         </breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/quotes-api/src/main/java/ch/es/pl/quotes/api/endpoints/BidController.java</url>
-          <line>140</line>
+          <line>153</line>
           <option name="timeStamp" value="5" />
         </line-breakpoint>
       </breakpoints>

@@ -25,17 +25,23 @@
             <li class="nav-item" v-if="!user">
               <router-link class="nav-link text-white" to="/identification">Identification</router-link>
             </li>
-            <li class="nav-item" v-else>
-              <router-link class="nav-link text-white" to="/logout" @click="logout">
-                Crédits : {{ user.useCredit }}
-                <img src="@/assets/leave.png" alt="Déconnexion" class="logout-icon">
-              </router-link>
-            </li>
-
+            <div class="nav-item" v-else>
+              <div class="logout-section">
+                <router-link class="nav-link text-white" to="/meslots">
+                  Mes Lots
+                  <div class="credits">Crédits : {{ user.useCredit }}</div>
+                </router-link>
+                <router-link class="nav-link" to="/logout" @click="logout">
+                  <img src="@/assets/leave.png" alt="Déconnexion" class="logout-icon">
+                </router-link>
+              </div>
+            </div>
           </ul>
         </div>
       </div>
     </div>
+    <br>
+    <br>
     <br>
   </header>
 </template>
@@ -90,8 +96,20 @@ export default {
 .custom-nav {
   margin-left: auto;
 }
-.logout-icon{
+
+.logout-section {
+  display: flex;
+  align-items: center;
+}
+
+.logout-icon {
   width: 30px;
   height: 30px;
+  margin-left: 15px;
+}
+
+.credits {
+  font-size: 12px;
+  color: white;
 }
 </style>
