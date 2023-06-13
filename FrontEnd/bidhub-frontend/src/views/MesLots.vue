@@ -28,7 +28,11 @@ export default {
   },
   data () {
     return {
-      lots: []
+      oldLots: [],
+      onSaleLots: [],
+      biddedLots: [],
+      takerLots: [],
+      sellerLots: []
     }
   },
   mounted () {

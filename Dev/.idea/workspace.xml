@@ -205,6 +205,7 @@
       <workItem from="1686559174661" duration="1728000" />
       <workItem from="1686559174661" duration="360000" />
       <workItem from="1686644293538" duration="1112000" />
+      <workItem from="1686657026254" duration="445000" />
     </task>
     <servers />
   </component>
@@ -218,11 +219,6 @@
           <properties class="java.lang.IllegalArgumentException" package="java.lang" />
           <option name="timeStamp" value="1" />
         </breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/quotes-api/src/main/java/ch/es/pl/quotes/api/endpoints/BidController.java</url>
-          <line>153</line>
-          <option name="timeStamp" value="5" />
-        </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
     <pin-to-top-manager>
