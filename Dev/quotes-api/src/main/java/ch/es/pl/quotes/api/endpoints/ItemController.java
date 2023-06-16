@@ -405,6 +405,20 @@ public class ItemController implements ItemsApi {
             }
 
             BidEntity highestBid = Collections.max(item.getBids(), Comparator.comparing(BidEntity::getBidAmount));
+            UserEntity buyer = highestBid.getUser();
+            UserEntity seller = item.getUser();
+
+
+            // Adjust the balance of the seller and buyer
+            seller.setUseCredit(seller.getUseCredit() + highestBid.getBidAmount());
+            buyer.setUseCredit(buyer.getUseCredit() - highestBid.getBidAmount());
+
+            // Update the user balances
+            userRepository.save(seller);
+            userRepository.save(buyer);
+
+
+
             item.setItePickedUp(true);
             item.setUser(highestBid.getUser());
             itemRepository.save(item);
