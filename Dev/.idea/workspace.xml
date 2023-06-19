@@ -6,8 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="a2c5a68a-9320-4e9f-bd2a-ee2060c0d282" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/quotes-api/src/main/java/ch/es/pl/quotes/api/endpoints/ItemController.java" beforeDir="false" afterPath="$PROJECT_DIR$/quotes-api/src/main/java/ch/es/pl/quotes/api/endpoints/ItemController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/quotes-spec/src/main/resources/quotes.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/quotes-spec/src/main/resources/quotes.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/quotes-spec/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/quotes-spec/pom.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -34,6 +33,9 @@
         <option name="useMavenConfig" value="true" />
       </MavenGeneralSettings>
     </option>
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="ProjectErrors" />
   </component>
   <component name="ProjectId" id="2PEfaMfPGJ1lK2CBA8g6l4eqjht" />
   <component name="ProjectViewState">
@@ -76,7 +78,7 @@
       <recent name="ch.es.pl.quotes.api.repositories" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.All in quotes-spec">
+  <component name="RunManager" selected="JUnit.SpecificationTest">
     <configuration name="Feature: quotes" type="CucumberJavaRunConfigurationType" factoryName="Cucumber java" temporary="true" nameIsGenerated="true">
       <option name="CUCUMBER_CORE_VERSION" value="5" />
       <option name="FILE_PATH" value="$PROJECT_DIR$/quotes-spec/src/test/resources/features/quotes.feature" />
@@ -141,6 +143,15 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="SpecificationTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="quotes-spec" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="SpecificationTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration default="true" type="JetRunConfigurationType">
       <module name="Dev" />
       <method v="2">
@@ -182,10 +193,12 @@
       <item itemvalue="Cucumber Java.Feature: user" />
       <item itemvalue="Cucumber Java.Scenario: Get user with id 4" />
       <item itemvalue="JUnit.All in quotes-spec" />
+      <item itemvalue="JUnit.SpecificationTest" />
       <item itemvalue="Spring Boot.Swagger2SpringBoot" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.SpecificationTest" />
         <item itemvalue="JUnit.All in quotes-spec" />
         <item itemvalue="Cucumber Java.Feature: quotes" />
         <item itemvalue="Cucumber Java.Feature: user" />
@@ -218,7 +231,7 @@
       <workItem from="1686659606892" duration="139000" />
       <workItem from="1686660085795" duration="3117000" />
       <workItem from="1686828489271" duration="628000" />
-      <workItem from="1687155426736" duration="387000" />
+      <workItem from="1687155426736" duration="1692000" />
     </task>
     <servers />
   </component>
