@@ -417,8 +417,6 @@ public class ItemController implements ItemsApi {
             userRepository.save(seller);
             userRepository.save(buyer);
 
-
-
             item.setItePickedUp(true);
             item.setUser(highestBid.getUser());
             itemRepository.save(item);
