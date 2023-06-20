@@ -5,16 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a2c5a68a-9320-4e9f-bd2a-ee2060c0d282" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/quotes-spec/src/test/java/ch/es/pl/quotes/spec/BidResponse.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-<<<<<<< HEAD
-=======
-      <change beforePath="$PROJECT_DIR$/quotes-api/src/main/java/ch/es/pl/quotes/api/endpoints/ItemController.java" beforeDir="false" afterPath="$PROJECT_DIR$/quotes-api/src/main/java/ch/es/pl/quotes/api/endpoints/ItemController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/quotes-api/src/main/resources/data.sql" beforeDir="false" afterPath="$PROJECT_DIR$/quotes-api/src/main/resources/data.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/quotes-spec/src/test/java/ch/es/pl/quotes/spec/UserSteps.java" beforeDir="false" afterPath="$PROJECT_DIR$/quotes-spec/src/test/java/ch/es/pl/quotes/spec/UserSteps.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/quotes-spec/src/test/resources/features/bid.feature" beforeDir="false" afterPath="$PROJECT_DIR$/quotes-spec/src/test/resources/features/bid.feature" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/quotes-spec/src/test/resources/features/user.feature" beforeDir="false" />
->>>>>>> trueMain
+      <change beforePath="$PROJECT_DIR$/quotes-api/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/quotes-api/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/quotes-api/src/main/java/ch/es/pl/quotes/api/configuration/AuthFilter.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/quotes-api/src/main/java/ch/es/pl/quotes/api/configuration/FilterConfig.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/quotes-api/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/quotes-api/src/main/resources/application.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -86,7 +81,7 @@
       <recent name="ch.es.pl.quotes.api.repositories" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.SpecificationTest">
+  <component name="RunManager" selected="Spring Boot.Swagger2SpringBoot">
     <configuration name="Feature: quotes" type="CucumberJavaRunConfigurationType" factoryName="Cucumber java" temporary="true" nameIsGenerated="true">
       <option name="CUCUMBER_CORE_VERSION" value="5" />
       <option name="FILE_PATH" value="$PROJECT_DIR$/quotes-spec/src/test/resources/features/quotes.feature" />
@@ -238,13 +233,11 @@
       <workItem from="1686644293538" duration="1112000" />
       <workItem from="1686657026254" duration="445000" />
       <workItem from="1686659606892" duration="139000" />
-<<<<<<< HEAD
       <workItem from="1686660085795" duration="173000" />
-=======
       <workItem from="1686660085795" duration="3117000" />
       <workItem from="1686828489271" duration="628000" />
       <workItem from="1687155426736" duration="1692000" />
->>>>>>> trueMain
+      <workItem from="1687245475428" duration="790000" />
     </task>
     <servers />
   </component>
@@ -258,6 +251,11 @@
           <properties class="java.lang.IllegalArgumentException" package="java.lang" />
           <option name="timeStamp" value="1" />
         </breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/quotes-api/src/main/java/ch/es/pl/quotes/api/endpoints/ItemController.java</url>
+          <line>568</line>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
     <pin-to-top-manager>
