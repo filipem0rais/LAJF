@@ -30,3 +30,18 @@ export default {
       })
   }
 }
+export function unSoldItems () {
+  const token = localStorage.getItem('token')
+
+  return axios.get('http://localhost:9090/api/items/unsoldItems', {
+    headers: {
+      Authorization: token
+    }
+  })
+    .then(response => {
+      return response.data
+    })
+    .catch(error => {
+      console.error(error)
+    })
+}

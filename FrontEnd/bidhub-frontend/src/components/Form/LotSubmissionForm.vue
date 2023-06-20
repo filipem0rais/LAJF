@@ -1,5 +1,6 @@
 <template>
   <form @submit="submitForm" >
+    <status-message :message-type="messageType" :message="successMessage || errorMessage"></status-message>
     <div class="form-group">
       <label for="nomLot">Nom du lot</label>
       <input type="text" class="form-control" id="nomLot" v-model="iteName" placeholder="Entrez le nom du lot" required minlength="2">
@@ -8,6 +9,10 @@
       <label for="description">Description</label>
       <textarea class="form-control" id="description" v-model="iteDescription" rows="3" maxlength="255"></textarea>
     </div>
+    <label for="etatLot">Ancien Lot</label>
+    <select class="form-control" v-model="selectedOldLot" @change="fillFormWithOldLot" id="oldLots">
+      <option v-for="lot in oldLots" :value="lot.idItem" :key="lot.idItem">Nom : {{ lot.iteName }} - Valeur initiale : {{ lot.iteInitialValue}}</option>
+    </select>
     <div class="form-group">
       <label for="valeurInitiale">Valeur initiale</label>
       <input type="text" class="form-control" id="valeurInitiale" v-model="iteInitialValue" placeholder="Entrez la valeur initiale" required pattern="[0-9]+" title="La valeur initiale doit contenir uniquement des chiffres">
@@ -28,19 +33,19 @@
       <input type="text" class="form-control" id="imageLot" v-model="itePicture" placeholder="Entrez le lien d'une image">
     </div>
     <button type="submit" class="btn btn-primary btn-block btn-lg">Valider</button>
-    <div v-if="successMessage" class="alert alert-success mt-3">
-      {{ successMessage }}
-    </div>
   </form>
 </template>
 
 <script>
+import StatusMessage from '@/components/Message/StatusMessage.vue'
 import CategorySelectDisplay from '@/components/Display/CategorySelectDisplay.vue'
 import { postLot } from '@/services/SubmissionService'
+import { unSoldItems } from '@/services/LotService'
 
 export default {
   components: {
-    CategorySelectDisplay
+    CategorySelectDisplay,
+    StatusMessage
   },
   props: ['categories'],
   data () {
@@ -58,15 +63,48 @@ export default {
       iteHighestBidAmount: '',
       itePickedUp: '',
       iteBidCount: '',
-      successMessage: ''
+      successMessage: '',
+      errorMessage: '',
+      selectedOldLot: null,
+      oldLots: [],
+      status: null
     }
   },
+  mounted () {
+    unSoldItems()
+      .then(lots => {
+        this.oldLots = lots
+      })
+      .catch(error => {
+        console.error(error)
+      })
+  },
   methods: {
+    fillFormWithOldLot () {
+      const lot = this.oldLots.find(lot => lot.idItem === this.selectedOldLot)
+
+      if (lot) {
+        this.iteDescription = lot.iteDescription
+        this.iteInitialValue = lot.iteInitialValue
+        this.iteOnSale = lot.iteOnSale
+        this.iteDatePublication = lot.iteDatePublication
+        this.idUser = lot.idUser
+        this.idCategory = lot.idCategory
+        this.iteName = lot.iteName
+        this.iteState = lot.iteState
+        this.itePicture = lot.itePicture
+        this.iteHighestBidAmount = lot.iteHighestBidAmount
+        this.itePickedUp = lot.itePickedUp
+        this.iteBidCount = lot.iteBidCount
+      }
+    },
     onCategoryChanged (category) {
       this.$emit('category-changed', category)
       this.idCategory = category.idCategory
     },
     submitForm () {
+      this.errorMessage = null
+      this.successMessage = null
       if (this.itePicture === '') {
         this.itePicture = 'https://dummyimage.com/300x300/ccc/000.jpg'
       }
@@ -86,11 +124,21 @@ export default {
         iteBidCount: 0
       }
       postLot(data)
-        .then(() => {
-          this.successMessage = 'Votre lot a été ajouté avec succès'
-        })
-        .catch(error => {
-          console.log(error)
+        .then(response => {
+          if (response.success) {
+            this.successMessage = 'Votre lot a été ajouté avec succès'
+            this.messageType = 'success'
+            this.iteName = ''
+            this.iteDescription = ''
+            this.iteInitialValue = ''
+            this.iteState = ''
+            this.itePicture = ''
+            this.idCategory = ''
+          } else {
+            this.errorMessage = response.message
+            this.messageType = 'danger'
+          }
+          this.status = response.status
         })
     },
     getDate () {

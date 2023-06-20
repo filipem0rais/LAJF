@@ -3,7 +3,6 @@
     <h2 class="text-center">{{ lot.iteName }}</h2>
     <p>{{ lot.iteDescription }}</p>
     <p><strong>Etat :</strong> {{ lot.iteState }}</p>
-    <p><strong>Categories:</strong> <!-- Affiche les catégories --></p>
   </div>
 </template>
 
