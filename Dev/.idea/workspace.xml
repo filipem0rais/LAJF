@@ -4,14 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-<<<<<<< HEAD
     <list default="true" id="1169cbba-13dd-4174-9ac8-16d57350225e" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/h2script.txt" beforeDir="false" />
-=======
-    <list default="true" id="a2c5a68a-9320-4e9f-bd2a-ee2060c0d282" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
->>>>>>> trueMain
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -21,9 +15,6 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
-<<<<<<< HEAD
-  <component name="TaskManager">
-=======
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
@@ -237,7 +228,6 @@
       <workItem from="1687245475428" duration="790000" />
       <workItem from="1687247895289" duration="1477000" />
     </task>
->>>>>>> trueMain
     <servers />
   </component>
   <component name="XDebuggerManager">
