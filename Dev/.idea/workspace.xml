@@ -5,8 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a2c5a68a-9320-4e9f-bd2a-ee2060c0d282" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/quotes-spec/src/test/java/ch/es/pl/quotes/spec/BidResponse.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/quotes-spec/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/quotes-spec/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/quotes-api/src/main/java/ch/es/pl/quotes/api/endpoints/ItemController.java" beforeDir="false" afterPath="$PROJECT_DIR$/quotes-api/src/main/java/ch/es/pl/quotes/api/endpoints/ItemController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/quotes-api/src/main/resources/data.sql" beforeDir="false" afterPath="$PROJECT_DIR$/quotes-api/src/main/resources/data.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/quotes-spec/src/test/java/ch/es/pl/quotes/spec/UserSteps.java" beforeDir="false" afterPath="$PROJECT_DIR$/quotes-spec/src/test/java/ch/es/pl/quotes/spec/UserSteps.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/quotes-spec/src/test/resources/features/bid.feature" beforeDir="false" afterPath="$PROJECT_DIR$/quotes-spec/src/test/resources/features/bid.feature" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/quotes-spec/src/test/resources/features/user.feature" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

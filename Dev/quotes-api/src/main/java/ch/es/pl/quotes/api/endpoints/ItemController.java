@@ -567,8 +567,16 @@ public class ItemController implements ItemsApi {
                 item.setIteHighestBidAmount(highestBidAmount);
                 // Get count of bids for the item
                 Integer bidsCount = bidRepository.countBidsByItem(itemEntity);
+
+                if (bidsCount == null) {
+                    bidsCount = 0;
+                }
                 item.setIteBidCount(bidsCount);
-                items.add(item);
+
+                if (bidsCount > 0) {
+                    items.add(item);
+                }
+
             }
             return new ResponseEntity<List<Item>>(items, HttpStatus.OK);
         } else {
