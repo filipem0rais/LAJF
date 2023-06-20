@@ -9,15 +9,21 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import org.openapitools.client.model.Bid;
+import org.openapitools.client.model.MakeBidRequest;
 import org.openapitools.model.RegisterUser;
 import org.openapitools.model.LoginUser;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.*;
+import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 
+
+import java.util.ArrayList;
+import java.util.List;
+
+import static org.assertj.core.api.Assertions.as;
 import static org.assertj.core.api.Assertions.assertThat;
 
 
@@ -26,10 +32,11 @@ public class UserSteps {
     private static final String BASE_URL = "http://localhost:9090/api"; // Remplacez ceci par l'URL de base de votre API
     private Integer userId;
     private ResponseEntity<String> response;
+    private ResponseEntity<BidResponse> bidResponse;
     private HttpClientErrorException httpClientErrorException;
     private Integer bidId;
     private String token;
-    private String bidInfo;
+    private MakeBidRequest bidInfo;
     private String email;
     private String password;
     private String userInfo;
@@ -85,10 +92,9 @@ public class UserSteps {
 
     }
 
-
     @Given("que je dispose d'un ID d'enchère valide")
     public void i_have_a_valid_bid_id() {
-        this.bidId = 5; // TODO: replace this with a valid bid ID
+        this.bidId = 1; // TODO: replace this with a valid bid ID
     }
 
     @Given("que je dispose d'un ID d'enchère invalide")
@@ -98,14 +104,37 @@ public class UserSteps {
 
     @Given("que je dispose d'un token d'utilisateur valide et des informations d'enchère valides")
     public void i_have_a_valid_user_token_and_valid_bid_info() {
-        this.token = "valid_token"; // TODO: replace this with a valid user token
-        this.bidInfo = "valid_bid_info"; // TODO: replace this with valid bid info
+
+        // send request to login user
+        String url = BASE_URL + "/auth/login";
+        RestTemplate restTemplate = new RestTemplate();
+        LoginUser loginUser = new LoginUser();
+        loginUser.setUseEmail("cucumber@yopmail.com");
+        loginUser.setUsePassword("$Test123");
+        try {
+            this.response = restTemplate.postForEntity(url, loginUser, String.class);
+        } catch (HttpClientErrorException e) {
+            this.httpClientErrorException = e;
+        }
+
+        // get token from response
+        String[] parts = this.response.getBody().split(":");
+        String[] parts2 = parts[1].split(",");
+        this.token = parts2[0].replace("\"", "");
+
+        //this.token = parts[1];
+
+
+        //this.token = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJjdWN1bWJlckB5b3BtYWlsLmNvbSIsImlkIjoxMDEsImlhdCI6MTY4NzI0MjU2MX0.ebZSjLuHl-0mGMGaV-kQZwVMEfhh32p_yf_TKwkcLC8"; // TODO: replace this with a valid user token
+        this.bidInfo = new MakeBidRequest();
+        this.bidInfo.setBidAmount(40001.0);
+        this.bidInfo.setItemId(99);
     }
 
     @Given("que je dispose d'un token d'utilisateur invalide et des informations d'enchère valides")
     public void i_have_an_invalid_user_token_and_valid_bid_info() {
-        this.token = "invalid_token"; // TODO: replace this with an invalid user token
-        this.bidInfo = "valid_bid_info"; // TODO: replace this with valid bid info
+        this.token = "invalid_token";
+        this.bidInfo = new MakeBidRequest();
     }
 
     @When("j'envoie une requete GET a \\/bids\\/{int}")
@@ -123,11 +152,21 @@ public class UserSteps {
     public void i_send_a_post_request_to_bids_with_the_token_and_bid_info() {
         String url = BASE_URL + "/bids";
         RestTemplate restTemplate = new RestTemplate();
+
+
+        // Create a list of HttpMessageConverters
+        List<HttpMessageConverter<?>> messageConverters = new ArrayList<>();
+        // Add the Jackson Message converter
+        messageConverters.add(new MappingJackson2HttpMessageConverter());
+        // Add the message converters to the restTemplate
+        restTemplate.setMessageConverters(messageConverters);
+
         HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
         headers.set("Authorization", "Bearer " + this.token);
-        HttpEntity<String> entity = new HttpEntity<>(this.bidInfo, headers);
+        HttpEntity<MakeBidRequest> entity = new HttpEntity<>(this.bidInfo, headers);
         try {
-            this.response = restTemplate.postForEntity(url, entity, String.class);
+            this.bidResponse = restTemplate.postForEntity(url, entity, BidResponse.class);
         } catch (HttpClientErrorException e) {
             this.httpClientErrorException = e;
         }
@@ -139,7 +178,7 @@ public class UserSteps {
         RestTemplate restTemplate = new RestTemplate();
         HttpHeaders headers = new HttpHeaders();
         headers.set("Authorization", "Bearer " + this.token);
-        HttpEntity<String> entity = new HttpEntity<>(this.bidInfo, headers);
+        HttpEntity<MakeBidRequest> entity = new HttpEntity<>(this.bidInfo, headers);
         try {
             this.response = restTemplate.exchange(url, HttpMethod.PUT, entity, String.class);
         } catch (HttpClientErrorException e) {
@@ -173,7 +212,7 @@ public class UserSteps {
 
     @Then("le corps de la réponse devrait contenir une enchère avec l'ID donné")
     public void the_response_body_should_contain_a_bid_with_the_given_id() {
-        assertThat(this.response.getBody()).contains("\"id\":" + this.bidId);
+        assertThat(this.response.getBody()).contains("\"idBid\":" + this.bidId);
     }
 
     @Then("le corps de la réponse devrait contenir une erreur indiquant que l'enchère n'a pas été trouvée")
@@ -247,5 +286,16 @@ public class UserSteps {
     public void queJeDisposeDUnEmailValideEtDUnMotDePasseInvalide() {
         this.email = "email@example.com";
         this.password = "invalid_password";
+    }
+
+    @And("le corps de la bidréponse devrait contenir l'ID de la nouvelle enchère")
+    public void leCorpsDeLaBidréponseDevraitContenirLIDDeLaNouvelleEnchère() {
+        // check that getId() doesnt return null
+        assertThat(this.bidResponse.getBody().getId()).isNotNull();
+    }
+
+    @Then("le code de statut de la bidréponse devrait être {int}")
+    public void leCodeDeStatutDeLaBidréponseDevraitÊtre(int arg0) {
+        assertThat(this.bidResponse.getStatusCode()).isEqualTo(HttpStatus.CREATED);
     }
 }

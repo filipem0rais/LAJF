@@ -26,6 +26,9 @@
                         <configuration>
                             <inputSpec>${basedir}/src/main/resources/quotes.yaml</inputSpec>
                             <generatorName>java</generatorName>
+                            <configOptions>
+                                <generateTests>false</generateTests>
+                            </configOptions>
                         </configuration>
                     </execution>
                 </executions>

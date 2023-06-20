@@ -200,6 +200,8 @@ insert into users (idUser, useName, useLastName, useEmail, usePassword, useCredi
 values (99, 'Ekaterina', 'Bartak', 'ebartak2q@dyndns.org', 'whnOBxmWai', 2067);
 insert into users (idUser, useName, useLastName, useEmail, usePassword, useCredit)
 values (100, 'Teddy', 'Casacchia', 'tcasacchia2r@aol.com', 'TS5bVJx', 2485);
+insert into users (idUser, useName, useLastName, useEmail, usePassword, useCredit)
+values (101, 'Cucumber','Cucumber','cucumber@yopmail.com','$2a$10$dM3KZWAUkx26D.ZNXy8b5.tZQgroupQAU57bdDS0R0DLS4X8gAq6K', 1000000);
 
 insert into categories (idCategory, catName, catParent)
 values (1, 'Art & Collections', null);

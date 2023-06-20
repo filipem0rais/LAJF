@@ -9,20 +9,12 @@ tags:
   - name: Bidhub-API
     description: API pour le projet Bidhub
 paths:
-  /users/{id}:
+  /users:
     get:
       tags:
         - Bidhub-API
       summary: Obtient un utilisateur
       operationId: getUser
-      parameters:
-        - name: id
-          in: path
-          description: id de l'utilisateur à obtenir
-          required: true
-          schema:
-            type: integer
-            format: int32
       responses:
         '200':
           description: OK
@@ -112,13 +104,8 @@ paths:
           schema:
             type: integer
             format: int32
-        - in: header
-          name: Authorization
-          schema:
-            type: string
-          required: true
       responses:
-        '200':
+        '204':
           description: OK
         '403':
           description: Forbidden
@@ -130,24 +117,18 @@ paths:
         - Bidhub-API
       summary: Fait une offre sur un article
       operationId: makeBid
-      parameters:
-        - in: header
-          name: Authorization
-          schema:
-            type: string
-          required: true
       requestBody:
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  itemId:
-                    type: integer
-                    format: int32
-                  bidAmount:
-                    type: number
-                    format: double
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                itemId:
+                  type: integer
+                  format: int32
+                bidAmount:
+                  type: number
+                  format: double
       responses:
         '201':
           description: Created
@@ -163,6 +144,8 @@ paths:
           description: Not Found
         '409':
           description: Conflict - bid lower than current highest bid
+        '412':
+          description: Precondition Failed - bid higher than user's balance
       deprecated: false
     get:
       tags:
@@ -186,12 +169,6 @@ paths:
         - Bidhub-API
       summary: Modifie une offre
       operationId: updateBid
-      parameters:
-        - in: header
-          name: Authorization
-          schema:
-            type: string
-          required: true
       requestBody:
         content:
           'application/json':
@@ -232,7 +209,6 @@ paths:
         '404':
           description: Not Found
       deprecated: false
-
     delete:
       tags:
         - Bidhub-API
@@ -246,14 +222,27 @@ paths:
           schema:
             type: integer
             format: int32
-        - in: header
-          name: Authorization
-          schema:
-            type: string
-          required: true
+      responses:
+        '204':
+          description: OK
+        '404':
+          description: Not Found
+      deprecated: false
+  /items/user:
+    get:
+      tags:
+        - Bidhub-API
+      summary: Obtient tous les articles d'un utilisateur
+      operationId: getItemsUser
       responses:
         '200':
           description: OK
+          content:
+            'application/json':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Item'
         '404':
           description: Not Found
       deprecated: false
@@ -280,12 +269,6 @@ paths:
         - Bidhub-API
       summary: Crée un article
       operationId: createItem
-      parameters:
-        - in: header
-          name: Authorization
-          schema:
-            type: string
-          required: true
       requestBody:
         content:
           'application/json':
@@ -306,12 +289,6 @@ paths:
         - Bidhub-API
       summary: Modifie un article
       operationId: updateItem
-      parameters:
-        - in: header
-          name: Authorization
-          schema:
-            type: string
-          required: true
       requestBody:
         content:
           'application/json':
@@ -331,7 +308,7 @@ paths:
   /items/{itemId}/end-auction:
     put:
       tags:
-        - items
+        - Bidhub-API
       summary: Met fin à une enchère
       description: Met fin à une enchère pour un article spécifique
       operationId: endAuction
@@ -343,12 +320,6 @@ paths:
           schema:
             type: integer
             format: int32
-        - in: header
-          name: Authorization
-          description: Token JWT de l'utilisateur
-          required: true
-          schema:
-            type: string
       responses:
         '204':
           description: L'enchère a été terminée avec succès
@@ -360,7 +331,7 @@ paths:
   /items/{itemId}/validate-transaction:
     put:
       tags:
-        - items
+        - Bidhub-API
       summary: Valide une transaction
       description: Valide la transaction pour un article spécifique
       operationId: validateTransaction
@@ -372,12 +343,6 @@ paths:
           schema:
             type: integer
             format: int32
-        - in: header
-          name: Authorization
-          description: Token JWT de l'utilisateur
-          required: true
-          schema:
-            type: string
       responses:
         '204':
           description: La transaction a été validée avec succès
@@ -481,7 +446,7 @@ paths:
             type: integer
             format: int32
       responses:
-        '200':
+        '204':
           description: OK
         '404':
           description: Not Found
@@ -546,6 +511,33 @@ paths:
           description: Not Found
       deprecated: false
 
+  /categories/{id}/parents:
+    get:
+      tags:
+        - Bidhub-API
+      summary: Obtient les parents d'une catégorie
+      operationId: getCategoryParents
+      parameters:
+        - name: id
+          in: path
+          description: id de la catégorie
+          required: true
+          schema:
+            type: integer
+            format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            'application/json':
+              schema:
+                type: array
+                items:
+                  type: string
+        '404':
+          description: Not Found
+      deprecated: false
+
   /categories/root:
     get:
       tags:
@@ -567,15 +559,10 @@ paths:
 
   /items/unsoldItems:
     get:
+      tags:
+        - Bidhub-API
       summary: Retourne tous les items invendus d'un utilisateur spécifique
       operationId: getUnsoldItems
-      parameters:
-        - name: Authorization
-          in: header
-          required: true
-          schema:
-            type: string
-          description: JWT Token de l'utilisateur
       responses:
         '200':
           description: Opération réussie. Retourne une liste d'items invendus appartenant à l'utilisateur.
@@ -591,8 +578,95 @@ paths:
           description: Non autorisé. L'utilisateur doit être authentifié.
         '404':
           description: Aucun item invendu trouvé pour l'utilisateur.
+      deprecated: false
 
+  /items/getBiddedItems:
+    get:
+      tags:
+        - Bidhub-API
+      summary: Retourne tous les items sur lesquels l'utilisateur a enchéri
+      operationId: getBiddedItems
+      responses:
+        '200':
+          description: Opération réussie. Retourne une liste d'items sur lesquels l'utilisateur a enchéri.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Item'
+        '400':
+          description: Requête invalide (par exemple, paramètres manquants, format de données incorrect, etc.)
+        '401':
+          description: Non autorisé. L'utilisateur doit être authentifié.
+        '404':
+          description: Aucun item trouvé pour l'utilisateur.
 
+  /items/getWonItemsNotPickedUp:
+    get:
+      tags:
+        - Bidhub-API
+      summary: Retourne tous les items gagnés par l'utilisateur et non ramassés
+      operationId: getWonItemsNotPickedUp
+      responses:
+        '200':
+          description: Opération réussie. Retourne une liste d'items gagnés par l'utilisateur et non ramassés.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Item'
+        '400':
+          description: Requête invalide (par exemple, paramètres manquants, format de données incorrect, etc.)
+        '401':
+          description: Non autorisé. L'utilisateur doit être authentifié.
+        '404':
+          description: Aucun item trouvé pour l'utilisateur.
+
+  /items/getSoldItemsNotPickedUp:
+    get:
+      tags:
+        - Bidhub-API
+      summary: Retourne tous les items vendus par l'utilisateur et non ramassés
+      operationId: getSoldItemsNotPickedUp
+      responses:
+        '200':
+          description: Opération réussie. Retourne une liste d'items vendus par l'utilisateur et non ramassés.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Item'
+        '400':
+          description: Requête invalide (par exemple, paramètres manquants, format de données incorrect, etc.)
+        '401':
+          description: Non autorisé. L'utilisateur doit être authentifié.
+        '404':
+          description: Aucun item trouvé pour l'utilisateur.
+
+  /items/getSoldItemsPickedUp:
+    get:
+      tags:
+        - Bidhub-API
+      summary: Retourne tous les items vendus par l'utilisateur
+      operationId: getSoldItemsPickedUp
+      responses:
+        '200':
+          description: Opération réussie. Retourne une liste d'items vendus par l'utilisateur.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Item'
+        '400':
+          description: Requête invalide (par exemple, paramètres manquants, format de données incorrect, etc.)
+        '401':
+          description: Non autorisé. L'utilisateur doit être authentifié.
+        '404':
+          description: Aucun item trouvé pour l'utilisateur.
 
 
 
@@ -709,6 +783,10 @@ components:
           description: montant de l'offre la plus élevée
           type: number
           format: double
+        iteBidCount:
+          description: nombre d'offres sur l'article
+          type: integer
+          format: int32
       title: Item
     RegisterUser:
       description: toutes les caractéristiques d'un utilisateur
