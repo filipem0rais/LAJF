@@ -7,7 +7,6 @@ export default {
     return axios.get(BASE_URL)
       .then(response => response.data)
       .catch(error => {
-        console.error(error)
         throw error
       })
   },
@@ -16,7 +15,6 @@ export default {
     return axios.get(url)
       .then(response => response.data)
       .catch(error => {
-        console.error(error)
         throw error
       })
   },
@@ -25,7 +23,6 @@ export default {
     return axios.get(url)
       .then(response => response.data)
       .catch(error => {
-        console.error(error)
         throw error
       })
   }
@@ -42,6 +39,6 @@ export function unSoldItems () {
       return response.data
     })
     .catch(error => {
-      console.error(error)
+      return error.response
     })
 }

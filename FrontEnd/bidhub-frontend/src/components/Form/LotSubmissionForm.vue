@@ -67,7 +67,8 @@ export default {
       errorMessage: '',
       selectedOldLot: null,
       oldLots: [],
-      status: null
+      status: null,
+      messageType: ''
     }
   },
   mounted () {

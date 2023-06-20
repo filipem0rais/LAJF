@@ -5,20 +5,20 @@ const BASE_URL = 'http://localhost:9090/api/auth'
 export function registerUser (userData) {
   return axios.post(BASE_URL + '/register', userData)
     .then(response => {
-      return response.data
+      return response
     })
-    .catch(error => {
-      throw error
+    .catch(response => {
+      return response.error
     })
 }
 export function loginUser (loginData) {
   return axios.post(BASE_URL + '/login', loginData)
     .then(response => {
       localStorage.setItem('token', response.data.token)
-      return response.data
+      return response
     })
     .catch(error => {
-      throw error
+      return error.response
     })
 }
 export function getUserData () {
@@ -35,7 +35,7 @@ export function getUserData () {
       return response.data
     })
     .catch(error => {
-      console.error(error)
+      return error.response
     })
 }
 export function logoutUser () {

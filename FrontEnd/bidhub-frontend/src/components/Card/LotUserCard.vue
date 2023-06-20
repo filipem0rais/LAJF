@@ -1,4 +1,5 @@
 <template>
+  <StatusMessage :message="message" :messageType="messageType" />
   <div class="card-container">
     <div class="card">
       <div class="card-image">
@@ -16,6 +17,57 @@
     </div>
   </div>
 </template>
+
+<script>
+import LotUserService from '@/services/LotUserService'
+import StatusMessage from '@/components/Message/StatusMessage.vue'
+
+export default {
+  components: {
+    StatusMessage
+  },
+  props: {
+    lot: {
+      type: Object,
+      required: true
+    },
+    type: {
+      type: String,
+      required: true
+    }
+  },
+  data () {
+    return {
+      message: '',
+      messageType: ''
+    }
+  },
+  methods: {
+    handleValidate () {
+      LotUserService.validateTransaction(this.lot.idItem)
+        .then(() => {
+          this.message = 'La transaction a bien été validée'
+          this.messageType = 'success'
+        })
+        .catch(error => {
+          this.message = 'Une erreur est survenue lors de la validation : ' + error.message
+          this.messageType = 'danger'
+        })
+    },
+    handleFinish () {
+      LotUserService.endAuction(this.lot.idItem)
+        .then(() => {
+          this.message = 'L\'enchère a bien été terminée'
+          this.messageType = 'success'
+        })
+        .catch(error => {
+          this.message = 'Une erreur est survenue lors de la fin de l\'enchère : ' + error.message
+          this.messageType = 'danger'
+        })
+    }
+  }
+}
+</script>
 
 <style scoped>
 .card {
@@ -52,46 +104,3 @@ button {
   width: 100%;
 }
 </style>
-
-<script>
-import LotUserService from '@/services/LotUserService'
-
-export default {
-  props: {
-    lot: {
-      type: Object,
-      required: true
-    },
-    type: {
-      type: String,
-      required: true
-    }
-  },
-  methods: {
-    handlePickUp () {
-      LotUserService.validateTransaction(this.lot.idItem)
-        .then(() => {
-        })
-        .catch(error => {
-          console.error(error)
-        })
-    },
-    handleValidate () {
-      LotUserService.validateTransaction(this.lot.idItem)
-        .then(() => {
-        })
-        .catch(error => {
-          console.error(error)
-        })
-    },
-    handleFinish () {
-      LotUserService.endAuction(this.lot.idItem)
-        .then(() => {
-        })
-        .catch(error => {
-          console.error(error)
-        })
-    }
-  }
-}
-</script>

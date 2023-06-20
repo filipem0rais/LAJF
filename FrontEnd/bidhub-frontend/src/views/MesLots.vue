@@ -2,6 +2,7 @@
   <br>
   <div class="container">
     <BreadCrumHeader :page-title="`Mes lots`"></BreadCrumHeader>
+    <StatusMessage :message-type="messageType" :message="message"></StatusMessage>
     <h4>Vente en attente (Preneur)</h4>
     <hr class="filter-hr-short">
     <div class="grid-container">
@@ -44,11 +45,13 @@
 import BreadCrumHeader from '@/components/Header/BreadCrumHeader.vue'
 import LotCard from '@/components/Card/LotUserCard.vue'
 import LotUserService from '../services/LotUserService'
+import StatusMessage from '@/components/Message/StatusMessage.vue'
 
 export default {
   components: {
     BreadCrumHeader,
-    LotCard
+    LotCard,
+    StatusMessage
   },
   data () {
     return {
@@ -56,7 +59,9 @@ export default {
       sellerLots: [],
       biddedLots: [],
       onSaleLots: [],
-      oldLots: []
+      oldLots: [],
+      messageType: '',
+      message: ''
     }
   },
   mounted () {
@@ -64,31 +69,64 @@ export default {
   },
   methods: {
     fetchLots () {
-      LotUserService.getWonItemsNotPickedUp()
-        .then(data => {
+      const lotPromises = [
+        LotUserService.getWonItemsNotPickedUp(),
+        LotUserService.getSoldItemsNotPickedUp(),
+        LotUserService.getBiddedItems(),
+        LotUserService.getItems(),
+        LotUserService.getSoldItemsPickedUp()
+      ]
+      Promise.all(lotPromises)
+        .then(responses => {
+          responses.forEach((response, index) => {
+            switch (response.status) {
+              case 200:
+                this.setLotsData(index, response.data)
+                break
+              case 400:
+                this.setMessage('Une erreur est survenue', 'danger')
+                break
+              case 401:
+                this.setMessage('Vous devez être connecté', 'danger')
+                break
+              case 404:
+                this.setMessage('Aucunes données trouvées', 'danger')
+                break
+              case 500:
+                this.setMessage('Une erreur est survenue', 'danger')
+                break
+              default:
+                this.setMessage('Une erreur est survenue', 'danger')
+                break
+            }
+          })
+        })
+        .catch(error => {
+          this.setMessage('Une erreur est survenue : ' + error.message, 'danger')
+        })
+    },
+    setLotsData (index, data) {
+      switch (index) {
+        case 0:
           this.takerLots = data
-        })
-        .catch(error => console.error(error))
-      LotUserService.getSoldItemsNotPickedUp()
-        .then(data => {
+          break
+        case 1:
           this.sellerLots = data
-        })
-        .catch(error => console.error(error))
-      LotUserService.getBiddedItems()
-        .then(data => {
+          break
+        case 2:
           this.biddedLots = data
-        })
-        .catch(error => console.error(error))
-      LotUserService.getItems()
-        .then(data => {
+          break
+        case 3:
           this.onSaleLots = data
-        })
-        .catch(error => console.error(error))
-      LotUserService.getSoldItemsPickedUp()
-        .then(data => {
+          break
+        case 4:
           this.oldLots = data
-        })
-        .catch(error => console.error(error))
+          break
+      }
+    },
+    setMessage (message, messageType) {
+      this.message = message
+      this.messageType = messageType
     }
   }
 }
@@ -102,6 +140,7 @@ export default {
   width: 50%;
   margin-left: 0;
 }
+
 .grid-container {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(10rem, 1fr));

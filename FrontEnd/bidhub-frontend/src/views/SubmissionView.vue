@@ -22,7 +22,8 @@ export default {
   },
   data () {
     return {
-      categories: []
+      categories: [],
+      messageType: ''
     }
   },
   methods: {
