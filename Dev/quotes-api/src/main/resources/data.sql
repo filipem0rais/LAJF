@@ -1,3 +1,5 @@
+use bidhub;
+
 insert into quotes
 values (1, 'Dr. Seuss', 'Don''t cry because it''s over, smile because it happened.');
 insert into quotes
