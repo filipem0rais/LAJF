@@ -6,10 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="a2c5a68a-9320-4e9f-bd2a-ee2060c0d282" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/quotes-api/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/quotes-api/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/quotes-api/src/main/java/ch/es/pl/quotes/api/configuration/AuthFilter.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/quotes-api/src/main/java/ch/es/pl/quotes/api/configuration/FilterConfig.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/quotes-api/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/quotes-api/src/main/resources/application.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -238,6 +234,7 @@
       <workItem from="1686828489271" duration="628000" />
       <workItem from="1687155426736" duration="1692000" />
       <workItem from="1687245475428" duration="790000" />
+      <workItem from="1687247895289" duration="1477000" />
     </task>
     <servers />
   </component>
@@ -251,11 +248,6 @@
           <properties class="java.lang.IllegalArgumentException" package="java.lang" />
           <option name="timeStamp" value="1" />
         </breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/quotes-api/src/main/java/ch/es/pl/quotes/api/endpoints/ItemController.java</url>
-          <line>568</line>
-          <option name="timeStamp" value="2" />
-        </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
     <pin-to-top-manager>
